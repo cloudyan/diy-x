@@ -1,0 +1,24 @@
+{
+  "name": "@deepjs/diy-xxx",
+  "private": true,
+  "version": "1.0.0",
+  "description": "亲手实现 xxx",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cloudyan/diy-xxx.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cloudyan/diy-xxx/issues"
+  },
+  "homepage": "https://github.com/cloudyan/diy-xxx#readme",
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
