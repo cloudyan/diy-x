@@ -1,0 +1,23 @@
+{
+  "name": "toy-testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "description": "",
+  "dependencies": {
+    "glob": "7.1.7",
+    "jest-haste-map": "27.0.2",
+    "jest-worker": "27.0.2"
+  },
+  "engines": {
+    "node": ">= 14.0.0"
+  }
+}

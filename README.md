@@ -1,5 +1,7 @@
 # diy-x
 
+此项目使用 pnpm 管理依赖
+
 亲手实现 xxx
 
 - [ ] 亲手实现 Promise
