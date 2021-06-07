@@ -1,5 +1,5 @@
 {
-  "name": "@deepjs/diy-xxx",
+  "name": "@deepjs/diy-x",
   "private": true,
   "version": "1.0.0",
   "description": "亲手实现 xxx",
@@ -9,16 +9,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloudyan/diy-xxx.git"
+    "url": "git+https://github.com/cloudyan/diy-x.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cloudyan/diy-xxx/issues"
+    "url": "https://github.com/cloudyan/diy-x/issues"
   },
-  "homepage": "https://github.com/cloudyan/diy-xxx#readme",
-  "devDependencies": {
-    "lerna": "^3.22.1"
-  }
+  "homepage": "https://github.com/cloudyan/diy-x#readme"
 }

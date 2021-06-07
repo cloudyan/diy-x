@@ -4,6 +4,7 @@
   "description": "",
   "main": "lib/main.js",
   "scripts": {
+    "init": "npx pnpm i",
     "build": "webpack"
   },
   "author": "",
