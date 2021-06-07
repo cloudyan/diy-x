@@ -1,7 +1,6 @@
-# diy-xxx
+# diy-x
 
 亲手实现 xxx
-
 
 - [ ] 亲手实现 Promise
 - [ ] 如何实现 bind?

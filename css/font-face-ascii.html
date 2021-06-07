@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>将文档中特定容器内的 Ascii 内容设置为等宽字体</title>
+  <style>
+  /* https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range */
+  @font-face {
+    font-family: 'Dengkuan For Ascii';
+    src: local('Consolas'), local('Monaco'), local('Andale Mono'),
+      local('Ubuntu Mono'), local('monospace');
+    unicode-range: U+0025-00FF;
+  }
+
+  /* 将文档中 Ascii 内容设置为等宽字体 */
+  .custom-ascii {
+    font-family: 'Dengkuan For Ascii', -apple-system, BlinkMacSystemFont, Segoe UI,
+      PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica,
+      Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol !important;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="demo1">
+    <p>不设置等宽字体 效果对比</p>
+    <ul>
+      <li>dev: <code>dev.xxx.com</code></li>
+      <li>sit: <code>sit.xxx.com</code></li>
+      <li>prod: <code>prod.xxx.com</code></li>
+    </ul>
+  </div>
+  <div class="custom-ascii">
+    <p>将文档中特定容器内的 Ascii 内容设置为等宽字体</p>
+    <ul>
+      <li>dev: <code>dev.xxx.com</code></li>
+      <li>sit: <code>sit.xxx.com</code></li>
+      <li>prod: <code>prod.xxx.com</code></li>
+    </ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>唤醒 app 弹窗点拒绝后，提示'Safari浏览器打不开该网页，因为网址无效。'的问题</title>
+</head>
+<body>
+  <button id="callapp"> callApp </button>
+  <script>
+    !(function() {
+      const button = document.getElementById('callapp');
+
+      // const iframe = document.createElement('iframe');
+      // iframe.style.display = 'none';
+
+      const schemaUrl = 'schema://xxx/url?id=123' + Date.now();
+
+      const luodiUrl = 'https://lnk0.com/VxZV58';
+      if (true) {
+        location.href = schemaUrl;
+        // iframe.src='https://baidu.com';
+      } else {
+        // iframe.src=schemaUrl;
+      }
+
+      setTimeout(function() {
+        // document.body.removeChild(iframe);
+        location.href = luodiUrl;
+      }, 3000);
+
+
+      button.onclick = function() {
+        // location.href = schemaUrl;
+
+        location.href = luodiUrl;
+        // setTimeout(function() {
+        // }, 2000)
+      }
+    })();
+  </script>
+</body>
+</html>
