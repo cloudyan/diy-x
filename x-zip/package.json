@@ -1,0 +1,46 @@
+{
+  "scripts": {
+    "zip": "node ./build/zip.js"
+  },
+  "kylinApp": {
+    "output": "www",
+    "pages": {
+      "index": {
+        "entry": "./src/pages/index/index.js"
+      }
+    },
+    "pageTemplate": "./src/layout/layout.html",
+    "devPort": 8090,
+    "options": {
+      "enableGlobalResourceInject": true
+    },
+    "plugins": [
+      "module:./plugin.js",
+      [
+        "vue"
+      ],
+      [
+        "resource",
+        {
+          "map": {
+            "vue": {
+              "external": "Vue",
+              "js": "https://gw.alipayobjects.com/as/g/h5-lib/vue/2.5.13/vue.min.js"
+            },
+            "fastclick": {
+              "external": "FastClick",
+              "js": "https://gw.alipayobjects.com/as/g/luna-component/luna-fastclick/0.3.1/index.js"
+            }
+          }
+        }
+      ],
+      [
+        "env"
+      ]
+    ]
+  },
+  "engines": {
+    "node": ">= 6.0.0",
+    "npm": ">= 3.0.0"
+  }
+}
