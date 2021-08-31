@@ -149,4 +149,4 @@ setTimeout(() => {
 
 参考：
 
-- https://www.zhihu.com/question/36273908?sort=created
+- [关于 Promise 执行顺序的一个问题？](https://www.zhihu.com/question/36273908?sort=created)

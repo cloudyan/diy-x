@@ -22,3 +22,5 @@ var i = 0;
 while (i < 27) {
   console.log(num2letter(i++));
 }
+
+// getExt("1.mp4") //->mp4
