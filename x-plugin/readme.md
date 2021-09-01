@@ -9,7 +9,8 @@
 - Babel
 - Eslint
 - Postcss
-- Vue
+- [Vue2](https://vuejs.org/v2/guide/plugins.html)
+- [Vue3](https://v3.vuejs.org/guide/plugins.html)
 - koa
 - Egg
 - Rollup
