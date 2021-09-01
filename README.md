@@ -6,33 +6,35 @@
 
 此项目使用 pnpm 管理依赖
 
+diy-x && toy-x 并无特别大的区别，不用在意
+
 ## diy-x
 
-亲手实现一些 ployfill 或小方法
+亲手实现一些 ployfill 或 实现原理机制
 
 - [ ] 如何实现 call 方法?
 - [ ] 如何实现 apply 方法?
 - [ ] 如何实现 bind 方法?
-
-## diy-x && toy-x
-
-亲手实现方案, 用于检验学习成果
-
 - [ ] 亲手实现 Promise [diy-promise]
 - [ ] 如何实现 空白屏侦测?
+- [ ] 亲手实现一个模板引擎
+
+## toy-x
+
+综合应用练习, 用于检验学习成果
+
 - [ ] 亲手实现 Koa
 - [ ] 亲手实现 Egg
 - [ ] 如何实现 mvvm ?
-- [ ] 亲手实现一个模板引擎
 - [ ] 亲手实现 Vue [toy-vue]
 - [ ] 亲手实现 React [toy-react]
 - [ ] 亲手实现 umi 微框架 [toy-umi]
 - [ ] 亲手实现 vite [toy-vite]
 - [ ] 亲手实现一个测试框架 [toy-testing]
 
-## 其他
+## x-xxx
 
-一些问题解决方案
+一些问题的解决方案
 
 - [ ] 如何实现图片懒加载？
 - [ ] fetch-jsonp
