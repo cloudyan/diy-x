@@ -33,12 +33,3 @@ class PluginCore {
     return this
   }
 }
-
-// usage:
-const core = new PluginCore({
-  type: '',
-})
-const pluginDemo = function(ctx, config) { Object.assign(ctx._config, config) }
-core.use(pluginDemo, {type: 'js_error'})
-
-console.log(core);
