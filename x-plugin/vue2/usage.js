@@ -1,5 +1,5 @@
 
-import { PluginVue } from '../index'
+import { PluginVue } from './core'
 
 
 // 使用
