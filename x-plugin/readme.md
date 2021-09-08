@@ -2,6 +2,11 @@
 
 很多库、工具实现都能见到插件化的影子，我们结合实例深入了解下
 
+插件分类
+
+- event-plugin
+- inject-plugin
+
 常见的插件化开发实现
 
 - [jQuery](https://learn.jquery.com/plugins/basic-plugin-creation/)
