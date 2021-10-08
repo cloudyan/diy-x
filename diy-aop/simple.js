@@ -30,10 +30,12 @@ Function.prototype.after = function (cb) {
   }
 }
 
-const res = test('AOP').before(function() {
-  console.log('===== before ==s====')
-}).after(function() {
-  console.log('===== after ======')
-})()
+const res = test('AOP')
+  .before(function() {
+    console.log('===== before ==s====')
+  })
+  .after(function() {
+    console.log('===== after ======')
+  })()
 
 console.log(res)

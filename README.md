@@ -10,27 +10,22 @@ diy-x && toy-x 并无特别大的区别，不用在意
 
 ## diy-x
 
-亲手实现一些 ployfill 或 实现原理机制
+亲手实现一些 ployfill 或 实现原理机制，甚至框架等
 
 - [ ] 如何实现 call 方法?
 - [ ] 如何实现 apply 方法?
 - [ ] 如何实现 bind 方法?
 - [ ] 亲手实现 Promise [diy-promise]
 - [ ] 如何实现 空白屏侦测?
-- [ ] 亲手实现一个模板引擎
-
-## toy-x
-
-综合应用练习, 用于检验学习成果
-
+- [ ] 手写一个模板引擎
 - [ ] 亲手实现 Koa
 - [ ] 亲手实现 Egg
 - [ ] 如何实现 mvvm ?
-- [ ] 亲手实现 Vue [toy-vue]
-- [ ] 亲手实现 React [toy-react]
-- [ ] 亲手实现 umi 微框架 [toy-umi]
-- [ ] 亲手实现 vite [toy-vite]
-- [ ] 亲手实现一个测试框架 [toy-testing]
+- [ ] 亲手实现 Vue [diy-vue]
+- [ ] 亲手实现 React [diy-react]
+- [ ] 亲手实现 umi 微框架 [diy-umi]
+- [ ] 亲手实现 vite [diy-vite]
+- [ ] 亲手实现一个测试框架 [diy-testing]
 
 ## x-xxx
 
@@ -49,3 +44,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 
 - HTTP2 头部压缩的原理是什么
 - 什么是 DSL
+
+## 扩展阅读
+
+- 可以膜拜下大神 [Fabrice Bellard](https://bellard.org/)

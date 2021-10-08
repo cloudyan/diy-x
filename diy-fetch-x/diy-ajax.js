@@ -8,7 +8,7 @@ function ajax(url, options = {}) {
     fail = noop,
     complete = noop,
   } = options
-  // 1、创建ajax对象
+  // 1. 创建ajax对象
   var xhr = null;
   try {
     xhr = new XMLHttpRequest();
@@ -16,27 +16,31 @@ function ajax(url, options = {}) {
     xhr = new ActiveXObject("Microsoft.XMLHTTP");
   }
 
-  // 2、等待数据响应
+  // 2. 等待数据响应
   // 必须在调用open()方法之前指定onreadystatechange事件处理程序才能确保跨域浏览器兼容性                //问题
   // 只要readyState属性的值有变化，就会触发readystatechange事件
   xhr.onreadystatechange = function(){
     if(xhr.readyState == 4){
-      // 判断本次下载的状态码都是多少 304表示请求的资源没有被修改
-      if((xhr.status >= 200 && xhr.status<300)||xhr.status ==304){
-        success(xhr.responseText);
+      if((xhr.status >= 200 && xhr.status < 300)||xhr.status == 304){
+        try {
+          const result = JSON.parse(xhr.responseText)
+          success(result)
+        } catch (err) {
+          fail(err);
+        }
       }else{
-        fail("Error:" + xhr.status);
+        fail('Error:' + xhr.status);
       }
     }
   }
 
-  // 3、调用open
+  // 3. 调用open
   xhr.open(method, url, true);
 
-  // 4、 如需要，必须在send方法之前，去设置请求格式
+  // 4. 设置 HTTP 请求头的值。必须在 open() 之后、send() 之前调用
   // xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded')
 
-  // 5、调用send
+  // 5. 调用send
   xhr.send();
 }
 

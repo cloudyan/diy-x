@@ -1,5 +1,23 @@
 // https://github.com/scottcorgan/tiny-emitter
 
+// Keep this empty so it's easier to inherit from
+// (via https://github.com/lipsmack from https://github.com/scottcorgan/tiny-emitter/issues/3)
+
+// subscribers
+// subscribe()
+// unsubscribe()：取消订阅。从 subscribers 数组中删除订阅者；
+// publish()
+
+// usage example
+// import Emitter from '@xmini/shard-utils';
+// const emitter = new Emitter();
+//
+// emitter.on('some-event', function(arg1, arg2, arg3) {
+//    //
+// });
+//
+// emitter.emit('some-event', 'arg1 value', 'arg2 value', 'arg3 value');
+
 export class Emitter {
   on(name, callback, context) {
     const self = this;
@@ -30,7 +48,7 @@ export class Emitter {
   }
 
   // name, value, context
-  emit(name, value) {
+  emit(name) {
     const data = [].slice.call(arguments, 1);
     const evtArr = ((this._events || (this._events = {}))[name] || []).slice();
     let i = 0;
