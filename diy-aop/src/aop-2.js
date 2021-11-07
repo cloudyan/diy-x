@@ -1,22 +1,24 @@
+/* eslint-disable prefer-rest-params,no-multi-assign */
+
 // source: https://github.com/notejs/aop
 function aspect(type){
   return function(target, methodName, advice){
-    var exist = target[methodName],
-      dispatcher;
+    const exist = target[methodName];
+      let dispatcher;
 
-    if( !exist || exist.target != target ){
-      dispatcher = target[methodName] =  function(){
+    if( !exist || exist.target !== target ){
+      dispatcher = target[methodName] = function(){
         // before methods
-        var beforeArr = dispatcher.before;
-        var args = arguments;
-        for(var l = beforeArr.length ; l--; ){
+        const beforeArr = dispatcher.before;
+        let args = arguments;
+        for(let l = beforeArr.length ; l--; ){
           args = beforeArr[l].advice.apply(this, args) || args;
         }
         // target method
-        var rs = dispatcher.method.apply(this, args);
+        let rs = dispatcher.method.apply(this, args);
         // after methods
-        var afterArr = dispatcher.after;
-        for(var i = 0, ii = afterArr.length; i < ii; i++){
+        const afterArr = dispatcher.after;
+        for(let i = 0, ii = afterArr.length; i < ii; i++){
           rs = afterArr[i].advice.call(this, rs, args) || rs;
         }
         // return object
@@ -32,13 +34,13 @@ function aspect(type){
       dispatcher.target = target;
     }
 
-    var aspectArr = (dispatcher || exist)[type];
-    var obj = {
-      advice : advice,
+    const aspectArr = (dispatcher || exist)[type];
+    const obj = {
+      advice,
       _index : aspectArr.length,
-      remove : function(){
+      remove(){
         aspectArr.splice(this._index, 1);
-      }
+      },
     };
     aspectArr.push(obj);
 
@@ -47,9 +49,9 @@ function aspect(type){
 
 }
 
-var aop = {
+const aop = {
   before : aspect('before'),
-  after : aspect('after')
+  after : aspect('after'),
 };
 
 export default aop;

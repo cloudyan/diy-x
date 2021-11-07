@@ -9,7 +9,7 @@ export function getFormData(object) {
     const value = object[key]
     if (Array.isArray(value)) {
       value.forEach((subValue, i) =>
-        formData.append(key + `[${i}]`, subValue)
+        formData.append(key + `[${i}]`, subValue),
       )
     } else {
       formData.append(key, object[key])

@@ -26,7 +26,7 @@ function queue(callback, concurrency) {
   checkConcurrency(concurrency);
 
   // 待处理的队列
-  let workers = [];
+  const workers = [];
   // 正在处理的队列
   const workerList = [];
 
@@ -53,7 +53,7 @@ function queue(callback, concurrency) {
               worker.callback(...args);
             }
             this.process();
-          })
+          }),
         );
       }
     },

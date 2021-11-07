@@ -6,6 +6,13 @@ module.exports = {
   },
   rules: {
     // your rules
+    'no-irregular-whitespace': [
+      'error',
+      {
+        skipStrings: true,
+        skipComments: true,
+      },
+    ],
     // 'unicorn/filename-case': 0,
     // 'unicorn/filename-case': [
     //   'error',

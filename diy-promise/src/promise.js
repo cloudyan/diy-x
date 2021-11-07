@@ -17,14 +17,22 @@ class MyPromise {
   }
 
   then(onFulfilled, onRejected) {}
+
   catch() {}
+
   finally() {}
 
   static all() {}
+
   static race() {}
+
   static allSettled() {}
+
   static resolve() {}
+
   static reject() {}
+
   static any() {}
+
   static try() {}
 }

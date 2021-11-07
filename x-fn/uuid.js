@@ -8,8 +8,8 @@ export function uuid(length, chars) {
     chars ||
     '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
   length = length || 8
-  var result = ''
-  for (var i = length; i > 0; --i)
+  let result = ''
+  for (let i = length; i > 0; --i)
     result += chars[Math.floor(Math.random() * chars.length)]
   return result
 }

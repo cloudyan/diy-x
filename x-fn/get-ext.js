@@ -3,7 +3,7 @@
  * @param {String} filename
  */
 export function getExt(filename) {
-  if (typeof filename == 'string') {
+  if (typeof filename === 'string') {
     return filename
         .split('.')
         .pop()

@@ -1,33 +1,37 @@
 
-var a = (data = {}) => {
+import axios from 'axios';
+
+const GD_MAP_AK = '';
+
+const a = (data = {}) => {
   return new Promise((resolve, reject) => {
     console.log('a', data)
     data.a = 1
     resolve(data)
   })
 }
-var b = (data = {}) => {
+const b = (data = {}) => {
   return new Promise((resolve, reject) => {
     console.log('b', data)
     data.b = 1
     resolve(data)
   })
 }
-var c = (data = {}) => {
+const c = (data = {}) => {
   return new Promise((resolve, reject) => {
     console.log('c', data)
     data.c = 1
     resolve(data)
   })
 }
-var d = (data = {}) => {
+const d = (data = {}) => {
   return new Promise((resolve, reject) => {
     console.log('d', data)
     resolve(data)
   })
 }
 
-Promise.all([a(),b().then(c)]).then(d).then(res => {
+Promise.all([a(), b().then(c)]).then(d).then(res => {
   console.log(res)
 })
 

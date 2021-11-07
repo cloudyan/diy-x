@@ -1,3 +1,4 @@
+/* eslint-disable no-extend-native,prefer-rest-params */
 
 
 // 对以下流程切片优化处理

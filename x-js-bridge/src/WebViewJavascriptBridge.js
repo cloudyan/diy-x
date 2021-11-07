@@ -1,3 +1,5 @@
+/* eslint-disable unicorn/filename-case */
+
 // WebViewJavascriptBridge.js
 
 // 此文件放在 app 中，构建 bridge
@@ -15,33 +17,33 @@
 (function(document, window) {
   if (typeof document === 'undefined' || typeof window === 'undefined') return;
 
-  var WebViewJavascriptBridge = window.WebViewJavascriptBridge;
+  const WebViewJavascriptBridge = window.WebViewJavascriptBridge;
   if (WebViewJavascriptBridge) return;
 
-  var version = '1.0.0';
-  var sendMessageQueue = [];
-  var receiveMessageQueue = [];
-  var messageHandlers = {};
+  const version = '1.0.0';
+  let sendMessageQueue = [];
+  let receiveMessageQueue = [];
+  const messageHandlers = {};
   // var messagingIframe;
-  var uniqueId = 1;
-  var responseCallbacks = {};
-  var dispatchMessagesWithTimeoutSafety = true;
+  let uniqueId = 1;
+  const responseCallbacks = {};
+  let dispatchMessagesWithTimeoutSafety = true;
   // var CUSTOM_PROTOCOL_SCHEME = 'native';
   // var QUEUE_HAS_MESSAGE = '__QUEUE_MESSAGE__';
 
-  var ua = navigator.userAgent.toLowerCase();
-  var isAndroid = ua.indexOf('android') > -1;
-  var isIphone = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1;
+  const ua = navigator.userAgent.toLowerCase();
+  const isAndroid = ua.indexOf('android') > -1;
+  const isIphone = ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1;
 
   // JSBridge
   window.WebViewJavascriptBridge = {
-    version: version,
-    init: init, // 初始化
-    send: send, // js 发消息给 native
-    registerHandler: registerHandler,
-    callHandler: callHandler,
-    _fetchQueue: _fetchQueue,
-    _handleMessageFromNative: _handleMessageFromNative,
+    version,
+    init, // 初始化
+    send, // js 发消息给 native
+    registerHandler,
+    callHandler,
+    _fetchQueue,
+    _handleMessageFromNative,
   };
 
   function isString(data) {
@@ -70,7 +72,7 @@
 
   // 初始化
   function init(messageHandler) {
-    var bridge = window.WebViewJavascriptBridge;
+    const bridge = window.WebViewJavascriptBridge;
     if (bridge._messageHandler) {
       throw new Error('WebViewJavascriptBridge.init called twice');
     }
@@ -79,9 +81,9 @@
       (data => {
         console.log('落地函数, data:', data);
       });
-    var receivedMessages = receiveMessageQueue;
+    const receivedMessages = receiveMessageQueue;
     receiveMessageQueue = null;
-    for (var i = 0; i < receivedMessages.length; i++) {
+    for (let i = 0; i < receivedMessages.length; i++) {
       _dispatchMessageFromNative(receivedMessages[i]);
     }
   }
@@ -89,9 +91,9 @@
   function send(data, responseCallback) {
     _doSend(
       {
-        data: data,
+        data,
       },
-      responseCallback
+      responseCallback,
     );
   }
 
@@ -110,10 +112,10 @@
     // }
     _doSend(
       {
-        handlerName: handlerName,
-        data: data,
+        handlerName,
+        data,
       },
-      responseCallback
+      responseCallback,
     );
   }
 
@@ -127,8 +129,8 @@
       _doDispatchMessageFromNative();
     }
     function _doDispatchMessageFromNative() {
-      var message = JSON.parse(messageJSON);
-      var responseCallback;
+      const message = JSON.parse(messageJSON);
+      let responseCallback;
 
       // native call finished, now need to call js callback function
       if (message.responseId) {
@@ -140,16 +142,16 @@
       } else {
         // 直接发送
         if (message.callbackId) {
-          var callbackResponseId = message.callbackId;
+          const callbackResponseId = message.callbackId;
           responseCallback = function(responseData) {
             _doSend({
               responseId: callbackResponseId,
-              responseData: responseData,
+              responseData,
             });
           };
         }
 
-        var handler = window.WebViewJavascriptBridge._messageHandler;
+        let handler = window.WebViewJavascriptBridge._messageHandler;
         if (message.handlerName) {
           handler = messageHandlers[message.handlerName];
         }
@@ -162,7 +164,7 @@
             console.warn(
               'WebViewJavascriptBridge: WARNING: javascript handler throw.',
               message,
-              exception
+              exception,
             );
           }
         }
@@ -185,7 +187,7 @@
   function _doSend(message, responseCallback) {
     // sendMessage add message, 触发native处理 sendMessage
     if (responseCallback) {
-      var callbackId = 'cb_' + uniqueId++ + '_' + new Date().getTime();
+      const callbackId = 'cb_' + uniqueId++ + '_' + new Date().getTime();
       responseCallbacks[callbackId] = responseCallback;
       message.callbackId = callbackId;
     }
@@ -223,7 +225,7 @@
   // 获取 sendMessageQueue 返回给 native，由于android不能直接获取返回的内容，
   // 所以使用 url shouldOverrideUrlLoading 的方式返回内容
   function _fetchQueue() {
-    var messageQueueString = JSON.stringify(sendMessageQueue);
+    const messageQueueString = JSON.stringify(sendMessageQueue);
     sendMessageQueue = [];
     return messageQueueString;
     // if (isIphone) {
@@ -238,13 +240,13 @@
   }
 
   (function(bridge) {
-    var commonArgs = ['success', 'fail', 'cancel', 'complete', 'trigger'];
-    var handlerCaches = {};
+    const commonArgs = ['success', 'fail', 'cancel', 'complete', 'trigger'];
+    const handlerCaches = {};
 
     bridge.addMethods = function(bridgeMethods) {
       if (isString(bridgeMethods)) bridgeMethods = [bridgeMethods];
       each(bridgeMethods, function(methodName) {
-        var names = getJsAndNativeNames(methodName);
+        const names = getJsAndNativeNames(methodName);
         generateMethod(names.js, names.native);
       });
     };
@@ -252,18 +254,19 @@
     bridge.addEvents = function(bridgeEvents) {
       if (isString(bridgeEvents)) bridgeEvents = [bridgeEvents];
       each(bridgeEvents, function(methodName) {
-        var names = getJsAndNativeNames(methodName);
+        const names = getJsAndNativeNames(methodName);
         generateEvent(names.js, names.native);
       });
     };
 
     function each(arr, callback) {
       if (isArray(arr)) {
-        for (var i = 0, len = arr.length; i < len; i++) {
+        for (let i = 0, len = arr.length; i < len; i++) {
           if (callback(arr[i], i, arr) === false) break;
         }
       } else {
-        for (var key in arr) {
+        for (const key in arr) {
+          // eslint-disable-next-line no-prototype-builtins
           if (arr.hasOwnProperty(key)) {
             if (callback(arr[key], key, arr) === false) break;
           }
@@ -272,7 +275,7 @@
     }
 
     function getJsAndNativeNames(methodName) {
-      var nativeMethodName = methodName;
+      let nativeMethodName = methodName;
       if (isArray(methodName)) {
         nativeMethodName = methodName[1];
         methodName = methodName[0];
@@ -291,7 +294,7 @@
           if (isString(responseData)) {
             responseData = JSON.parse(responseData);
           }
-          var status = responseData.status;
+          const status = responseData.status;
           if (status === 'success') {
             args.success && args.success(responseData);
           } else if (status === 'fail') {
@@ -319,7 +322,7 @@
 
     // 处理参数，参数为对象格式
     function dealArgs(args) {
-      var data = {};
+      const data = {};
       each(args, function(arg, key) {
         // 不是 commonArgs 中列出的方法，是要给 Native 传递的 message
         // 先将其转存到 data 上
@@ -334,11 +337,11 @@
     }
 
     function on(eventName, args) {
-      var init2 = initEvent(eventName);
-      var cache = handlerCaches[eventName] || {};
+      const init2 = initEvent(eventName);
+      const cache = handlerCaches[eventName] || {};
 
       each(commonArgs, function(handlerName) {
-        var typeHandler = args[handlerName];
+        const typeHandler = args[handlerName];
         // 同一个监听器不要重复监听
         if (typeHandler && cache[handlerName].indexOf(typeHandler) === -1) {
           cache[handlerName].push(typeHandler);
@@ -349,7 +352,7 @@
         bridge.callHandler(
           'on_' + eventName,
           {},
-          handlerCaches[eventName]._handler
+          handlerCaches[eventName]._handler,
         );
       }
 
@@ -357,15 +360,15 @@
     }
 
     function off(eventName, args) {
-      var allEmpty = true;
+      let allEmpty = true;
 
       if (args) {
-        var cache = handlerCaches[eventName] || {};
+        const cache = handlerCaches[eventName] || {};
 
         each(commonArgs, function(handlerName) {
-          var handlerCache = cache[handlerName] || [];
-          var handlerNeedOff = args[handlerName];
-          var index = handlerCache.indexOf(handlerNeedOff);
+          const handlerCache = cache[handlerName] || [];
+          const handlerNeedOff = args[handlerName];
+          const index = handlerCache.indexOf(handlerNeedOff);
           // 从此方法缓存中删除此 handler
           if (index !== -1) handlerCache.splice(index, 1);
 
@@ -397,8 +400,8 @@
       return function handler(responseData) {
         if (typeof responseData === 'string')
           responseData = JSON.parse(responseData);
-        var cache = handlerCaches[eventName] || {};
-        var status = responseData.status;
+        const cache = handlerCaches[eventName] || {};
+        const status = responseData.status;
         if (status === 'success') executeHandler(cache, status, responseData);
         else if (status === 'fail') executeHandler(cache, status, responseData);
         else if (status === 'cancel')
@@ -408,22 +411,22 @@
     }
 
     function executeHandler(cache, handlerName, responseData) {
-      var handlers = cache[handlerName];
+      const handlers = cache[handlerName];
       each(handlers, function(handler) {
         handler(responseData);
       });
     }
   })(window.WebViewJavascriptBridge);
 
-  var doc = document;
+  const doc = document;
   // _createQueueReadyIframe(doc);
-  var readyEvent = doc.createEvent('Events');
+  const readyEvent = doc.createEvent('Events');
   readyEvent.initEvent('WebViewJavascriptBridgeReady');
   readyEvent.bridge = WebViewJavascriptBridge;
   doc.dispatchEvent(readyEvent);
 
   registerHandler(
     '_disableJavascriptAlertBoxSafetyTimeout',
-    disableJavscriptAlertBoxSafetyTimeout
+    disableJavscriptAlertBoxSafetyTimeout,
   );
 })(document, window);

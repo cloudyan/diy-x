@@ -1,3 +1,4 @@
+/* eslint-disable no-extend-native,prefer-rest-params */
 
 // 实现一个apply函数
 Function.prototype.myapply = function (context) {

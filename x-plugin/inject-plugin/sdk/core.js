@@ -14,7 +14,7 @@ class PluginCore {
   }
 
   init(config) {
-    this._config = {...defaultConfig, ...config}
+    this._config = { ...defaultConfig, ...config }
   }
 
   use(plugin, config = {}) {

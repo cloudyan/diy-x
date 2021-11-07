@@ -11,7 +11,7 @@ const toString = objProto.toString;
 function isString(v) {
   return toString.call(v) === '[object String]';
 }
-function isFn(v) {
+function isFunction(v) {
   const isAlert = typeof window !== 'undefined' && v === window.alert;
   if (isAlert) {
     return true;
@@ -26,6 +26,8 @@ function isFn(v) {
 
 let uniqueId = 1;
 const commonArgs = ['success', 'fail', 'cancel', 'complete', 'trigger'];
+
+function each() {}
 
 function getMapNames(methodName) {
   let pluginMethodName = methodName;

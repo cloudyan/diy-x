@@ -18,7 +18,7 @@ function num2letter(num) {
 }
 
 // test
-var i = 0;
+let i = 0;
 while (i < 27) {
   console.log(num2letter(i++));
 }

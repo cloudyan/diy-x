@@ -23,7 +23,7 @@ function pollingRequest(promiseAjax, interval) {
       },
       err => {
         console.log(err)
-      }
+      },
     )
     cacheQueue.push(requestId)
   }
@@ -39,8 +39,8 @@ function pollingRequest(promiseAjax, interval) {
 
 function randomRange(under, over) {
   switch(arguments.length) {
-    case 1: return parseInt(Math.random()*under+1);
-    case 2: return parseInt(Math.random()*(over-under+1) + under);
+    case 1: return parseInt(Math.random()*under+1, 10);
+    case 2: return parseInt(Math.random()*(over-under+1) + under, 10);
     default: return 0;
   }
 }
@@ -50,7 +50,7 @@ function mockFetch() {
   console.log('send request')
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      resolve({data: 'success'})
+      resolve({ data: 'success' })
     }, delay*1000)
   })
 }
@@ -61,6 +61,6 @@ pollingRequest(mockFetch, 1000).then(
   },
   err => {
 
-  }
+  },
 )
 

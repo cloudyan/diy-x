@@ -1,3 +1,4 @@
+/* eslint-disable prefer-rest-params,no-irregular-whitespace */
 
 // 路由切换
 // 1. href
@@ -9,13 +10,13 @@ window.addEventListener('hashchange', function() {
 
 // 3. History API
 // 第一阶段：我们对原生方法进行包装，调用前执行 dispatchEvent 了一个同样的事件
-function aop (type) {
-  var source = window.history[type];
+function aop(type) {
+  const source = window.history[type];
   return function () {
-    var event = new Event(type);
+    const event = new Event(type);
     event.arguments = arguments;
     window.dispatchEvent(event);
-    var rewrite = source.apply(this, arguments);
+    const rewrite = source.apply(this, arguments);
     return rewrite;
   };
 }

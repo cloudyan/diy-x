@@ -1,4 +1,5 @@
 import device from '@deepjs/device';
+
 const noop = () => {};
 const fnList = ['setShare', 'showShare', 'showOptionMenu', 'hideOptionMenu'];
 const bridge = {};
@@ -24,7 +25,9 @@ switch (device.host.name) {
   case 'iqg':
   case 'jsz':
   case 'iqgsh':
+    // eslint-disable-next-line global-require
     require('./WebViewJavascriptBridge');
+    // eslint-disable-next-line no-case-declarations,global-require
     const Bridge = require('./index');
     Object.assign(bridge, Bridge, window.WebViewJavascriptBridge);
     // console.log('app bridge', bridge);

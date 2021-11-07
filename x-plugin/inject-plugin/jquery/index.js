@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-assign */
 /*
  * jQuery插件实现机制：
  * 就是给原型添加一些功能方法。
@@ -8,6 +9,7 @@
 (function(win) {
   // 对外暴露的工厂函数
   function jQuery() {
+    // eslint-disable-next-line new-cap
     return new jQuery.fn.init();
   }
   // 给原型提供一个简写方式
@@ -28,11 +30,14 @@
 
 
 // 实现一个jQ弹出框插件
+// eslint-disable-next-line no-undef
 jQuery.fn.alert = function(msg) {
+  // eslint-disable-next-line no-alert
   alert(msg);
   return this;
 };
 
 // 测试插件
+// eslint-disable-next-line no-undef
 const $tip = $();
 $tip.alert('弹出框插件');

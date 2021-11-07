@@ -29,7 +29,7 @@ export default class Bridge {
       document.addEventListener(
         'WebViewJavascriptBridgeReady',
         onWebViewJavascriptBridgeReady,
-        false
+        false,
       );
     }
   }
@@ -86,7 +86,7 @@ function isFunction(fn) {
 }
 
 function runJsBridgeFn(bridge) {
-  for (var i = 0, len = fnListCaches.length; i < len; i++) {
+  for (let i = 0, len = fnListCaches.length; i < len; i++) {
     fnListCaches[i](bridge);
   }
 }

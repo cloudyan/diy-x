@@ -1,5 +1,5 @@
 document.addEventListener('click', function (clickEvent) {
-  let target = clickEvent.target;
+  const target = clickEvent.target;
   readXPath(target);
 });
 function readXPath(el) {
@@ -42,7 +42,7 @@ function readXPath(el) {
 
   // 标准CSS路径
   if (!(el instanceof Element)) return;
-  let path = [];
+  const path = [];
   while (el.nodeType === Node.ELEMENT_NODE) {
     let selector = el.nodeName.toLowerCase();
     if (el.id) {
@@ -50,12 +50,14 @@ function readXPath(el) {
       path.unshift(selector);
       break;
     } else {
-      let sib = el,
-        nth = 1;
+      let sib = el;
+      let nth = 1;
+
+      // eslint-disable-next-line no-cond-assign
       while ((sib = sib.previousElementSibling)) {
-        if (sib.nodeName.toLowerCase() == selector) nth++;
+        if (sib.nodeName.toLowerCase() === selector) nth++;
       }
-      if (nth != 1) selector += ':nth-of-type(' + nth + ')';
+      if (nth !== 1) selector += ':nth-of-type(' + nth + ')';
     }
     path.unshift(selector);
     el = el.parentNode;
@@ -72,6 +74,7 @@ export function findDom(realWrapper, clonedWrapper, target) {
 
 function getChildNum(child) {
   let i = 0;
+  // eslint-disable-next-line no-cond-assign
   while ((child = child.previousSibling) != null) i++;
   return i;
 }
@@ -81,7 +84,7 @@ function getChildDom(parentNode, index) {
 }
 
 function getXPathByDom(el, root = null) {
-  let stack = [];
+  const stack = [];
   while (el.parentNode != null) {
     stack.push(getChildNum(el));
   }

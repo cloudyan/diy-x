@@ -1,5 +1,9 @@
 import axios from 'axios'
 
+const stringify = () => {
+
+}
+
 // simple
 const jsonp = url => {
   if (!url) {

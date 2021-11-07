@@ -1,6 +1,6 @@
 
 // 回调版本
-function ajax(url, options = {}) {
+function ajax1(url, options = {}) {
   const noop = () => {}
   const {
     method = 'get',
@@ -9,19 +9,20 @@ function ajax(url, options = {}) {
     complete = noop,
   } = options
   // 1. 创建ajax对象
-  var xhr = null;
+  let xhr = null;
   try {
     xhr = new XMLHttpRequest();
   }catch(error){
-    xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    // eslint-disable-next-line no-undef
+    xhr = new ActiveXObject('Microsoft.XMLHTTP');
   }
 
   // 2. 等待数据响应
   // 必须在调用open()方法之前指定onreadystatechange事件处理程序才能确保跨域浏览器兼容性                //问题
   // 只要readyState属性的值有变化，就会触发readystatechange事件
   xhr.onreadystatechange = function(){
-    if(xhr.readyState == 4){
-      if((xhr.status >= 200 && xhr.status < 300)||xhr.status == 304){
+    if(xhr.readyState === 4){
+      if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
         try {
           const result = JSON.parse(xhr.responseText)
           success(result)
@@ -46,9 +47,9 @@ function ajax(url, options = {}) {
 
 
 // promise版
-function ajax(url, options) {
+function ajax2(url, options) {
   const {
-    method = 'get'
+    method = 'get',
   } = options
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
@@ -67,12 +68,12 @@ function ajax(url, options) {
 }
 
 // example
-ajax('https://baidu.com', {
+ajax1('https://baidu.com', {
   success(res){ console.log(res) },
   fail(err) { console.log(err) },
 })
 
-ajax('https://baidu.com')
+ajax2('https://baidu.com')
   .then(res => {
     console.log(res)
   }).catch(err => {

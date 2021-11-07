@@ -1,11 +1,12 @@
+/* eslint-disable guard-for-in */
 // 将外部依赖打成 zip 包
 
 const download = require('download')
 const { SourceCode } = require('eslint')
 const { ready } = require('jquery')
-const package = require('./package.json')
+const pkg = require('./package.json')
 
-const { kylinApp } = package
+const { kylinApp } = pkg
 const { plugins } = kylinApp
 
 // console.log(plugins)
@@ -14,7 +15,7 @@ function getResource(plugins) {
   for(let i = 0; i < plugins.length; i++) {
     const plugin = plugins[i]
     if (plugin && plugin[0]) {
-      if (plugin[0] == 'resource') return plugin[1].map
+      if (plugin[0] === 'resource') return plugin[1].map
     }
   }
 }
@@ -25,7 +26,7 @@ const sources = getResource(plugins)
 
 function getSourceInfo(sources) {
   const res = []
-  for (let key in sources) {
+  for (const key in sources) {
     res.push(sources[key].js)
   }
   return res;
@@ -38,7 +39,7 @@ console.log(resArr)
 Promise.all(resArr.map(url => {
   const dir = url.replace(/^https?:\/\//, '').split('/')
   dir.pop()
-  download(url, `./dist/${dir.join('/')}`)
+  return download(url, `./dist/${dir.join('/')}`)
 }));
 
 // (async () => {

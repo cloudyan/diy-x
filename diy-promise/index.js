@@ -2,7 +2,7 @@
 const STATUS = {
   PENDING: 0,
   FULFILLED: 1,
-  REJECTED: 2
+  REJECTED: 2,
 }
 
 class Promise {
@@ -71,7 +71,7 @@ class Promise {
       // Promise的thenable特性基于此
       else if(data !== null && data instanceof Object) {
         try {
-          let then = data.then
+          const then = data.then
           if(then instanceof Function) {
             then.call(data, (val) => {
               this.resolvePromise(val, resolve, reject);
@@ -116,7 +116,7 @@ class Promise {
           if(!(onFulfilled instanceof Function)) {
             resolve(this.resolveData)
           } else {
-            let data = onFulfilled(this.resolveData)
+            const data = onFulfilled(this.resolveData)
             this.resolvePromise(data, resolve, reject)
           }
         })
@@ -125,7 +125,7 @@ class Promise {
           if(!(onRejected instanceof Function)) {
             reject(this.rejectData)
           } else {
-            let data = onRejected(this.rejectData)
+            const data = onRejected(this.rejectData)
             this.resolvePromise(data, resolve, reject)
           }
         })
@@ -139,7 +139,7 @@ class Promise {
         if(!(onFulfilled instanceof Function)) {
           resolve(this.resolveData)
         } else {
-          let data = onFulfilled(this.resolveData)
+          const data = onFulfilled(this.resolveData)
           this.resolvePromise(data, resolve, reject)
         }
       })
@@ -151,7 +151,7 @@ class Promise {
         if(!(onRejected instanceof Function)) {
           reject(this.rejectData)
         } else {
-          let data = onRejected(this.rejectData)
+          const data = onRejected(this.rejectData)
           this.resolvePromise(data, resolve, reject)
         }
       })
@@ -165,7 +165,7 @@ class Promise {
    * @param {*reject函数} rejectFn
    */
   catch(rejectFn) {
-    //不是函数直接返回
+    // 不是函数直接返回
     if(!(rejectFn instanceof Function)) {
       return
     }
@@ -177,7 +177,7 @@ class Promise {
           rejectFn(this.rejectData)
         }
       })
-    } else if (this.status = STATUS.REJECTED) {
+    } else if (this.status === STATUS.REJECTED) {
       // 没有错误信息则不执行catch中的函数
       if(this.rejectData !== null) {
         rejectFn(this.rejectData)
@@ -220,9 +220,9 @@ class Promise {
    */
   static all(promiseArray) {
     if(!(promiseArray instanceof Array)) {
-      throw new TypeError("parameter must be array")
+      throw new TypeError('parameter must be array')
     }
-    let result = []
+    const result = []
     let i = 0
     return new Promise((resolve, reject) => {
       if(promiseArray.length === 0) {
@@ -261,7 +261,7 @@ class Promise {
    */
   static race(promiseArray) {
     if(!(promiseArray instanceof Array)) {
-      throw new TypeError("parameter must be array")
+      throw new TypeError('parameter must be array')
     }
     // 标识符，有一个promise执行完成设为true，返回结果
     let flag = false
@@ -292,4 +292,4 @@ class Promise {
   }
 }
 
-module.exports =  Promise
+module.exports = Promise
