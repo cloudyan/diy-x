@@ -1,6 +1,8 @@
 // plugin:
-export default const pluginJsError = {
+const pluginJsError = {
   install(ctx, config) {
     Object.assign(ctx._config, config)
-  }
+  },
 }
+
+export default pluginJsError

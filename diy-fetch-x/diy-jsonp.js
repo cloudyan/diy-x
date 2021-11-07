@@ -37,9 +37,10 @@ axios.jsonp = jsonp
  * TIP: https://api.map.baidu.com/geocoder/v2/ 此接口不支持跨域，只能使用 jsonp 调用
  */
 
+const BAIDU_MAP_AK = ''
 function geoToCode(pos) {
   const { coords } = pos
-  if (typeof coords.latitude == 'undefined') {
+  if (typeof coords.latitude === 'undefined') {
     return new Promise((resolve, reject) => {
       reject(pos)
     })

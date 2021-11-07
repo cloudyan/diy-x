@@ -1,14 +1,15 @@
 // source: https://github.com/briancavalier/aop-jsconf-2013
 
-var slice = Function.prototype.call.bind([].slice);
+/* eslint prefer-rest-params: 0 */
+const slice = Function.prototype.call.bind([].slice);
 
 // Very simple advice functions
 module.exports = {
-	before: before,
-	afterReturning: afterReturning,
-	afterThrowing: afterThrowing,
-	after: after,
-	around: around
+	before,
+	afterReturning,
+	afterThrowing,
+	after,
+	around,
 };
 
 /**
@@ -32,7 +33,7 @@ function before(f, advice) {
  */
 function afterReturning(f, advice) {
 	return function() {
-		var result = f.apply(this, arguments);
+		const result = f.apply(this, arguments);
 		advice.call(this, result);
 
 		return result;
@@ -64,7 +65,7 @@ function afterThrowing(f, advice) {
  */
 function after(f, advice) {
 	return function() {
-		var result, threw;
+		let result; let threw;
 		try {
 			result = f.apply(this, arguments);
 		} catch(e) {

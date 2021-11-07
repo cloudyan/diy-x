@@ -1,6 +1,6 @@
 
 // 复制内容到剪贴板
-export function copyToBoard(value) {
+export function copy2board(value) {
   const element = document.createElement('textarea')
   document.body.appendChild(element)
   element.value = value
@@ -15,7 +15,7 @@ export function copyToBoard(value) {
 }
 
 // 如果复制成功返回true
-// copyToBoard('lalallala')
+// copy2board('lalallala')
 
 
 // 原理：

@@ -4,6 +4,7 @@ export class PluginVue {
   constructor(config = {}) {
     this.config = { ...config };
   }
+
   use(plugin, config = {}) {
     const installedPlugins =
       this._installedPlugins || (this._installedPlugins = []);

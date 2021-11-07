@@ -40,6 +40,7 @@ export class Emitter {
     const self = this;
     function on() {
       self.off(name, on);
+      // eslint-disable-next-line
       callback.apply(context, arguments);
     }
 
@@ -49,6 +50,7 @@ export class Emitter {
 
   // name, value, context
   emit(name) {
+    // eslint-disable-next-line
     const data = [].slice.call(arguments, 1);
     const evtArr = ((this._events || (this._events = {}))[name] || []).slice();
     let i = 0;

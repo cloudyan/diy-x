@@ -12,11 +12,11 @@ function isString(v) {
   return toString.call(v) === '[object String]';
 }
 function isFn(v) {
-  var isAlert = typeof window !== 'undefined' && v === window.alert;
+  const isAlert = typeof window !== 'undefined' && v === window.alert;
   if (isAlert) {
     return true;
   }
-  var str = toString.call(v);
+  const str = toString.call(v);
   return (
     str === '[object Function]' ||
     str === '[object GeneratorFunction]' ||
@@ -95,17 +95,17 @@ export default class Bridge {
     // }
     this._doSend(
       {
-        handlerName: handlerName,
-        data: data,
+        handlerName,
+        data,
       },
-      responseCallback
+      responseCallback,
     );
   }
 
   _doSend(message, responseCallback) {
     const { _sendMessageQueue } = this;
     if (responseCallback) {
-      var callbackId = 'cb_' + uniqueId++ + '_' + new Date().getTime();
+      const callbackId = 'cb_' + uniqueId++ + '_' + new Date().getTime();
       this._responseCallbacks[callbackId] = responseCallback;
       message.callbackId = callbackId;
     }
@@ -165,7 +165,7 @@ export default class Bridge {
         if (isString(responseData)) {
           responseData = JSON.parse(responseData);
         }
-        var status = responseData.status;
+        const status = responseData.status;
         if (status === 'success') {
           args.success && args.success(responseData);
         } else if (status === 'fail') {

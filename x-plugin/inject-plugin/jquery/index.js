@@ -14,13 +14,13 @@
   jQuery.fn = jQuery.prototype = {};
 
   // init是jQuery中真正的构造函数
-  var init = (jQuery.fn.init = function() {});
+  const init = (jQuery.fn.init = function() {});
 
   // 替换构造函数的原型 为 jQuery工厂的原型
   init.prototype = jQuery.fn;
 
   // 把工厂通过两个变量暴露出去
-  win.jQuery = win.$ = jQuery; //这里现在是官方标准写法
+  win.jQuery = win.$ = jQuery; // 这里现在是官方标准写法
 })(window);
 
 // 避免与其它库的冲突 TODO: noConflict 的实现机制
@@ -34,5 +34,5 @@ jQuery.fn.alert = function(msg) {
 };
 
 // 测试插件
-var $tip = $();
+const $tip = $();
 $tip.alert('弹出框插件');

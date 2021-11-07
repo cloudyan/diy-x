@@ -1,0 +1,13 @@
+/lambda/
+/scripts
+/config
+.history
+public
+dist
+.umi
+.umi-production
+mock
+
+src/index.ts
+locales
+temp
