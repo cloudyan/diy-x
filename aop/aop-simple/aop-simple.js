@@ -5,11 +5,11 @@ const slice = Function.prototype.call.bind([].slice);
 
 // Very simple advice functions
 module.exports = {
-	before,
-	afterReturning,
-	afterThrowing,
-	after,
-	around,
+  before,
+  afterReturning,
+  afterThrowing,
+  after,
+  around,
 };
 
 /**
@@ -19,10 +19,10 @@ module.exports = {
  * @return {function} advised function that will call advice before f
  */
 function before(f, advice) {
-	return function() {
-		advice.apply(this, arguments); // ignore advice's return value
-		return f.apply(this, arguments);
-	};
+  return function() {
+    advice.apply(this, arguments); // ignore advice's return value
+    return f.apply(this, arguments);
+  };
 }
 
 /**
@@ -32,12 +32,12 @@ function before(f, advice) {
  * @return {function} advised function that will call advice after f returns
  */
 function afterReturning(f, advice) {
-	return function() {
-		const result = f.apply(this, arguments);
-		advice.call(this, result);
+  return function() {
+    const result = f.apply(this, arguments);
+    advice.call(this, result);
 
-		return result;
-	};
+    return result;
+  };
 }
 
 /**
@@ -47,14 +47,14 @@ function afterReturning(f, advice) {
  * @return {function} advised function that will call advice after f throws
  */
 function afterThrowing(f, advice) {
-	return function() {
-		try {
-			return f.apply(this, arguments);
-		} catch(e) {
-			advice.call(this, e);
-			throw e;
-		}
-	};
+  return function() {
+    try {
+      return f.apply(this, arguments);
+    } catch(e) {
+      advice.call(this, e);
+      throw e;
+    }
+  };
 }
 
 /**
@@ -64,22 +64,22 @@ function afterThrowing(f, advice) {
  * @return {function} advised function that will call advice after f returns or throws
  */
 function after(f, advice) {
-	return function() {
-		let result; let threw;
-		try {
-			result = f.apply(this, arguments);
-		} catch(e) {
-			threw = true;
-			result = e;
-		}
+  return function() {
+    let result; let threw;
+    try {
+      result = f.apply(this, arguments);
+    } catch(e) {
+      threw = true;
+      result = e;
+    }
 
-		advice.call(this, result);
-		if(threw) {
-			throw result;
-		} else {
-			return result;
-		}
-	};
+    advice.call(this, result);
+    if(threw) {
+      throw result;
+    } else {
+      return result;
+    }
+  };
 }
 
 /**
@@ -90,8 +90,8 @@ function after(f, advice) {
  * @return {function} advised function that will call advice "around" f
  */
 function around(f, advice) {
-	return function() {
-		// Use bind to preserve `thisArg` when passing f to advice
-		return advice.call(this, f.bind(this), slice(arguments));
-	};
+  return function() {
+    // Use bind to preserve `thisArg` when passing f to advice
+    return advice.call(this, f.bind(this), slice(arguments));
+  };
 }

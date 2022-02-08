@@ -12,15 +12,37 @@ diy-x && toy-x 并无特别大的区别，不用在意
 
 亲手实现一些 ployfill 或 实现原理机制，甚至框架等
 
-- [ ] 如何实现 call 方法?
-- [ ] 如何实现 apply 方法?
-- [ ] 如何实现 bind 方法?
+- 实现函数原型方法
+  - call 方法
+  - apply 方法
+  - bind 方法
+- 实现 new 关键字
+- 实现 instanceof 关键字
+- 实现 Object.create
+- 实现 Object.assign
+- 实现 JSON.stringify
+- 实现 JSON.parse
+- inherit 实现继承（es5 es6）
+- 数组去重
+- 数组扁平化
+- 深浅拷贝区别及实现（广度优先，深度优先）
+- 事件总线（发布订阅模式）
+- 节流、防抖区别及实现
+- 函数柯里化
+- 实现数组原型方法
+  - forEach
+  - map
+  - filter
+  - some
+  - reduce
+- 手写 JSONP 实现
+- 手写 ajax
 - [ ] 亲手实现 Promise [diy-promise]
 - [ ] 如何实现 空白屏侦测?
-- [ ] 手写一个模板引擎
+- [ ] 手写一个模板引擎/字符串模板
+- [ ] 如何实现 mvvm ?
 - [ ] 亲手实现 Koa
 - [ ] 亲手实现 Egg
-- [ ] 如何实现 mvvm ?
 - [ ] 亲手实现 Vue [diy-vue]
 - [ ] 亲手实现 React [diy-react]
 - [ ] 亲手实现 umi 微框架 [diy-umi]
@@ -31,9 +53,9 @@ diy-x && toy-x 并无特别大的区别，不用在意
 
 一些问题的解决方案
 
-- [ ] 如何实现图片懒加载？
+- [ ] 实现图片懒加载？
 - [ ] fetch-jsonp
-- [ ] 实现一个函数用来解析 URL 的 querystring
+- [ ] 解析 URL 参数为对象
 - [ ] 如何实现选中复制的功能？
 - [ ] 如何实现选中添加备注的功能？
 - async await
