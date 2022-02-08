@@ -12,14 +12,14 @@ diy-x && toy-x 并无特别大的区别，不用在意
 
 亲手实现一些 ployfill 或 实现原理机制，甚至框架等
 
-- 实现函数原型方法
+- [x] 实现函数原型方法
   - [x] [`call` 的实现](./my-call-apply-bind/readme.md)
   - [x] [`apply` 的实现](./my-call-apply-bind/readme.md)
   - [x] [`bind` 的实现](./my-call-apply-bind/readme.md)
 - [x] [实现 `new` 关键字](./my-new/readme.md)
 - [x] [实现 `instanceof` 关键字](./my-instanceof/readme.md)
-- [ ] 实现 `Object.create`
-- [ ] 实现 `Object.assign`
+- [x] [实现 `Object.create`](./polyfill-object/create.js)
+- [x] [实现 `Object.assign`](./polyfill-object/assign.js)
 - [ ] 实现 `JSON.stringify`
 - [ ] 实现 `JSON.parse`
 - [ ] `inherit` 实现继承（es5 es6）
