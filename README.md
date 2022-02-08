@@ -1,6 +1,6 @@
 # diy-x
 
-亲手实现的 x, 用来检验掌握的知识点
+亲手实现 xxx, 用来检验掌握的知识点
 
 源自 [learn-javascript diy](https://github.com/cloudyan/learn-javascript/tree/master/diy)
 
@@ -22,12 +22,15 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [x] [实现 `Object.assign`](./polyfill-object/assign.js)
 - [ ] 实现 `JSON.stringify`
 - [ ] 实现 `JSON.parse`
+  - [ ] `eval` 实现
+  - [ ] `new Function` 实现
 - [ ] `inherit` 实现继承（es5 es6）
-- [ ] 数组去重
-- [ ] 数组扁平化
-- [ ] 深浅拷贝区别及实现（广度优先，深度优先）
-- [ ] 事件总线（发布订阅模式）
-- [ ] 节流、防抖区别及实现
+- [x] [深浅拷贝区别及实现](./my-clone/readme.md)
+  - [ ] 广度优先实现
+  - [ ] 深度优先实现
+- [x] 防抖、节流区别及实现
+  - [x] [防抖 `debounce`](./my-debounce-throttle/readme.md)
+  - [x] [节流 `throttle`](./my-debounce-throttle/readme.md)
 - [ ] 函数柯里化
 - 实现数组原型方法
   - [ ] forEach
@@ -35,6 +38,13 @@ diy-x && toy-x 并无特别大的区别，不用在意
   - [ ] filter
   - [ ] some
   - [ ] reduce
+- [ ] 数组去重
+- [ ] 数组扁平化
+- [ ] 对象数组去重（数组内元素为对象）
+- [ ] 实现一个函数，切分数字千分位（10000 => 10,000）
+- [ ] 手写一个观察者模式
+- [ ] 手写事件总线（发布订阅模式）
+- [ ] 手写一个通用的事件侦听器函数
 - [ ] 手写 JSONP 实现
 - [ ] 手写 ajax
 - [ ] 亲手实现 Promise [diy-promise]

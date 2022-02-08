@@ -1,9 +1,16 @@
 # Promise
 
-Promise A+ 规范
+实现 `Promise` 需要完全读懂 Promise A+ 规范，不过从总体的实现上看，有如下几个点需要考虑到：
+
+- `Promise` 本质是一个状态机，且状态只能为以下三种：Pending（等待态）、Fulfilled（执行态）、Rejected（拒绝态），状态的变更是单向的，只能从Pending -> Fulfilled 或 Pending -> Rejected，状态变更不可逆
+- then 需要支持链式调用
+
+**Promise A+ 规范**
 
 - 官方英文地址：https://promisesaplus.com/
 - 中文翻译可参考 http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/
+
+方法
 
 - Promise 的含义
 - Promise.prototype.then()
