@@ -77,6 +77,11 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - HTTP2 头部压缩的原理是什么
 - 什么是 DSL
 
+## 参考
+
+- https://mp.weixin.qq.com/s/oOmX4lcCy_vZfXx0KjLKOg
+- https://mp.weixin.qq.com/s/7KwM6fNM5MICHiIwoRDm-w
+
 ## 扩展阅读
 
 - 可以膜拜下大神 [Fabrice Bellard](https://bellard.org/)
