@@ -12,6 +12,7 @@
 function deepClone(obj, hash = new WeakMap()){
   if (obj instanceof RegExp) return new RegExp(obj);
   if (obj instanceof Date) return new Date(obj);
+  if (typeof obj === 'function') return new Function('return ' + obj.toString())();
   if (obj === null || typeof obj !== 'object') return obj;
   // 处理循环引用的情况
   if (hash.has(obj)) {
@@ -24,7 +25,7 @@ function deepClone(obj, hash = new WeakMap()){
   hash.set(obj, constr);
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {
-      constr[key] = deepClone(obj[key],hash)
+      constr[key] = deepClone(obj[key], hash)
     }
   }
   // 考虑key 是 symbol 类型的情况
@@ -39,7 +40,7 @@ function deepClone(obj, hash = new WeakMap()){
 
 // testing
 let symbol1 = Symbol(1)
-const obj1 = {a: {b: 1}, c: [{d: 1}], e: null, f: undefined, [symbol1]: {a: 1}, g: symbol1};
+const obj1 = {a: {b: 1}, c: [{d: 1}], e: null, f: undefined, [symbol1]: {a: 1}, g: symbol1, h: () => {return 1}};
 const obj2 = deepClone(obj1);
 
 obj1.a.b=2;
@@ -49,6 +50,8 @@ obj1[symbol1].a=2;
 console.log(obj1)
 console.log(obj2)
 console.log(obj1.g === obj2.g)
+console.log(obj1.h === obj2.h)
+console.log(obj1.h(), obj2.h())
 ```
 
 ## 知识点
