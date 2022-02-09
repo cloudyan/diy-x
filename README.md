@@ -20,26 +20,27 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [x] [实现 `instanceof` 关键字](./my-instanceof/readme.md)
 - [x] [实现 `Object.create`](./polyfill-object/create.js)
 - [x] [实现 `Object.assign`](./polyfill-object/assign.js)
-- [ ] 实现 `JSON.stringify`
-- [ ] 实现 `JSON.parse`
-  - [ ] `eval` 实现
-  - [ ] `new Function` 实现
+- [ ] JSON
+  - [ ] 实现 `JSON.stringify`
+  - [ ] 实现 `JSON.parse`
+    - [ ] `eval` 实现
+    - [ ] `new Function` 实现
 - [ ] `inherit` 实现继承（es5 es6）
 - [x] [深浅拷贝区别及实现](./my-clone/readme.md)
+  - [x] 深度优先实现
   - [ ] 广度优先实现
-  - [ ] 深度优先实现
 - [x] 防抖、节流区别及实现
   - [x] [防抖 `debounce`](./my-debounce-throttle/readme.md)
   - [x] [节流 `throttle`](./my-debounce-throttle/readme.md)
-- [ ] 函数柯里化
+- [x] 函数柯里化
 - 实现数组原型方法
   - [ ] forEach
   - [ ] map
   - [ ] filter
   - [ ] some
   - [ ] reduce
+  - [x] flat 数组扁平化
 - [ ] 数组去重
-- [ ] 数组扁平化
 - [ ] 对象数组去重（数组内元素为对象）
 - [ ] 实现一个函数，切分数字千分位（10000 => 10,000）
 - [ ] 手写一个观察者模式
@@ -68,8 +69,13 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [ ] 解析 URL 参数为对象
 - [ ] 如何实现选中复制的功能？
 - [ ] 如何实现选中添加备注的功能？
-- [ ] async await
-- [ ] Promise.prototype.finally()
+- [ ] 实现 async await
+- [ ] 实现 Promise.prototype.finally()
+- [ ] 请求相关实现
+  - [ ] 超时取消
+  - [ ] 失败重试
+  - [ ] 并发控制
+- [ ] 实现一个接口测试的框架 apitest
 - @deepjs/uni-script
 - 逆向 sourceMap
 
