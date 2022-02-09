@@ -9,11 +9,12 @@
 - 遍历对象递归（普通 `key` 和 `key` 是 `symbol` 类型的情况）
 
 ```js
+// 递归实现深拷贝 深度优先
 function deepClone(obj, hash = new WeakMap()){
   if (obj instanceof RegExp) return new RegExp(obj);
   if (obj instanceof Date) return new Date(obj);
   if (typeof obj === 'function') return new Function('return ' + obj.toString())();
-  if (obj === null || typeof obj !== 'object') return obj;
+  if (obj === null || typeof obj !== 'object') return obj; // 其他基本类型，直接返回
   // 处理循环引用的情况
   if (hash.has(obj)) {
     return hash.get(obj)
