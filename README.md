@@ -32,7 +32,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [x] 防抖、节流区别及实现
   - [x] [防抖 `debounce`](./my-debounce-throttle/readme.md)
   - [x] [节流 `throttle`](./my-debounce-throttle/readme.md)
-- [x] 函数柯里化
+- [x] curry 函数柯里化
 - 实现数组原型方法
   - [ ] forEach
   - [ ] map

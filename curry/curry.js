@@ -22,3 +22,13 @@ function sumFn(a, b, c) { return a + b + c }
 let sum = curry(sumFn)
 console.log(sum(2)(3)(5))   // 10
 console.log(sum(2, 3)(5))   // 10
+
+
+// 乘法
+const mul = x => y => z => x * y * z;
+console.log(mul(1)(2)(3));
+
+const mul1 = (x, y, z) => x * y * z;
+const mul2 = curry(mul1);
+console.log(mul2(1)(2)(3))
+console.log(mul2(1, 2)(3))
