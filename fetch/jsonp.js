@@ -1,31 +1,39 @@
 import axios from 'axios'
 
-const stringify = () => {
+// JSONP 核心原理：
+// script 标签不受同源策略约束，所以可以用来进行跨域请求，优点是兼容性好，但是只能用于 GET 请求；
 
+axios.jsonp = jsonp
+const stringify = (params) => {
+  const res = [];
+  for (let key in params) {
+    if (params.hasOwnProperty(key)) {
+      if (typeof params[key] !== 'undefined') {
+        res.push(`${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+      }
+    }
+  }
+  return res.join('&')
 }
 
 // simple
-const jsonp = url => {
+function jsonp({url, params, callbackName}) {
   if (!url) {
     console.error('请输入 url')
     return
   }
 
   return new Promise((resolve, reject) => {
-    window.jsonCallBack = res => {
-      resolve(res)
-    }
     const JSONP = document.createElement('script')
-    JSONP.type='text/javascript'
-    JSONP.src=`${url}&callback=jsonCallBack`
-    document.getElementsByTagName('head')[0].appendChild(JSONP)
-    setTimeout(() => {
-      document.getElementsByTagName('head')[0].removeChild(JSONP)
-    }, 500)
+    // JSONP.type = 'text/javascript'
+    JSONP.src = `${url}?${stringify(params)}&callback=${callbackName}`
+    document.body.appendChild(JSONP)
+    window[callbackName] = data => {
+      resolve(data)
+      document.body.removeChild(JSONP)
+    }
   })
 }
-
-axios.jsonp = jsonp
 
 
 // example

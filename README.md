@@ -46,7 +46,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [ ] 手写一个观察者模式
 - [x] EventEmitter 手写事件总线（发布订阅模式） 参见 [node-modules tiny-emitter](https://github.com/cloudyan/npm-modules/blob/dev/packages/emitter/readme.md)
 - [ ] 手写一个通用的事件侦听器函数
-- [ ] 手写 JSONP 实现
+- [x] [手写 JSONP 实现](./fetch/jsonp.js)
   - [ ] 扩展 axios 支持 JSONP
 - [ ] 简单封装 xhr 发起 ajax 请求
 - [ ] 针对 xhr 和 fetch 请求，如何实现以下诉求
