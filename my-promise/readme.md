@@ -7,8 +7,16 @@
 
 **Promise A+ 规范**
 
-- 官方英文地址：https://promisesaplus.com/
+- Promise A+ 规范, 官方英文地址：https://promisesaplus.com/
 - 中文翻译可参考 http://malcolmyu.github.io/malnote/2015/06/12/Promises-A-Plus/
+- 参考好文
+  0. [Promise 入门](https://es6.ruanyifeng.com/#docs/promise)
+  1. [深入分析 Promise 实现细节](https://juejin.cn/post/6945319439772434469)
+  2. [Promise V8 源码分析(一)](https://zhuanlan.zhihu.com/p/264944183)
+  3. [Promise V8 源码分析(二)](https://zhuanlan.zhihu.com/p/329201628)
+  4. [Promise V8 源码补充篇](https://juejin.cn/post/6953452438300917790)
+
+> 注意: Promise 是基于 [EcmaScript 规范](https://262.ecma-international.org/#sec-promise-objects) 而不是 Promise A+ 规范来实现的
 
 方法
 
@@ -55,8 +63,9 @@ class MyPromise {
 
 关于 macrotask 和 microtask 两个概念
 
-- macro-task: script（整体代码）, setTimeout, setInterval, setImmediate, I/O, UI rendering
-- micro-task: process.nextTick, Promises（这里指浏览器实现的原生 Promise）, Object.observe, MutationObserver
+- 宏任务 macro-task: script（整体代码块）, setTimeout, setInterval, setImmediate（node环境）, I/O, 事件队列, UI rendering
+- 微任务 micro-task: process.nextTick（node环境）, Promises（这里指浏览器实现的原生 Promise）, Object.observe, MutationObserver, queueMicrotask
+- requestAnimationFrame 有争议
 
 详见 [stackoverflow](https://stackoverflow.com/questions/25915634/difference-between-microtask-and-macrotask-within-an-event-loop-context) 解答
 

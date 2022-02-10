@@ -44,7 +44,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [x] [数组去重](./my-unique/readme.md)
 - [x] [实现一个函数，切分数字千分位（10000 => 10,000）](./utils/src/number.js)
 - [ ] 手写一个观察者模式
-- [ ] 手写事件总线（发布订阅模式）
+- [x] EventEmitter 手写事件总线（发布订阅模式） 参见 [node-modules tiny-emitter](https://github.com/cloudyan/npm-modules/blob/dev/packages/emitter/readme.md)
 - [ ] 手写一个通用的事件侦听器函数
 - [ ] 手写 JSONP 实现
   - [ ] 扩展 axios 支持 JSONP
