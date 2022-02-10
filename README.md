@@ -77,6 +77,8 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [ ] 实现 async await
 - [ ] 实现 Promise.prototype.finally()
 - [ ] 实现一个接口测试的框架 apitest
+- [ ] 实现大文件的分包上传
+- [ ] 实现大文件的分包下载
 - @deepjs/uni-script
 - 逆向 sourceMap
 
@@ -88,6 +90,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 
 - https://mp.weixin.qq.com/s/oOmX4lcCy_vZfXx0KjLKOg
 - https://mp.weixin.qq.com/s/7KwM6fNM5MICHiIwoRDm-w
+- https://juejin.cn/post/7022795467821940773
 
 ## 扩展阅读
 
