@@ -48,7 +48,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [ ] 手写一个通用的事件侦听器函数
 - [x] [手写 JSONP 实现](./fetch/jsonp.js)
   - [ ] 扩展 axios 支持 JSONP
-- [ ] 简单封装 xhr 发起 ajax 请求
+- [x] [简单封装 xhr 发起 ajax 请求](./fetch/xhr.js)
 - [ ] 针对 xhr 和 fetch 请求，如何实现以下诉求
   - [ ] 超时取消
   - [ ] 失败重试

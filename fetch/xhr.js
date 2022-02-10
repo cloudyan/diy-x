@@ -1,4 +1,7 @@
 
+// MDN [XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest)
+
+
 // 回调版本
 function ajax1(url, options = {}) {
   const noop = () => {}
@@ -35,7 +38,7 @@ function ajax1(url, options = {}) {
     }
   }
 
-  // 3. 调用open
+  // 3. 调用open（默认为true 异步）
   xhr.open(method, url, true);
 
   // 4. 设置 HTTP 请求头的值。必须在 open() 之后、send() 之前调用
@@ -63,7 +66,7 @@ function ajax2(url, options) {
       }
     };
     xhr.open(method, url);
-    xhr.send(method.data);
+    xhr.send(options.data);
   });
 }
 
