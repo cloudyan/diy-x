@@ -3,7 +3,7 @@
 手写数组去重方法（前端应用场景中一般不会遇到数组去重，都是使用后端去重后的数据，去重仅作为考察基础知识掌握能力）
 
 1. `Set` 实现（推荐）
-2. [`for`, `for...of`, `foreach`, `filter`] + [`indexOf`, `includes`, `for`] 组合实现
+2. [`for`, `for...of`, `forEach`, `filter`] + [`indexOf`, `includes`, `for`] 组合实现
 3. [`reduce`] + [`indexOf`, `includes`] 实现
 4. ~~`sort` + `for` 实现~~（sort 并无意义）
 5. 遍历 + `hasOwnProperty` 结合缓存实现（有限制）
