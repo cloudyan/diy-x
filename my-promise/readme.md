@@ -15,6 +15,8 @@
   2. [Promise V8 源码分析(一)](https://zhuanlan.zhihu.com/p/264944183)
   3. [Promise V8 源码分析(二)](https://zhuanlan.zhihu.com/p/329201628)
   4. [Promise V8 源码补充篇](https://juejin.cn/post/6953452438300917790)
+- MDN [在 JavaScript 中通过 queueMicrotask() 使用微任务](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide)
+  - 理解下何时使用微任务
 
 > 注意: Promise 是基于 [EcmaScript 规范](https://262.ecma-international.org/#sec-promise-objects) 而不是 Promise A+ 规范来实现的
 

@@ -17,6 +17,8 @@ function MyPromise(fn) {
     if (that.state === PENDING) {
       that.state = RESOLVED
       that.value = value
+
+      // 状态一旦变更，不可逆，所以回调数组是否保留，没影响
       that.resolvedCallbacks.map(cb => cb(that.value))
     }
   }
@@ -60,10 +62,15 @@ MyPromise.prototype.then = function(onFulfilled, onRejected) {
 
 // Promise.resolve(4).then().then((value) => console.log(value))
 
-new MyPromise((resolve, reject) => {
+const p1 = new MyPromise((resolve, reject) => {
   setTimeout(() => {
     resolve(2)
   }, 0)
-}).then(value => {
+})
+
+p1.then(value => {
+  console.log(value)
+})
+p1.then(value => {
   console.log(value)
 })

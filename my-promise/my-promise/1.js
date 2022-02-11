@@ -1,15 +1,18 @@
 
 // 参考学习：https://juejin.cn/post/6945319439772434469
 
-
+{
 // 1. 传入执行器 executor
-class MyPromise {
+class MyPromise1 {
   constructor(executor) {
     // executor 是一个执行器，进入会立即执行
     executor()
   }
 }
+};
 
+
+{
 // 2. executor 传入 resolve 和 reject 方法
 class MyPromise {
   constructor(executor) {
@@ -26,16 +29,18 @@ class MyPromise {
   // 更改失败后的状态
   reject = () => {}
 }
+};
 
 
 // 3. 状态与结果的管理
 
 // 定义三个常量表示状态
+{
 const PENDING = 'pending'
 const FULFILLED = 'fulfilled'
 const REJECTED = 'rejected'
 
-class MyPromise {
+class MyPromise3 {
   constructor(executor) {
     executor(this.resolve, this.reject)
   }
@@ -62,6 +67,7 @@ class MyPromise {
       this.reason = reason
     }
   }
+}
 }
 
 
@@ -103,6 +109,9 @@ class MyPromise {
     } else if (this.status === REJECTED) {
       // 调用失败回调，并且把原因返回
       onRejected(this.reason)
+    } else if (this.status === PENDING) {
+      // 未处理 pending
+      console.log('pending')
     }
   }
 }
@@ -117,14 +126,14 @@ const p1 = new MyPromise((resolve, reject) => {
 })
 
 p1.then(value => {
-  console.log('resolve', value)
+  console.log('p1 resolve', value)
 }, reason => {
-  console.log('reject', reason)
+  console.log('p1 reject', reason)
 })
 
 // 当前问题, 未处理异步逻辑，
-// then 会马上执行，虽然判断了 pending 状态，待没有等待这个状态
-// 接下来需要处理一下 pending 的状态
+// then 会马上执行，虽然判断了 pending 状态，但没有等待这个状态
+// 接下来还需要处理一下 pending 的状态，参见 2.js
 const p2 = new MyPromise((resolve, reject) => {
   setTimeout(() => {
     resolve('success')
@@ -132,7 +141,7 @@ const p2 = new MyPromise((resolve, reject) => {
 })
 
 p2.then(value => {
-  console.log('resolve', value)
+  console.log('p2 resolve', value)
 }, reason => {
-  console.log('reject', reason)
+  console.log('p2 reject', reason)
 })
