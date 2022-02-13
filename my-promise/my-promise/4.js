@@ -11,7 +11,7 @@ class MyPromise {
     // 处理执行器异常捕获
     try {
       executor(this.resolve, this.reject)
-    } catch (err) {
+    } catch(err) {
       this.reject(err)
     }
   }
@@ -27,7 +27,7 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = FULFILLED
       this.value = value
-      while (this.onFulfilledCallback.length) {
+      while(this.onFulfilledCallback.length) {
         this.onFulfilledCallback.shift()(value)
       }
     }
@@ -36,11 +36,12 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = REJECTED
       this.reason = reason
-      while (this.onRejectedCallback.length) {
+      while(this.onRejectedCallback.length) {
         this.onRejectedCallback.shift()(reason)
       }
     }
   }
+
   then(onFulfilled, onRejected) {
     const promise = new MyPromise((resolve, reject) => {
       if (this.status === FULFILLED) {
@@ -49,7 +50,7 @@ class MyPromise {
           try {
             const x = onFulfilled(this.value)
             resolvePromise(promise, x, resolve, reject)
-          } catch (err) {
+          } catch(err) {
             reject(err)
           }
         })
@@ -175,3 +176,7 @@ p32.then(res => {
 }, err => {
   console.log('err', err)
 })
+
+
+// 以上三个异常情况处理后，我们 fulfilled 分支下的流程算是处理，接下来还要把 rejected 和 pending 条件分支的逻辑都处理掉
+// 参见 5.js
