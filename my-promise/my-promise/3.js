@@ -42,7 +42,7 @@ class MyPromise {
     const promise = new MyPromise((resolve, reject) => {
       // 这里的内容在执行器中，会立即执行（此时返回为 pending 状态）
       if (this.status === FULFILLED) {
-        // 将成功回调的结果，传入 resolvePromise 集中处理
+        // 将成功回调的结果，传入 resolvePromise 集中处理（这里仅处理了 FULFILLED 状态的逻辑）
         const x = onFulfilled(this.value)
         resolvePromise(x, resolve, reject)
       } else if (this.status === REJECTED) {

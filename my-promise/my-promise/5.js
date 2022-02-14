@@ -1,5 +1,7 @@
 
-// 接 4.js, 4中我们处理了 fulfilled 状态下的流程，下面将 rejected 和 pending 状态的也改造下
+// 接 4.js, 4中我们处理了 fulfilled 状态下的错误流程，下面来处理下
+//  - 将 rejected 和 pending 状态的也改造下
+//  - then 中的 onRejected 回调可以不传
 
 const PENDING = 'pending'
 const FULFILLED = 'fulfilled'
@@ -41,8 +43,14 @@ class MyPromise {
   }
 
   then(onFulfilled, onRejected) {
+    // 参数判断
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value
+    onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason }
+
     const promise = new MyPromise((resolve, reject) => {
-      if (this.status === FULFILLED) {
+
+      // 提取方法，以复用错误
+      const onResolve = () => {
         queueMicrotask(() => {
           try {
             const x = onFulfilled(this.value)
@@ -51,11 +59,25 @@ class MyPromise {
             reject(err)
           }
         })
+      }
+      const onReject = () => {
+        queueMicrotask(() => {
+          try {
+            const x = onRejected(this.reason)
+            resolvePromise(promise, x, resolve, reject)
+          } catch(err) {
+            reject(err)
+          }
+        })
+      }
+
+      if (this.status === FULFILLED) {
+        onResolve()
       } else if (this.status === REJECTED) {
-        onRejected(this.reason)
+        onReject()
       } else if (this.status === PENDING) {
-        this.onFulfilledCallback.push(onFulfilled)
-        this.onRejectedCallback.push(onRejected)
+        this.onFulfilledCallback.push(onResolve)
+        this.onRejectedCallback.push(onReject)
       }
     })
     return promise
@@ -72,3 +94,22 @@ function resolvePromise(p, x, resolve, reject) {
     resolve(x)
   }
 }
+
+
+// testing
+
+const promise = new MyPromise((resolve, reject) => {
+  setTimeout(() => {
+    resolve('resolve')
+    reject('reject')
+  }, 2000)
+})
+
+const p1 = promise.then(res => {
+  console.log('1', res)
+  return 'p1'
+})
+
+p1.then(res => {
+  console.log('2', res)
+})
