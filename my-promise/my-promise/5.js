@@ -97,7 +97,6 @@ function resolvePromise(p, x, resolve, reject) {
 
 
 // testing
-
 const promise = new MyPromise((resolve, reject) => {
   setTimeout(() => {
     resolve('resolve')
@@ -112,4 +111,7 @@ const p1 = promise.then(res => {
 
 p1.then(res => {
   console.log('2', res)
+  return '2'
+}).then(res => {
+  console.log('3', res)
 })
