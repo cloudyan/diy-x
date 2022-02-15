@@ -30,6 +30,9 @@ Object.myAssign = function(target, ...source) {
 // MDN 官方 Polyfill
 // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#polyfill_2
 // 这个 polyfill 不支持 symbol 属性, 由于 ES5 中本来就不存在 symbols
+// ES6 的 Object.assign 是支持处理 symbol 属性的
+//     考虑更周全的版本可以参见 https://github.com/es-shims/object.assign/blob/main/implementation.js
+//     通过 has-symbols 模块 && Object.getOwnPropertySymbols 判断是否支持 symbol 然后做处理
 if (typeof Object.assign !== 'function') {
   // Must be writable: true, enumerable: false, configurable: true
   Object.defineProperty(Object, 'assign', {

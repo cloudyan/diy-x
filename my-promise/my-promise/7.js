@@ -105,7 +105,7 @@ function resolvePromise(p, x, resolve, reject) {
   //   resolve(x)
   // }
 
-  // 改为
+  // 修改如下
   if (typeof x === 'object' || typeof x === 'function') {
     if (x === null) return resolve(x)
 
@@ -113,12 +113,15 @@ function resolvePromise(p, x, resolve, reject) {
     try {
       then = x.then
     } catch(err) {
+      // 如果取 x.then 的值时抛出错误 err，则以 err 为据因拒绝 promise
       return reject(err)
     }
 
+    // 如果 then 是函数(应该作为函数，这也是 thenable 的条件)
     if (typeof then === 'function') {
       let called = false
       try {
+        // then 只能被调用一次，状态变更后不可再调用
         then.call(
           x,
           y => {
@@ -137,9 +140,11 @@ function resolvePromise(p, x, resolve, reject) {
         reject(err)
       }
     } else {
+      // 如果 then 不是函数，则以 x 为参数执行 premise
       resolve(x)
     }
   } else {
+    // 如果 then 不是对象或函数，则以 x 为参数执行 premise
     resolve(x)
   }
 }
