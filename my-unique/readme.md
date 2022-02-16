@@ -8,6 +8,11 @@
 4. ~~`sort` + `for` 实现~~（sort 并无意义）
 5. 遍历 + `hasOwnProperty` 结合缓存实现（有限制）
 6. 遍历 + `Map` 缓存实现（推荐）
+7. 扩展: 对象数组去重
+   1. 基于某个对象属性去重
+   2. 简单对象数组去重（对象为 json 数据）
+   3. 基于宽松相等(内容完全相等)去重
+      1. 主要考虑实现 [looseEqual](https://github.com/cloudyan/npm-modules/blob/dev/packages/vue2/vue2-shared.md)
 
 ## 1. `Set` 实现
 
