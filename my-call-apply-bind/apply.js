@@ -1,6 +1,7 @@
 /* eslint-disable no-extend-native,prefer-rest-params */
 
 // 函数原型方法 `apply` 的实现
+// 既然是模拟实现，不应该用更高级的方法 如 ... 运算符
 Function.prototype.myApply = function (context) {
   if (typeof this !== 'function') {
     throw new TypeError('not funciton')
@@ -11,7 +12,7 @@ Function.prototype.myApply = function (context) {
   }
 
   if ([undefined, null].includes(context)) {
-    context = window
+    context = globalThis || window
   }
 
   let tempFn = Symbol()
@@ -23,3 +24,4 @@ Function.prototype.myApply = function (context) {
 
   return result
 }
+

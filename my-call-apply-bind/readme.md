@@ -33,3 +33,17 @@
 
 - https://mp.weixin.qq.com/s/620g6Gw6KF1N-jWUguw8yQ
 - https://mp.weixin.qq.com/s/oOmX4lcCy_vZfXx0KjLKOg
+
+扩展
+
+- https://stackoverflow.com/questions/51503894/how-can-create-own-call-function-in-javascript
+
+While each browser has its own source code for implementing Javascript, you can find how many of the native Javascript functions are implemented with the ECMA specifications found here:
+
+http://www.ecma-international.org/ecma-262/10.0/index.html#sec-properties-of-the-function-prototype-object
+
+- For specs of `apply`, see: 19.2.3.1
+- For specs of `bind`, see: 19.2.3.2
+- For specs of `call`, see: 19.2.3.3
+
+If you're interested for example, how Node implemented apply, you can dig into their source code on Github here: https://github.com/nodejs/node

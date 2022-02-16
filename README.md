@@ -34,15 +34,17 @@ diy-x && toy-x 并无特别大的区别，不用在意
   - [x] [防抖 `debounce`](./my-debounce-throttle/readme.md)
   - [x] [节流 `throttle`](./my-debounce-throttle/readme.md)
 - [x] curry 函数柯里化
-- 实现数组原型方法
+- [ ] 数组相关
   - [ ] forEach
   - [ ] map
   - [ ] filter
   - [ ] some
   - [ ] reduce
   - [x] flat 数组扁平化
-- [x] [数组去重](./my-unique/readme.md)
-- [x] [实现一个函数，切分数字千分位（10000 => 10,000）](./utils/src/number.js)
+  - [x] [数组去重](./my-unique/readme.md)
+  - [ ] 类数组转化为数组
+- [x] 切分/分割类题目
+  - [x] [实现一个函数，切分数字千分位（10000 => 10,000）](./division/thousandth.js)
 - [ ] 手写一个观察者模式
 - [x] EventEmitter 手写事件总线（发布订阅模式） 参见 [node-modules tiny-emitter](https://github.com/cloudyan/npm-modules/blob/dev/packages/emitter/readme.md)
 - [ ] 手写一个通用的事件侦听器函数
@@ -53,7 +55,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
   - [ ] 超时取消
   - [ ] 失败重试
   - [ ] 并发控制
-- [ ] 亲手实现 Promise [diy-promise]
+- [x] 手写 Promise [my-promise](./my-promise/readme.md)
 - [ ] 如何实现 空白屏侦测?
 - [ ] 手写一个模板引擎/字符串模板
 - [ ] 如何实现 mvvm ?
@@ -91,6 +93,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - https://mp.weixin.qq.com/s/oOmX4lcCy_vZfXx0KjLKOg
 - https://mp.weixin.qq.com/s/7KwM6fNM5MICHiIwoRDm-w
 - https://juejin.cn/post/7022795467821940773
+- https://juejin.cn/post/7020562888657993741
 
 ## 扩展阅读
 

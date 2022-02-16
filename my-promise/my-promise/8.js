@@ -239,6 +239,10 @@ class MyPromise {
       resolve(func());
     })
   }
+
+  // 让同步函数同步执行，异步函数异步执行 是一种场景
+  // 还有一种场景，比如请求了接口，但数据做了缓存，两次返回，一次是异步，一次是同步
+  // 参见 https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API/Microtask_guide#%E4%BD%95%E6%97%B6%E4%BD%BF%E7%94%A8%E5%BE%AE%E4%BB%BB%E5%8A%A1
 }
 
 function resolvePromise(p, x, resolve, reject) {

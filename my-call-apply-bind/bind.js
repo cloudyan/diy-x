@@ -3,7 +3,9 @@
 // 函数原型方法 `bind` 的实现
 Function.prototype.myBind = function (context, ...args) {
   if (typeof this !== 'function') {
-    throw new TypeError('not function')
+  // if (!(this instanceof Function)) {
+    // 当前调用bind方法的不是函数
+    throw new TypeError('this is not a function type.')
   }
 
   // 表示当前函数 this
@@ -21,3 +23,25 @@ Function.prototype.myBind = function (context, ...args) {
     }
   }
 }
+
+
+function es5Bind () {
+  //arguments are just Array-like but not actual Array. Check MDN.
+  let bindFn = this,
+      bindObj = arguments[0],
+      bindParams = [].slice.call(arguments,1); //----> [arg1,arg2..] Array.isArray --> true
+  return function () {
+    bindFn.apply(bindObj, bindParams.concat([].slice.call(arguments)))
+  }
+}
+
+function es6Bind(...bindArgs) {
+  let context = this;
+  return function (...funcArgs) {
+    context.call(bindArgs[0], ...[...(bindArgs.slice(1)), ...funcArgs]);
+     // we can use above line using call (OR) below line using apply
+     //context.apply(bindArgs[0], [...(bindArgs.slice(1)), ...funcArgs]);
+  }
+}
+// Function.prototype.es5Bind = es5Bind;
+// Function.prototype.es6Bind = es6Bind;
