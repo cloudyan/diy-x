@@ -35,6 +35,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
   - [x] [防抖 `debounce`](./my-debounce-throttle/readme.md)
   - [x] [节流 `throttle`](./my-debounce-throttle/readme.md)
 - [x] curry 函数柯里化
+- [ ] 偏函数
 - [ ] 数组相关
   - [ ] forEach
   - [ ] map
@@ -71,6 +72,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [ ] 亲手实现 umi 微框架 [diy-umi]
 - [ ] 亲手实现 vite [diy-vite]
 - [ ] 亲手实现一个测试框架 [diy-testing]
+- [ ] 尾递归优化
 
 ## x-xxx
 

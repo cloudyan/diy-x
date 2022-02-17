@@ -1,5 +1,6 @@
 
 // 实现 JSON.stringify
+// 参见 https://github.com/YvetteLau/Step-By-Step/issues/39#issuecomment-508327280
 
 const jsonStringify = function jsonStringify(data) {
   let dataType = typeof data;
