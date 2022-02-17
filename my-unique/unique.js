@@ -32,9 +32,9 @@ function unique4(arr) {
   // return arr.reduce((prev, cur) => prev.indexOf(cur) > -1 ? prev : prev.concat(cur), [])
 }
 
-// 5. sort + for （sort 并无意义）
+// 废弃方案 5. sort + for （sort 并无意义）
 function unique5(arr) {
-  // arr = arr.sort(); // 默认转为字符串比较，会报错
+  // arr = arr.sort(); // 默认将 key 转为字符串比较，会报错
   arr = arr.sort((a, b) => a === b ? 0 : 1);
 
   const result = [];

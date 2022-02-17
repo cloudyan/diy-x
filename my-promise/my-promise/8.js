@@ -114,7 +114,7 @@ class MyPromise {
   // 1. 传入空的可迭代对象 返回已完成 resolved
   // 2. 传入的参数不包含 promise，返回异步完成 resolved
   // 3. 所有都都成功或任何一个失败，就变为 resolved 或 reject
-  static all(promiseList) {
+  static all(promiseList = []) {
     return new MyPromise((resolve, reject) => {
       const result = []
       const length = promiseList.length
@@ -139,13 +139,13 @@ class MyPromise {
   }
   // 1. 传入空的可迭代对象，则返回的 promise 将永远等待
   // 2. 返回第一个结果值（无论 resolved 或 rejected）
-  static race(promiseList) {
+  static race(promiseList = []) {
     return new MyPromise((resolve, reject) => {
       const length = promiseList.length
 
-      // TODO:
       if (length === 0) {
-        return
+        return // 永远 pending 中
+        // 思考 这种永远 pending 会有什么影响
         // return resolve()
       }
       for (let i = 0; i < length; i++) {

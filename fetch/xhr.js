@@ -25,8 +25,12 @@ function ajax1(url, options = {}) {
   // 只要readyState属性的值有变化，就会触发readystatechange事件
   xhr.onreadystatechange = function(){
     if(xhr.readyState === 4){
+      // TODO: 这里到底该怎么设计好？
+      // jQuery.ajax 以及 axios 是怎么考虑设计的，为什么?
       if((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304){
         try {
+
+          // TODO:  xhr.response vs req.responeText
           const result = JSON.parse(xhr.responseText)
           success(result)
         } catch (err) {
@@ -38,7 +42,7 @@ function ajax1(url, options = {}) {
     }
   }
 
-  // 3. 调用open（默认为true 异步）
+  // 3. 调用open（默认为 true 表示异步, false 表示异步）
   xhr.open(method, url, true);
 
   // 4. 设置 HTTP 请求头的值。必须在 open() 之后、send() 之前调用
@@ -50,18 +54,24 @@ function ajax1(url, options = {}) {
 
 
 // promise版
-function ajax2(url, options) {
+function ajax2(url, options = {}) {
   const {
     method = 'get',
   } = options
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
+
+    // If specified, responseType must be empty string or "text"
+    xhr.responseType = 'text';
+
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {
+        // if(req.status >= '200' && req.status <= 300){
         if (xhr.status === 200) {
-          resolve(xhr.response);
+          console.log(xhr)
+          resolve(xhr.response)
         } else {
-          reject(xhr);
+          reject(xhr)
         }
       }
     };

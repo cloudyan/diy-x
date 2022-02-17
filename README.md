@@ -12,6 +12,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 
 亲手实现一些 ployfill 或 实现原理机制，甚至框架等
 
+- [x] [数据类型判断](./my-is/readme.md)
 - [x] 实现函数原型方法
   - [x] [`call` 的实现](./my-call-apply-bind/readme.md)
   - [x] [`apply` 的实现](./my-call-apply-bind/readme.md)
@@ -42,7 +43,8 @@ diy-x && toy-x 并无特别大的区别，不用在意
   - [ ] reduce
   - [x] flat 数组扁平化
   - [x] [数组去重](./my-unique/readme.md)
-  - [ ] 类数组转化为数组
+    - [x] 对象数组去重
+  - [x] [类数组转化为数组](./polyfill-array/array-like.js)
 - [x] 切分/分割类题目
   - [x] [实现一个函数，切分数字千分位（10000 => 10,000）](./division/thousandth.js)
 - [ ] 手写一个观察者模式
@@ -56,6 +58,9 @@ diy-x && toy-x 并无特别大的区别，不用在意
   - [ ] 失败重试
   - [ ] 并发控制
 - [x] 手写 Promise [my-promise](./my-promise/readme.md)
+- [ ] 手写各种排序
+- [x] 手写命名风格转换（小驼峰，首字符大写，帕斯卡）参见 [vue2-shared 源码分析](https://github.com/cloudyan/npm-modules/blob/dev/packages/vue2/vue2-shared.md)
+- [x] 手写一个 sleep, 参见 [delay 源码分析](https://github.com/cloudyan/npm-modules/blob/dev/packages/delay/readme.md)
 - [ ] 如何实现 空白屏侦测?
 - [ ] 手写一个模板引擎/字符串模板
 - [ ] 如何实现 mvvm ?

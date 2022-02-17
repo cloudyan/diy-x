@@ -24,14 +24,24 @@ function jsonp({url, params, callbackName}) {
   }
 
   return new Promise((resolve, reject) => {
-    const JSONP = document.createElement('script')
+    const jsNode = document.createElement('script')
     // JSONP.type = 'text/javascript'
-    JSONP.src = `${url}?${stringify(params)}&callback=${callbackName}`
-    document.body.appendChild(JSONP)
+    jsNode.src = `${url}?${stringify(params)}&callback=${callbackName}`
+
+    // 触发callback，触发后删除js标签和绑定在window上的callback
     window[callbackName] = data => {
       resolve(data)
-      document.body.removeChild(JSONP)
+      document.body.removeChild(jsNode)
     }
+    // js 加载异常的情况
+    jsNode.addEventListener('error', () => {
+      delete.window[callbackName]
+      document.body.removeChild(jsNode)
+      reject('JavaScript 资源加载失败')
+    }, false)
+
+    // 添加 js 节点，开始请求
+    document.body.appendChild(jsNode)
   })
 }
 

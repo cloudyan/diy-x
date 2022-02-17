@@ -18,6 +18,7 @@ Function.prototype.myApply = function (context) {
   let tempFn = Symbol()
   context[tempFn] = this
 
+  // arr 可能不传值
   const result = arr ? context[tempFn](...arr) : context[tempFn]()
 
   delete context[tempFn]

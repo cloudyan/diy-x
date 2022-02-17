@@ -1,6 +1,48 @@
 # 深浅拷贝区别与实现
 
+建议分析 lodash 的深拷贝实现
+
+## 浅拷贝
+
+只考虑对象类型
+
+```js
+// 1
+Object.assign({}, obj)
+
+// 2
+{...obj}
+```
+
+简单实现
+
+```js
+function shallowCopy(obj) {
+  if (typeof obj !== 'object') return
+
+  let newObj = obj instanceof Array ? [] : {}
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      newObj[key] = obj[key]
+    }
+  }
+  return newObj
+}
+```
+
 ## 深拷贝 `deepclone`
+
+### 递归实现
+
+深度优先
+
+1. 判断类型，**正则**和**日期**直接返回新对象
+2. 是函数，通过 `new Function` 和 `toString` 返回 clone
+3. **空 null**或者**非对象类型**，直接返回原值
+4. 考虑循环引用，判断如果`hash`中含有直接返回`hash`中的值
+5. 新建一个相应的 `new obj.constructor` 加入 `hash`
+6. 遍历对象递归（普通 `key` 和 `key` 是 `symbol` 类型的情况）
+7. key 是 symbol 类型，类似 6，也是遍历递归
 
 ### 深度遍历广度遍历的区别？
 
@@ -10,16 +52,6 @@
 2. 深度优先有回溯的操作(没有路走了需要回头)所以相对而言时间会长一点
 3. 深度优先采用的是堆栈的形式, 即先进后出
 4. 广度优先则采用的是队列的形式, 即先进先出
-
-### 递归实现
-
-深度优先
-
-- 判断类型，**正则**和**日期**直接返回新对象
-- **空 null**或者**非对象类型**，直接返回原值
-- 考虑循环引用，判断如果`hash`中含有直接返回`hash`中的值
-- 新建一个相应的 `new obj.constructor` 加入 `hash`
-- 遍历对象递归（普通 `key` 和 `key` 是 `symbol` 类型的情况）
 
 ### `JSON.stringify` 结合 `JSON.parse` 实现clone
 

@@ -42,7 +42,9 @@ class MyPromise {
   }
 
   then(onFulfilled, onRejected) {
+    // 解决 onFufilled，onRejected 没有传值的问题
     const onFulfilled1 = typeof onFulfilled === 'function' ? onFulfilled : (value) => value
+    // 因为错误的值要让后面访问到，所以这里也要抛出错误，不然会在之后 then 的 resolve 中捕获
     const onRejected1 = typeof onRejected === 'function' ? onRejected : (reason) => {throw reason}
 
     const promise2 = new MyPromise((resolve, reject) => {

@@ -26,6 +26,8 @@ class MyPromise {
       // 状态变更为成功，调用所有成功的回调
       while (this.onFulfilledCallback.length) {
         // Array.shift() 取出数组第一个元素，然后（）调用，shift 不是纯函数，取出后会改变数组，直到数组为空
+        // 这里清空了数组，实际并不必要，for 循环也是也可以的
+        // 思考 如果执行的过程出错了，怎么办
         this.onFulfilledCallback.shift()(value)
       }
     }

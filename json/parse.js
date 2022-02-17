@@ -1,6 +1,37 @@
-//
+// 实现 JSON.parse
 
-// MDN polyfill
+// 1. 使用 eval 实现
+function parse1(json) {
+  return eval(`(${json})`)
+}
+
+// 2. 上述方案如果数据中传入了可执行的 JS 代码，很可能造成 XSS 攻击，
+// 因此调用 eval 之前，需要对数据进行校验
+function parse2(json) {
+  const rx_one = /^[\],:{}\s]*$/;
+  const rx_two = /\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g;
+  const rx_three = /"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g;
+  const rx_four = /(?:^|:|,)(?:\s*\[)+/g;
+
+  if (
+    rx_one.test(
+        json.replace(rx_two, '@')
+            .replace(rx_three, ']')
+            .replace(rx_four, '')
+    )
+  ) {
+    return eval(`(${json})`)
+  }
+}
+
+// 3. 使用 new Function 实现
+// Function 与 eval 有相同的字符串参数特性
+function parse3(json) {
+  return (new Function(`return ${json}`))()
+}
+
+
+// 以下是 MDN polyfill 的实现
 // From https://github.com/douglascrockford/JSON-js/blob/master/json2.js
 if (typeof JSON.parse !== "function") {
   var rx_one = /^[\],:{}\s]*$/;
