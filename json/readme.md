@@ -19,7 +19,7 @@ JSON：并不是JavaScript 的子集。[JavaScript 与 JSON 的区别](https://d
 该方法将一个 `JavaScript` 对象或值转换为 `JSON` 字符串，如果指定了一个 `replacer` 函数，则可以选择性地替换值，或者指定的 `replacer` 是数组，则可选择性地仅包含数组指定的属性。
 
 - 异常
-  - 当在循环引用时会抛出异常 `TypeError` ("cyclic object value")（循环对象值）
+  - 当在循环引用时会抛出异常 `TypeError` ("cyclic object value")（循环对象值）obj['a'] = obj
   - 当尝试去转换 `BigInt` 类型的值会抛出`TypeError` ("BigInt value can't be serialized in JSON")（`BigInt`值不能`JSON`序列化）、
 - 处理规则
   - 转换值如果有 `toJSON()` 方法，该方法定义什么值将被序列化。
