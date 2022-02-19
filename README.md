@@ -21,11 +21,11 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [x] [实现 `instanceof` 关键字](./my-instanceof/readme.md)
 - [x] [实现 `Object.create`](./polyfill-object/create.js)
 - [x] [实现 `Object.assign`](./polyfill-object/assign.js)
-- [ ] JSON
-  - [ ] 实现 `JSON.stringify`
-  - [ ] 实现 `JSON.parse`
-    - [ ] `eval` 实现
-    - [ ] `new Function` 实现
+- [x] JSON
+  - [x] 实现 `JSON.stringify`
+  - [x] 实现 `JSON.parse`
+    - [x] `eval` 实现
+    - [x] `new Function` 实现
 - [ ] `inherit` 实现继承（es5 es6）
 - [x] [深浅拷贝区别及实现](./my-clone/readme.md)
   - [x] 深度优先与广度优先的区别
