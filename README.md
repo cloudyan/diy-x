@@ -55,7 +55,8 @@ diy-x && toy-x 并无特别大的区别，不用在意
   - [ ] 扩展 axios 支持 JSONP
 - [x] [简单封装 xhr 发起 ajax 请求](./fetch/xhr.js)
 - [ ] 针对 xhr 和 fetch 请求，如何实现以下诉求
-  - [ ] 超时取消
+  - [ ] 取消
+  - [ ] 超时
   - [ ] 失败重试
   - [ ] 并发控制
 - [x] 手写 Promise [my-promise](./my-promise/readme.md)
@@ -72,7 +73,8 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [ ] 亲手实现 umi 微框架 [diy-umi]
 - [ ] 亲手实现 vite [diy-vite]
 - [ ] 亲手实现一个测试框架 [diy-testing]
-- [ ] 尾递归优化
+- [ ] [尾递归优化](https://juejin.cn/post/6959549674990600228)
+- [ ] 生产随机数的各种方法
 
 ## x-xxx
 

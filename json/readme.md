@@ -14,7 +14,7 @@ JSON：并不是JavaScript 的子集。[JavaScript 与 JSON 的区别](https://d
 
 ## `JSON.stringify(value[, replacer [, space]])`
 
-JSON 序列化
+`JSON.stringify` 是浏览器高版本带的一个将 JS 的 Object 对象转换为**JSON字符串**的一个方法
 
 该方法将一个 `JavaScript` 对象或值转换为 `JSON` 字符串，如果指定了一个 `replacer` 函数，则可以选择性地替换值，或者指定的 `replacer` 是数组，则可选择性地仅包含数组指定的属性。
 
@@ -32,6 +32,11 @@ JSON 序列化
   - `NaN` 和 `Infinity`, `-Infinity` 格式的数值及 `null` 都会被当做 `null`。
   - 其他类型的对象，包括 Map/Set/WeakMap/WeakSet，**仅会序列化可枚举的属性**（不可枚举的属性默认会被忽略）。
 
+简单记忆
+
+- 会处理的几种类型: String, Number, Boolean, null, Array, Object
+- 不会处理的几种类型: Date, RegExp, Symbol, undefined, Function
+
 ```js
 const noop = () => {}
 const obj = {
@@ -40,6 +45,7 @@ const obj = {
   symbol: Symbol(),     // 忽略, 在数组中会转为 null
   fn_1: noop,           // 忽略, 在数组中会转为 null
   nan: NaN,             // 转为 null
+  regexp: /abc/,        // 转为 '{}' 字符串
   num_1: 0,
   num_2: -0,            // 转为 0
   num_3: Infinity,      // 转为 null
@@ -85,6 +91,7 @@ console.log(JSON.parse(jsonStr))
 参考
 
 - 深拷贝系列 ———— [自己实现一个JSON.stringify和JSON.parse](https://juejin.cn/post/6844904001801027592)
+- [实现一个 JSON.stringify](https://github.com/YvetteLau/Step-By-Step/issues/39#issuecomment-508327280)
 - [JSON 之父 Douglas Crockford 写的 ployfill](https://github.com/douglascrockford/JSON-js)，里面提供了三种实现方式
   - 推荐：上文解析 [JSON.parse 三种实现方式](https://juejin.cn/post/6844903568919527432)
 - [关于模板引擎的工作方式和性能？](https://www.zhihu.com/question/28466557/answer/241364553)
