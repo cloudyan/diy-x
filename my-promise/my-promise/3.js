@@ -90,12 +90,6 @@ p1.then((res) => {
 }).then((res) => {
   console.log('then2', res)
 })
-p1.then((res) => {
-  console.log('2', res);
-  return 'then2'
-}).then((res) => {
-  console.log('then3', res)
-})
 
 
 

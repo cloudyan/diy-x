@@ -53,6 +53,7 @@ function shallowCopy(obj) {
 3. 深度优先采用的是堆栈的形式, 即先进后出
 4. 广度优先则采用的是队列的形式, 即先进先出
 
+TODO fiber 实例
 ### `JSON.stringify` 结合 `JSON.parse` 实现clone
 
 ```js

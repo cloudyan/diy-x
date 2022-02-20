@@ -9,7 +9,7 @@ export function compileTpl(template, data) {
     // return data[key] || raw;
 
     var paths = key.split('.');
-    var lookup = data;
+    // var lookup = data[key];
     while (paths.length > 0){
       lookup = lookup[paths.shift()];
     }

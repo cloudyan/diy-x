@@ -13,7 +13,7 @@ function deepClone(obj, hash = new WeakMap()){
   // new 一个相应的对象
   // obj 为 Array，相当于new Array()
   // obj 为 Object，相当于new Object()
-  let constr = new obj.constructor(); // 为什么用这个，完成原型链的 clone
+  let constr = new obj.constructor(); // 为什么用这个，完成原型链的 clone，是否可以用 Object.create(obj)？TODO:
   hash.set(obj, constr);
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {
