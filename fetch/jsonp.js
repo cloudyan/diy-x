@@ -30,8 +30,9 @@ function jsonp({url, params, callbackName}) {
 
     // 触发callback，触发后删除js标签和绑定在window上的callback
     window[callbackName] = data => {
-      resolve(data)
+      delete window[callbackName]
       document.body.removeChild(jsNode)
+      resolve(data)
     }
     // js 加载异常的情况
     jsNode.addEventListener('error', () => {
