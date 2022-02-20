@@ -35,7 +35,7 @@ function jsonp({url, params, callbackName}) {
     }
     // js 加载异常的情况
     jsNode.addEventListener('error', () => {
-      delete.window[callbackName]
+      delete window[callbackName]
       document.body.removeChild(jsNode)
       reject('JavaScript 资源加载失败')
     }, false)
