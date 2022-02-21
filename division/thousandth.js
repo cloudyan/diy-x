@@ -29,3 +29,15 @@ num2.replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
 // 低版本浏览器报错
 // /(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g
 
+
+// 金额转千分位
+const formatPrice = (number) => {
+  number = '' + number
+
+  const [ integer, decimal = '' ] = number.split('.')
+
+  return integer.replace(/\B(?=(\d{3})+$)/g, ',') + (decimal ? '.' + decimal : '')
+}
+
+console.log(formatPrice(1234567890.123456789)) // 1,234,567,890.1234567
+
