@@ -88,6 +88,13 @@ console.log(JSON.parse(jsonStr))
 - 使用 eval 实现
 - 使用 new Function 实现
 
+## 扩展
+
+- 正则
+  - [正则可视化工具](https://regexper.com/) 这个有 bug
+    - `/\(?:["\/bfnrt]|u[0-9a-fA-F]{4})/g`
+  - [正则可视化工具 2](https://regexp.deepjs.cn/)
+
 参考
 
 - 深拷贝系列 ———— [自己实现一个JSON.stringify和JSON.parse](https://juejin.cn/post/6844904001801027592)

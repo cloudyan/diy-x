@@ -5,9 +5,9 @@ const EventUtils = {
     if (element.addEventListener) {
       element.addEventListener(type, handler, false);
     } else if (element.attachEvent) {
-      element.attachEvent("on" + type, handler);
+      element.attachEvent('on' + type, handler);
     } else {
-      element["on" + type] = handler;
+      element['on' + type] = handler;
     }
   },
   // 移除事件
@@ -15,9 +15,9 @@ const EventUtils = {
     if (element.removeEventListener) {
       element.removeEventListener(type, handler, false);
     } else if (element.detachEvent) {
-      element.detachEvent("on" + type, handler);
+      element.detachEvent('on' + type, handler);
     } else {
-      element["on" + type] = null;
+      element['on' + type] = null;
     }
   },
  // 获取事件目标
