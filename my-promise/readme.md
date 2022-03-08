@@ -17,4 +17,7 @@
 
 具体文档相关内容，参看 learn-javascript [es6 Promise](https://github.com/cloudyan/learn-javascript/blob/master/es6/16.promise/readme.md)
 
-- 手写实现，参照 Promise A+ 的规范一步一步实现 [my-promise 1~8.js](./my-promise/1.js)
+手写实现
+
+- 参照 Promise A+ 的规范一步一步实现 [my-promise 1~8.js](./my-promise/1.js)
+- https://github.com/calvinmetcalf/lie
