@@ -15,6 +15,10 @@
 - Promise.try()                 ESnext
 - await.ops                     ESnext
 
+扩展
+
+- Promise.map               用以控制并发
+
 具体文档相关内容，参看 learn-javascript [es6 Promise](https://github.com/cloudyan/learn-javascript/blob/master/es6/16.promise/readme.md)
 
 手写实现
