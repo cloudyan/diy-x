@@ -126,3 +126,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
 ## 扩展阅读
 
 - 可以膜拜下大神 [Fabrice Bellard](https://bellard.org/)
+
+## 其他
+
+- https://github.com/bradtraversy/50projects50days

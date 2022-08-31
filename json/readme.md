@@ -54,8 +54,8 @@ const obj = {
   bool_1: true,
   bool_2: false,
   // 值在数组中
-  arr_2: [NaN, 0, -0, Infinity, new Date('2022-02-17T08:53:59.659Z')],
-  arr_1: [undefined, Symbol(), noop],   // 作为属性会忽略，在数组中会转为 null
+  arr_1: [NaN, 0, -0, Infinity, new Date('2022-02-17T08:53:59.659Z')],
+  arr_2: [undefined, Symbol(), noop],   // 作为属性会忽略，在数组中会转为 null
 }
 
 // key 为 Symbol 也会忽略

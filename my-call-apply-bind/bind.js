@@ -1,7 +1,17 @@
 /* eslint-disable no-extend-native,prefer-rest-params */
 
+// https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/
+// 非常简单的示例
+Function.prototype.simpleBind = function simpleBind(scope) {
+  var fn = this;
+  return function simpleBinded() {
+    return fn.apply(scope);
+  };
+}
+
+
 // 函数原型方法 `bind` 的实现
-Function.prototype.myBind = function (context, ...args) {
+Function.prototype.myBind = function myBind(context, ...args) {
   if (typeof this !== 'function') {
   // if (!(this instanceof Function)) {
     // 当前调用bind方法的不是函数
