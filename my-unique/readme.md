@@ -57,7 +57,7 @@
 
 注意：`sort()` 默认排序时，需要调用 `toString()` 方法，在 `null prototype` 场景时就会报错
 
-自 EcmaScript 2019 起，规范 要求 Array.prototype.sort 为稳定排序。
+自 EcmaScript 2019 起，规范要求 Array.prototype.sort 为稳定排序。
 
 ## 6. 遍历 + `hasOwnProperty` 结合缓存实现（有限制）
 
