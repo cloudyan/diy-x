@@ -5,7 +5,7 @@
 1. `Set` 实现（推荐）
 2. [`for`, `for...of`, `forEach`, `filter`] + [`indexOf`, `includes`, `for`] 组合实现
 3. [`reduce`] + [`indexOf`, `includes`] 实现
-4. ~~`sort` + `for` 实现~~（sort 并无意义）
+4. `sort` + `for` 实现（利用底层 sort）
 5. 遍历 + `hasOwnProperty` 结合缓存实现（有限制）
 6. 遍历 + `Map` 缓存实现（推荐）
 7. 扩展: 对象数组去重
@@ -35,21 +35,21 @@
 
 ## 2. `for` + `indexOf` 实现
 
-通过 `for` 实现遍历，`foreach`, `filter` 类似
+通过 `for` 实现双层循环遍历比对，`foreach`, `filter` 类似
 
 `indexOf()` 使用严格相等 `===` 与 Array 的元素进行比较。这个不同于 `SameValueZero` 算法。
 
-## 3. `for...of` + `includes` 实现
+## 2. `for...of` + `includes` 实现
 
 `includes()` 方法使用 `sameValueZero` 算法来确定是否找到给定元素。
 
-## 4. `reduce` + `includes` 实现
+## 3. `reduce` + `includes` 实现
 
 通过 `reduce` 实现遍历，写法和 `for` 区别比较大
 
-## 5. ~~`sort` + `for` 实现~~（sort 并无意义）
+## 4. `sort` + `forEach` 实现（sort 并无意义，本质还是遍历）
 
-该方法，是否使用 sort 并无区别，都要遍历所有。另注意 `sort` 会改变原数组，慎用
+该方法，是否使用 sort 并无区别，都要遍历所有。另注意 `sort` 会改变原数组，慎用(可使用副本)
 
 `sort()` 方法用[原地算法](https://en.wikipedia.org/wiki/In-place_algorithm)对数组的元素进行排序，并返回数组。默认排序顺序是先将元素转换为字符串，然后比较它们的`UTF-16`代码单元值序列时构建的
 
@@ -59,7 +59,7 @@
 
 自 EcmaScript 2019 起，规范要求 Array.prototype.sort 为稳定排序。
 
-## 6. 遍历 + `hasOwnProperty` 结合缓存实现（有限制）
+## 5. 遍历 + `hasOwnProperty` 结合缓存实现（有限制）
 
 此方案有限制，以下情况会异常
 
@@ -68,9 +68,9 @@
 
 大多数 Javascript 对象的`toString()`方法都继承自`Object.prototype`。但是其中一些如 `Object.create(null)`, `Symbol()` 具有 `null prototype, not havetoString()` 方法，因此 Javascript 将无法将这些对象转换为字符串原语。`and can't convert object to primitive error will rise`.
 
-## 7. 遍历 + `Map` 实现
+## 6. 遍历 + `Map` 实现
 
-利用 `Map` 缓存去重
+利用 `Map` 缓存，实现 hashTable 去重
 
 `Map` 键的相等(Key equality)是基于 sameValueZero 算法的(`NaN` 是与 `NaN` 相等的，其他的值同 `===` 运算符)
 
@@ -100,7 +100,7 @@ Object.create(null) + ''
 参考：https://stackoverflow.com/questions/41164750/cannot-convert-object-to-primitive-value
 
 
-## 扩展
+## 7. 扩展
 
 - 数组对象去重（根据特定属性值判断去重）
 - `new Set()` 的时间复杂度
@@ -110,3 +110,4 @@ Object.create(null) + ''
 参考：
 
 - https://segmentfault.com/a/1190000016418021
+-
