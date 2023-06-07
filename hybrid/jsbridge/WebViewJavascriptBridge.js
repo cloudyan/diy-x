@@ -1,8 +1,9 @@
 /* eslint-disable unicorn/filename-case */
 
 // WebViewJavascriptBridge.js
+// 用于和客户端 app 通信
 
-// 此文件放在 app 中，构建 bridge
+// 此文件放在 app 中，构建 bridge(app 注入有延迟，可以直接打包到 H5 中)
 // WebViewJavascriptBridge 是 Webview和 Html 交互通信的桥梁
 
 // 参看：http://www.cocoachina.com/ios/20150629/12248.html
@@ -14,7 +15,7 @@
 // bridge.getAppConfig({success:function(data){console.log(222)}})
 // bridge._fetchQueue()
 
-(function(document, window) {
+(function (document, window) {
   if (typeof document === 'undefined' || typeof window === 'undefined') return;
 
   const WebViewJavascriptBridge = window.WebViewJavascriptBridge;
@@ -78,7 +79,7 @@
     }
     bridge._messageHandler =
       messageHandler ||
-      (data => {
+      ((data) => {
         console.log('落地函数, data:', data);
       });
     const receivedMessages = receiveMessageQueue;
@@ -143,7 +144,7 @@
         // 直接发送
         if (message.callbackId) {
           const callbackResponseId = message.callbackId;
-          responseCallback = function(responseData) {
+          responseCallback = function (responseData) {
             _doSend({
               responseId: callbackResponseId,
               responseData,
@@ -207,14 +208,15 @@
       window.webkit.messageHandlers.deepJsBridge.postMessage
     ) {
       return window.webkit.messageHandlers.deepJsBridge.postMessage(msg);
+    } else {
+      console.log('当前webview 不支持 webkit postMessage');
     }
   }
   function _sendMessage(msg) {
     if (isIphone) {
       return callIphoneBridge(msg);
     } else {
-      // if (isAndroid) {
-      // console.log('android');
+      // 如果是 Android 以及非 iPhone
       if (window.deepJsBridge && window.deepJsBridge.callNative) {
         return window.deepJsBridge.callNative(JSON.stringify(msg));
       }
@@ -239,21 +241,21 @@
     // }
   }
 
-  (function(bridge) {
+  (function (bridge) {
     const commonArgs = ['success', 'fail', 'cancel', 'complete', 'trigger'];
     const handlerCaches = {};
 
-    bridge.addMethods = function(bridgeMethods) {
+    bridge.addMethods = function (bridgeMethods) {
       if (isString(bridgeMethods)) bridgeMethods = [bridgeMethods];
-      each(bridgeMethods, function(methodName) {
+      each(bridgeMethods, function (methodName) {
         const names = getJsAndNativeNames(methodName);
         generateMethod(names.js, names.native);
       });
     };
 
-    bridge.addEvents = function(bridgeEvents) {
+    bridge.addEvents = function (bridgeEvents) {
       if (isString(bridgeEvents)) bridgeEvents = [bridgeEvents];
-      each(bridgeEvents, function(methodName) {
+      each(bridgeEvents, function (methodName) {
         const names = getJsAndNativeNames(methodName);
         generateEvent(names.js, names.native);
       });
@@ -287,10 +289,10 @@
     }
 
     function generateMethod(jsName, nativeName) {
-      bridge[jsName] = function(args) {
+      bridge[jsName] = function (args) {
         console.log(`called ${nativeName}`, args);
         args = dealArgs(args || {});
-        bridge.callHandler(nativeName, args.data, function(responseData) {
+        bridge.callHandler(nativeName, args.data, function (responseData) {
           if (isString(responseData)) {
             responseData = JSON.parse(responseData);
           }
@@ -308,10 +310,10 @@
     }
 
     function generateEvent(jsEventName, nativeEventName) {
-      bridge['on' + getAdaptName(jsEventName)] = function(args) {
+      bridge['on' + getAdaptName(jsEventName)] = function (args) {
         return on(nativeEventName, args);
       };
-      bridge['off' + getAdaptName(jsEventName)] = function(args) {
+      bridge['off' + getAdaptName(jsEventName)] = function (args) {
         return off(nativeEventName, args);
       };
     }
@@ -323,7 +325,7 @@
     // 处理参数，参数为对象格式
     function dealArgs(args) {
       const data = {};
-      each(args, function(arg, key) {
+      each(args, function (arg, key) {
         // 不是 commonArgs 中列出的方法，是要给 Native 传递的 message
         // 先将其转存到 data 上
         if (commonArgs.indexOf(key) === -1) {
@@ -340,7 +342,7 @@
       const init2 = initEvent(eventName);
       const cache = handlerCaches[eventName] || {};
 
-      each(commonArgs, function(handlerName) {
+      each(commonArgs, function (handlerName) {
         const typeHandler = args[handlerName];
         // 同一个监听器不要重复监听
         if (typeHandler && cache[handlerName].indexOf(typeHandler) === -1) {
@@ -365,7 +367,7 @@
       if (args) {
         const cache = handlerCaches[eventName] || {};
 
-        each(commonArgs, function(handlerName) {
+        each(commonArgs, function (handlerName) {
           const handlerCache = cache[handlerName] || [];
           const handlerNeedOff = args[handlerName];
           const index = handlerCache.indexOf(handlerNeedOff);
@@ -412,7 +414,7 @@
 
     function executeHandler(cache, handlerName, responseData) {
       const handlers = cache[handlerName];
-      each(handlers, function(handler) {
+      each(handlers, function (handler) {
         handler(responseData);
       });
     }

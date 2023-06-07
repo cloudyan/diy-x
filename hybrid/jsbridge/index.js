@@ -1,6 +1,9 @@
-import './WebViewJavascriptBridge'
+import './WebViewJavascriptBridge';
 
-const noop = () => {}
+// 使用可以参看 bridge.md
+// 底层支持参看 WebViewJavascriptBridge.js
+
+const noop = () => {};
 
 let inited;
 let bridgeReady;
@@ -13,11 +16,11 @@ export default class Bridge {
     // ready = noop,
     // init = noop,
   }) {
-    this.methods = methods
-    this.methods = events
-    this._nativeFnList = []
+    this.methods = methods;
+    this.methods = events;
+    this._nativeFnList = [];
 
-    const that = this
+    const that = this;
 
     function onWebViewJavascriptBridgeReady() {
       that.init(window.WebViewJavascriptBridge);
@@ -41,7 +44,7 @@ export default class Bridge {
     // window.deepJsBridgeInited = true;
 
     if (isFunction(bridge.init)) {
-      bridge.init()
+      bridge.init();
 
       // 这里挂载所有方法/事件，到 bridge 对象上
       bridge.addMethods(this.methods);

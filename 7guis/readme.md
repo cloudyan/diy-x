@@ -13,7 +13,9 @@
 - **Circle Drawer**，用 Canvas 画圆，支持调整直径，挑战点是 undo/undo，绘图和对话框控制
 - **单元格**，实现 excel 的简单可用版，支持公式，相对复杂而实际的任务，辅助评估方案是否适合大型应用
 
-jotai 作者最近用 jotai 完成了 7GUIs 的挑战，详见 https://twitter.com/dai_shi/status/1433804219828490241 。
+jotai 作者最近用 jotai 完成了 7GUIs 的挑战，详见 https://twitter.com/dai_shi/status/1433804219828490241
+
+vue3 官方也提供了此示例，详见 https://cn.vuejs.org/examples/#counter
 
 
 1. ![counter](./img/counter.png)
@@ -23,3 +25,9 @@ jotai 作者最近用 jotai 完成了 7GUIs 的挑战，详见 https://twitter.c
 5. ![CRUD](./img/crud.png)
 6. ![Circle Drawer](./img/circledraw.png)
 7. ![Cells](./img/cells.png)
+
+TODO:
+
+- vue3
+- rest
+- jotai
