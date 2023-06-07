@@ -138,3 +138,6 @@ diy-x && toy-x 并无特别大的区别，不用在意
 ## 其他
 
 - https://github.com/bradtraversy/50projects50days
+- https://github.com/shfshanyue/mini-code
+- https://github.com/T-Roc/my-promise
+- https://github.com/CoderCxb/Questions
