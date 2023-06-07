@@ -3,17 +3,16 @@
 // https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/
 // 非常简单的示例
 Function.prototype.simpleBind = function simpleBind(scope) {
-  var fn = this;
+  var fn = this
   return function simpleBinded() {
-    return fn.apply(scope);
-  };
+    return fn.apply(scope)
+  }
 }
-
 
 // 函数原型方法 `bind` 的实现
 Function.prototype.myBind = function myBind(context, ...args) {
   if (typeof this !== 'function') {
-  // if (!(this instanceof Function)) {
+    // if (!(this instanceof Function)) {
     // 当前调用bind方法的不是函数
     throw new TypeError('this is not a function type.')
   }
@@ -34,23 +33,22 @@ Function.prototype.myBind = function myBind(context, ...args) {
   }
 }
 
-
-function es5Bind () {
+function es5Bind() {
   //arguments are just Array-like but not actual Array. Check MDN.
   let bindFn = this,
-      bindObj = arguments[0],
-      bindParams = [].slice.call(arguments,1); //----> [arg1,arg2..] Array.isArray --> true
+    bindObj = arguments[0],
+    bindParams = [].slice.call(arguments, 1) //----> [arg1,arg2..] Array.isArray --> true
   return function () {
     bindFn.apply(bindObj, bindParams.concat([].slice.call(arguments)))
   }
 }
 
 function es6Bind(...bindArgs) {
-  let context = this;
+  let context = this
   return function (...funcArgs) {
-    context.call(bindArgs[0], ...[...(bindArgs.slice(1)), ...funcArgs]);
-     // we can use above line using call (OR) below line using apply
-     //context.apply(bindArgs[0], [...(bindArgs.slice(1)), ...funcArgs]);
+    context.call(bindArgs[0], ...[...bindArgs.slice(1), ...funcArgs])
+    // we can use above line using call (OR) below line using apply
+    //context.apply(bindArgs[0], [...(bindArgs.slice(1)), ...funcArgs]);
   }
 }
 // Function.prototype.es5Bind = es5Bind;

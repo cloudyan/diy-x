@@ -1,13 +1,13 @@
-import './WebViewJavascriptBridge';
+import './WebViewJavascriptBridge'
 
 // 使用可以参看 bridge.md
 // 底层支持参看 WebViewJavascriptBridge.js
 
-const noop = () => {};
+const noop = () => {}
 
-let inited;
-let bridgeReady;
-const fnListCaches = [];
+let inited
+let bridgeReady
+const fnListCaches = []
 
 export default class Bridge {
   constructor({
@@ -16,81 +16,81 @@ export default class Bridge {
     // ready = noop,
     // init = noop,
   }) {
-    this.methods = methods;
-    this.methods = events;
-    this._nativeFnList = [];
+    this.methods = methods
+    this.methods = events
+    this._nativeFnList = []
 
-    const that = this;
+    const that = this
 
     function onWebViewJavascriptBridgeReady() {
-      that.init(window.WebViewJavascriptBridge);
+      that.init(window.WebViewJavascriptBridge)
     }
 
     if (window.WebViewJavascriptBridge) {
-      onWebViewJavascriptBridgeReady();
+      onWebViewJavascriptBridgeReady()
     } else {
       document.addEventListener(
         'WebViewJavascriptBridgeReady',
         onWebViewJavascriptBridgeReady,
         false,
-      );
+      )
     }
   }
 
   init(bridge) {
-    if (!this.isInApp && this.bridgeReady) return;
-    this.bridgeReady = true;
+    if (!this.isInApp && this.bridgeReady) return
+    this.bridgeReady = true
     // if (window.deepJsBridgeInited) return;
     // window.deepJsBridgeInited = true;
 
     if (isFunction(bridge.init)) {
-      bridge.init();
+      bridge.init()
 
       // 这里挂载所有方法/事件，到 bridge 对象上
-      bridge.addMethods(this.methods);
-      bridge.addEvents(this.events);
+      bridge.addMethods(this.methods)
+      bridge.addEvents(this.events)
 
       // 直接执行 xxx
-      const that = this;
+      const that = this
       if (isFunction(bridge.getNativeFnList)) {
         bridge.getNativeFnList({
           success(res) {
-            const { data = [] } = res;
-            that._nativeFnList = data;
+            const { data = [] } = res
+            that._nativeFnList = data
           },
-        });
+        })
       }
       // Object.assign(bridge, window.webAttributes);
 
       // 把 ready 中缓存执行了
-      runJsBridgeFn(bridge);
+      runJsBridgeFn(bridge)
     } else {
-      console.warn('WebViewJavascriptBridge 的初始化 init 未成功');
+      console.warn('WebViewJavascriptBridge 的初始化 init 未成功')
     }
   }
 
   ready(callback) {
-    if (!this.isInApp || !isFunction(callback)) return;
+    if (!this.isInApp || !isFunction(callback)) return
 
     if (!this.bridgeReady) {
-      fnListCaches.push(callback);
+      fnListCaches.push(callback)
     } else {
-      callback(window.WebViewJavascriptBridge);
+      callback(window.WebViewJavascriptBridge)
     }
   }
 
   canIUse(fnName) {
-    return this._nativeFnList.indexOf[fnName] > -1;
+    return this._nativeFnList.indexOf[fnName] > -1
   }
 }
 
 function isFunction(fn) {
-  return fn && {}.toString.call(fn) === '[object Function]';
+  return fn && {}.toString.call(fn) === '[object Function]'
 }
 
 function runJsBridgeFn(bridge) {
   for (let i = 0, len = fnListCaches.length; i < len; i++) {
-    fnListCaches[i](bridge);
+    fnListCaches[i](bridge)
   }
 }
 

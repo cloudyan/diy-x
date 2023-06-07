@@ -1,4 +1,3 @@
-
 // 上接 2.js，下面处理 then 的链式调用
 // 先手写 2.js 中已实现的功能
 
@@ -11,12 +10,12 @@ class MyPromise {
     executor(this.resolve, this.reject)
   }
 
-  status = PENDING;
-  value = null;
-  reason = null;
+  status = PENDING
+  value = null
+  reason = null
 
-  onFulfilledCallback = [];
-  onRejectedCallback = [];
+  onFulfilledCallback = []
+  onRejectedCallback = []
 
   resolve = (value) => {
     if (this.status === PENDING) {
@@ -53,7 +52,7 @@ class MyPromise {
         this.onRejectedCallback.push(onRejected)
       }
     })
-    return promise;
+    return promise
   }
 }
 
@@ -68,7 +67,6 @@ function resolvePromise(x, resolve, reject) {
     resolve(x)
   }
 }
-
 
 // testing
 const p1 = new MyPromise((resolve, reject) => {
@@ -85,103 +83,17 @@ const p1 = new MyPromise((resolve, reject) => {
 
 // 链式调用
 p1.then((res) => {
-  console.log('1', res);
+  console.log('1', res)
   return 'then1'
 }).then((res) => {
   console.log('then2', res)
 })
 
-
-
-
 // 目前我们没有做异常处理，接下来在 4.js 中我们异常捕获等情况
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // NOTE: 思考，这里异步为什么会导致链式调用失效
 
-
-
-
-
-
-
-
-
-
-
 // NOTE: 解析在下方，你确定要看，不先自行思考下
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // 因为 pending 时，存储的回调不具备改变当前 promise 的能力（没有 resolve，reject 的相关处理），
 // 所以此时第一个 then 返回的 promise 一直是 pending 状态（不是链式调用失效了，而是一直 pending 还未调用后面的链上 then 方法）
-

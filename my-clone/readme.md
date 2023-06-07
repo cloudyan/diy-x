@@ -54,14 +54,15 @@ function shallowCopy(obj) {
 4. 广度优先则采用的是队列的形式, 即先进先出
 
 TODO fiber 实例
-### `JSON.stringify` 结合 `JSON.parse` 实现clone
+
+### `JSON.stringify` 结合 `JSON.parse` 实现 clone
 
 ```js
 const jsonClone = function (obj) {
   try {
     return JSON.parse(JSON.stringify(obj))
-  } catch(err) {
-    return obj;
+  } catch (err) {
+    return obj
   }
 }
 ```
@@ -72,7 +73,7 @@ const jsonClone = function (obj) {
 
 - MDN [`WeakMap`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)
   - 其中的 key 必须是引用类型
-  - 张鑫旭 [JS WeakMap应该什么时候使用](https://www.zhangxinxu.com/wordpress/2021/08/js-weakmap-es6/)
+  - 张鑫旭 [JS WeakMap 应该什么时候使用](https://www.zhangxinxu.com/wordpress/2021/08/js-weakmap-es6/)
   - MDN [WeakRef](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/WeakRef)
   - MDN [FinalizationRegistry](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/FinalizationRegistry)
   - [你不知道的 WeakMap](https://juejin.cn/post/6844904169417998349)

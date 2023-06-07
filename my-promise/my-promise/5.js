@@ -1,4 +1,3 @@
-
 // 接 4.js, 4中我们处理了 fulfilled 状态下的错误流程，下面来处理下
 //  - 将 rejected 和 pending 状态的也改造下
 //  - then 中的 onRejected 回调可以不传
@@ -11,7 +10,7 @@ class MyPromise {
   constructor(executor) {
     try {
       executor(this.resolve, this.reject)
-    } catch(err) {
+    } catch (err) {
       this.reject(err)
     }
   }
@@ -27,7 +26,7 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = FULFILLED
       this.value = value
-      while(this.onFulfilledCallback.length) {
+      while (this.onFulfilledCallback.length) {
         this.onFulfilledCallback.shift()(value)
       }
     }
@@ -36,7 +35,7 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = REJECTED
       this.reason = reason
-      while(this.onRejectedCallback.length) {
+      while (this.onRejectedCallback.length) {
         this.onRejectedCallback.shift()(reason)
       }
     }
@@ -44,18 +43,23 @@ class MyPromise {
 
   then(onFulfilled, onRejected) {
     // 参数判断
-    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : value => value
-    onRejected = typeof onRejected === 'function' ? onRejected : reason => { throw reason }
+    onFulfilled =
+      typeof onFulfilled === 'function' ? onFulfilled : (value) => value
+    onRejected =
+      typeof onRejected === 'function'
+        ? onRejected
+        : (reason) => {
+            throw reason
+          }
 
     const promise = new MyPromise((resolve, reject) => {
-
       // 提取方法，以复用错误
       const onResolve = () => {
         queueMicrotask(() => {
           try {
             const x = onFulfilled(this.value)
             resolvePromise(promise, x, resolve, reject)
-          } catch(err) {
+          } catch (err) {
             reject(err)
           }
         })
@@ -65,7 +69,7 @@ class MyPromise {
           try {
             const x = onRejected(this.reason)
             resolvePromise(promise, x, resolve, reject)
-          } catch(err) {
+          } catch (err) {
             reject(err)
           }
         })
@@ -86,7 +90,9 @@ class MyPromise {
 
 function resolvePromise(p, x, resolve, reject) {
   if (p === x) {
-    return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
+    return reject(
+      new TypeError('Chaining cycle detected for promise #<Promise>'),
+    )
   }
   if (x instanceof MyPromise) {
     x.then(resolve, reject)
@@ -94,7 +100,6 @@ function resolvePromise(p, x, resolve, reject) {
     resolve(x)
   }
 }
-
 
 // testing
 const promise = new MyPromise((resolve, reject) => {
@@ -104,14 +109,14 @@ const promise = new MyPromise((resolve, reject) => {
   }, 2000)
 })
 
-const p1 = promise.then(res => {
+const p1 = promise.then((res) => {
   console.log('1', res)
   return 'p1'
 })
 
-p1.then(res => {
+p1.then((res) => {
   console.log('2', res)
   return '2'
-}).then(res => {
+}).then((res) => {
   console.log('3', res)
 })

@@ -3,24 +3,24 @@ const betaCalc = {
   currentValue: 0,
 
   setValue(newValue) {
-    this.currentValue = newValue;
-    console.log(this.currentValue);
+    this.currentValue = newValue
+    console.log(this.currentValue)
   },
 
   plus(addend) {
-    this.setValue(this.currentValue + addend);
+    this.setValue(this.currentValue + addend)
   },
 
   minus(subtrahend) {
-    this.setValue(this.currentValue - subtrahend);
-  }
+    this.setValue(this.currentValue - subtrahend)
+  },
 
   // 注册插件
   register(plugin) {
-    const { name, exec } = plugin;
-    this[name] = exec;
-  }
-};
+    const { name, exec } = plugin
+    this[name] = exec
+  },
+}
 
 // 定义插件
 // 在大多数插件系统中，插件通常被分为两个部分：
@@ -28,27 +28,19 @@ const betaCalc = {
 //   2. 元数据（包括名称、描述、版本号、依赖项等）
 const squaredPlugin = {
   name: 'squared',
-  exec: function() {
+  exec: function () {
     this.setValue(this.currentValue * this.currentValue)
-  }
-};
+  },
+}
 
 // 注册插件
-betaCalc.register(squaredPlugin);
+betaCalc.register(squaredPlugin)
 
 // 使用计算器
-betaCalc.setValue(3); // => 3
-betaCalc.plus(2);     // => 5
-betaCalc.squared();   // => 25
-betaCalc.squared();   // => 625
-
-
-
-
-
-
-
-
+betaCalc.setValue(3) // => 3
+betaCalc.plus(2) // => 5
+betaCalc.squared() // => 25
+betaCalc.squared() // => 625
 
 // 这个系统的优点很多。该插件是一种简单的对象字面量，可以传递给我们的函数。这意味着可以通过 npm 去下载插件并将其作为 ES6 模块导入。轻松分发是非常重要的。
 

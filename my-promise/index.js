@@ -8,27 +8,27 @@ const STATUS = {
 class Promise {
   constructor(task) {
     // promise初始状态
-    this.status = STATUS.PENDING;
+    this.status = STATUS.PENDING
     // resolve时返回的数据
-    this.resolveData = null;
+    this.resolveData = null
     // reject时返回的数据
-    this.rejectData = null;
+    this.rejectData = null
     // resolve和reject时执行的回调队列
     // promise的resolve和reject为异步响应时，即调用then时promise为
     // pending状态，则将传入then的函数加入该队列，等待promise resolve或
     // reject时执行该队列
-    this.onFulfilledList = [];
-    this.onRejectedList = [];
+    this.onFulfilledList = []
+    this.onRejectedList = []
 
     /**
      * promise成功，执行onFulfilledList回调
      * @param {*} data
      */
     this.onResolve = (data) => {
-      if(this.status === STATUS.PENDING) {
-        this.status = STATUS.FULFILLED;
-        this.resolveData = data;
-        this.onFulfilledList.forEach(fn => {
+      if (this.status === STATUS.PENDING) {
+        this.status = STATUS.FULFILLED
+        this.resolveData = data
+        this.onFulfilledList.forEach((fn) => {
           fn(this.resolveData)
         })
       }
@@ -38,10 +38,10 @@ class Promise {
      * @param {*} err
      */
     this.onReject = (err) => {
-      if(this.status === STATUS.PENDING) {
-        this.status = STATUS.REJECTED;
-        this.rejectData = err;
-        this.onRejectedList.forEach(fn => {
+      if (this.status === STATUS.PENDING) {
+        this.status = STATUS.REJECTED
+        this.rejectData = err
+        this.onRejectedList.forEach((fn) => {
           fn(this.rejectData)
         })
       }
@@ -56,10 +56,10 @@ class Promise {
      */
     this.resolvePromise = (data, resolve, reject) => {
       // then return 的数据是一个promise
-      if(data instanceof Promise) {
-        if(data.status === STATUS.PENDING) {
+      if (data instanceof Promise) {
+        if (data.status === STATUS.PENDING) {
           data.then((val) => {
-            this.resolvePromise(val, resolve, reject);
+            this.resolvePromise(val, resolve, reject)
           }, reject)
         } else if (data.status === STATUS.FULFILLED) {
           resolve(data.resolveData)
@@ -69,13 +69,17 @@ class Promise {
       }
       // then return的是一个对象,若对象具有then方法，则可使用此方法作为新的then
       // Promise的thenable特性基于此
-      else if(data !== null && data instanceof Object) {
+      else if (data !== null && data instanceof Object) {
         try {
           const then = data.then
-          if(then instanceof Function) {
-            then.call(data, (val) => {
-              this.resolvePromise(val, resolve, reject);
-            }, reject)
+          if (then instanceof Function) {
+            then.call(
+              data,
+              (val) => {
+                this.resolvePromise(val, resolve, reject)
+              },
+              reject,
+            )
           } else {
             resolve(data)
           }
@@ -106,14 +110,14 @@ class Promise {
    * @param {*失败} onRejected
    */
   then(onFulfilled, onRejected) {
-    let promise;
+    let promise
     // pending状态下将传入then的函数加入promise对应的回调队列
     // 等待promise状态改变后执行
-    if(this.status === STATUS.PENDING) {
+    if (this.status === STATUS.PENDING) {
       promise = new Promise((resolve, reject) => {
         this.onFulfilledList.push(() => {
           // 传入then的参数不是函数则忽略
-          if(!(onFulfilled instanceof Function)) {
+          if (!(onFulfilled instanceof Function)) {
             resolve(this.resolveData)
           } else {
             const data = onFulfilled(this.resolveData)
@@ -122,7 +126,7 @@ class Promise {
         })
         this.onRejectedList.push(() => {
           // 传入then的参数不是函数则忽略
-          if(!(onRejected instanceof Function)) {
+          if (!(onRejected instanceof Function)) {
             reject(this.rejectData)
           } else {
             const data = onRejected(this.rejectData)
@@ -136,7 +140,7 @@ class Promise {
     else if (this.status === STATUS.FULFILLED) {
       promise = new Promise((resolve, reject) => {
         // 传入then的参数不是函数则忽略，直接resolve
-        if(!(onFulfilled instanceof Function)) {
+        if (!(onFulfilled instanceof Function)) {
           resolve(this.resolveData)
         } else {
           const data = onFulfilled(this.resolveData)
@@ -148,7 +152,7 @@ class Promise {
     else {
       promise = new Promise((resolve, reject) => {
         // 传入then的参数不是函数则忽略，直接reject
-        if(!(onRejected instanceof Function)) {
+        if (!(onRejected instanceof Function)) {
           reject(this.rejectData)
         } else {
           const data = onRejected(this.rejectData)
@@ -166,20 +170,20 @@ class Promise {
    */
   catch(rejectFn) {
     // 不是函数直接返回
-    if(!(rejectFn instanceof Function)) {
+    if (!(rejectFn instanceof Function)) {
       return
     }
 
-    if(this.status === STATUS.PENDING) {
+    if (this.status === STATUS.PENDING) {
       this.onRejectedList.push(() => {
         // 没有错误信息则不执行catch中的函数
-        if(this.rejectData !== null) {
+        if (this.rejectData !== null) {
           rejectFn(this.rejectData)
         }
       })
     } else if (this.status === STATUS.REJECTED) {
       // 没有错误信息则不执行catch中的函数
-      if(this.rejectData !== null) {
+      if (this.rejectData !== null) {
         rejectFn(this.rejectData)
       }
     }
@@ -191,7 +195,7 @@ class Promise {
    * @param {*} value
    */
   static resolve(value) {
-    if(value instanceof Promise) {
+    if (value instanceof Promise) {
       return value
     }
     return new Promise((resolve, reject) => {
@@ -204,7 +208,7 @@ class Promise {
    * @param {*} value
    */
   static reject(value) {
-    if(value instanceof Promise) {
+    if (value instanceof Promise) {
       return value
     }
     return new Promise((resolve, reject) => {
@@ -219,32 +223,35 @@ class Promise {
    * @param {*} promiseArray
    */
   static all(promiseArray) {
-    if(!(promiseArray instanceof Array)) {
+    if (!(promiseArray instanceof Array)) {
       throw new TypeError('parameter must be array')
     }
     const result = []
     let i = 0
     return new Promise((resolve, reject) => {
-      if(promiseArray.length === 0) {
+      if (promiseArray.length === 0) {
         resolve(result)
       } else {
         promiseArray.forEach((item, index) => {
-          if(item instanceof Promise) {
-            item.then(res => {
-              result[index] = res
-              i++
-              if(i === promiseArray.length) {
-                resolve(result)
-              }
-            }, err => {
-              reject(err)
-            })
+          if (item instanceof Promise) {
+            item.then(
+              (res) => {
+                result[index] = res
+                i++
+                if (i === promiseArray.length) {
+                  resolve(result)
+                }
+              },
+              (err) => {
+                reject(err)
+              },
+            )
           }
           // 如果传入的不是promise，则直接作为结果填入结果数组中
           else {
             result[index] = item
             i++
-            if(i === promiseArray.length) {
+            if (i === promiseArray.length) {
               resolve(result)
             }
           }
@@ -260,29 +267,32 @@ class Promise {
    * @param {*} promiseArray
    */
   static race(promiseArray) {
-    if(!(promiseArray instanceof Array)) {
+    if (!(promiseArray instanceof Array)) {
       throw new TypeError('parameter must be array')
     }
     // 标识符，有一个promise执行完成设为true，返回结果
     let flag = false
     return new Promise((resolve, reject) => {
       promiseArray.forEach((item) => {
-        if(item instanceof Promise) {
-          item.then(res => {
-            if(!flag) {
-              flag = true
-              resolve(res)
-            }
-          }, err => {
-            if(!flag) {
-              flag = true
-              reject(err)
-            }
-          })
+        if (item instanceof Promise) {
+          item.then(
+            (res) => {
+              if (!flag) {
+                flag = true
+                resolve(res)
+              }
+            },
+            (err) => {
+              if (!flag) {
+                flag = true
+                reject(err)
+              }
+            },
+          )
         }
         // 如果传入的不是promise，则直接作为结果
         else {
-          if(!flag) {
+          if (!flag) {
             flag = true
             resolve(item)
           }

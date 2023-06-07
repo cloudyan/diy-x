@@ -17,7 +17,6 @@ jotai 作者最近用 jotai 完成了 7GUIs 的挑战，详见 https://twitter.c
 
 vue3 官方也提供了此示例，详见 https://cn.vuejs.org/examples/#counter
 
-
 1. ![counter](./img/counter.png)
 2. ![Temperature Converter](./img/tempconv.png)
 3. ![Flight Booker](./img/bookflight.png)

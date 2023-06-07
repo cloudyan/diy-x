@@ -1,14 +1,12 @@
-
 // 类数组转化为数组
 
 let arrayLike = {
   0: 'tom',
   1: '65',
   2: '男',
-  3: ['jane','john','Mary'],
-  'length': 4
+  3: ['jane', 'john', 'Mary'],
+  length: 4,
 }
-
 
 // 1. [].slice
 console.log([].slice.call(arrayLike))

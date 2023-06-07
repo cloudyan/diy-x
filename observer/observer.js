@@ -1,31 +1,29 @@
-
-
-class Subject{
-  constructor(name){
+class Subject {
+  constructor(name) {
     this.name = name
     this.observers = []
     this.state = 'XXXX'
   }
   // 被观察者要提供一个接受观察者的方法
-  attach(observer){
+  attach(observer) {
     this.observers.push(observer)
   }
 
   // 改变被观察着的状态
-  setState(newState){
+  setState(newState) {
     this.state = newState
-    this.observers.forEach(o=>{
+    this.observers.forEach((o) => {
       o.update(newState)
     })
   }
 }
 
-class Observer{
-  constructor(name){
+class Observer {
+  constructor(name) {
     this.name = name
   }
 
-  update(newState){
+  update(newState) {
     console.log(`${this.name}say:${newState}`)
   }
 }

@@ -92,13 +92,14 @@ map.set(Object.create(null), true)
 
 ```js
 // 调用 toString 会报错
-Object.create(null) + ''
-// 等同于
-(Object.create(null)) .toString()
+Object.create(null) +
+  ''(
+    // 等同于
+    Object.create(null),
+  ).toString()
 ```
 
 参考：https://stackoverflow.com/questions/41164750/cannot-convert-object-to-primitive-value
-
 
 ## 7. 扩展
 

@@ -5,8 +5,7 @@
  */
 export function uuid(length, chars) {
   chars =
-    chars ||
-    '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    chars || '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
   length = length || 8
   let result = ''
   for (let i = length; i > 0; --i)

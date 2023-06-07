@@ -1,6 +1,6 @@
 # toy-mvvm
 
-基于Vue实现一个简易MVVM
+基于 Vue 实现一个简易 MVVM
 
 参考：
 

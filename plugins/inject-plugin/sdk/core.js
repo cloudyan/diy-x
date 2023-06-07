@@ -1,9 +1,8 @@
-
 const defaultConfig = {
   name: 'XPlugin',
 }
 
-const isFn = fn => typeof fn === 'function'
+const isFn = (fn) => typeof fn === 'function'
 
 class PluginCore {
   constructor(config) {

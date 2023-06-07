@@ -19,7 +19,7 @@ function MyPromise(fn) {
       that.value = value
 
       // 状态一旦变更，不可逆，所以回调数组是否保留，没影响
-      that.resolvedCallbacks.map(cb => cb(that.value))
+      that.resolvedCallbacks.map((cb) => cb(that.value))
     }
   }
 
@@ -27,7 +27,7 @@ function MyPromise(fn) {
     if (that.state === PENDING) {
       that.state = REJECTED
       that.value = value
-      that.rejectedCallbacks.map(cb => cb(that.value))
+      that.rejectedCallbacks.map((cb) => cb(that.value))
     }
   }
 
@@ -38,14 +38,13 @@ function MyPromise(fn) {
   }
 }
 
-
-MyPromise.prototype.then = function(onFulfilled, onRejected) {
+MyPromise.prototype.then = function (onFulfilled, onRejected) {
   const that = this
-  onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : v => v
+  onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : (v) => v
   onRejected =
     typeof onRejected === 'function'
       ? onRejected
-      : r => {
+      : (r) => {
           throw r
         }
   if (that.state === PENDING) {
@@ -68,9 +67,9 @@ const p1 = new MyPromise((resolve, reject) => {
   }, 0)
 })
 
-p1.then(value => {
+p1.then((value) => {
   console.log(value)
 })
-p1.then(value => {
+p1.then((value) => {
   console.log(value)
 })

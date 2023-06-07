@@ -1,4 +1,3 @@
-
 const arrayToTree = (array) => {
   const hashMap = {}
   let result = []
@@ -10,13 +9,13 @@ const arrayToTree = (array) => {
     // 这一步也有可能在下面出现
     if (!hashMap[id]) {
       hashMap[id] = {
-        children: []
+        children: [],
       }
     }
 
     hashMap[id] = {
       ...it,
-      children: hashMap[id].children
+      children: hashMap[id].children,
     }
     // 处理当前的item
     const treeIt = hashMap[id]
@@ -28,7 +27,7 @@ const arrayToTree = (array) => {
       // 也有可能当前节点的父父节点还没有加入hashMap，所以需要单独处理一下
       if (!hashMap[pid]) {
         hashMap[pid] = {
-          children: []
+          children: [],
         }
       }
       // 非根节点的话，找到父节点，把自己塞到父节点的children中即可
@@ -51,7 +50,6 @@ const data1 = [
 ]
 
 console.log(JSON.stringify(arrayToTree(data1), null, 2))
-
 
 const tree2list = (tree) => {
   let list = []
@@ -77,39 +75,38 @@ const tree2list = (tree) => {
 // 测试
 const data2 = [
   {
-    "id": 1,
-    "name": "部门1",
-    "pid": 0,
-    "children": [
+    id: 1,
+    name: '部门1',
+    pid: 0,
+    children: [
       {
-        "id": 2,
-        "name": "部门2",
-        "pid": 1,
-        "children": []
+        id: 2,
+        name: '部门2',
+        pid: 1,
+        children: [],
       },
       {
-        "id": 3,
-        "name": "部门3",
-        "pid": 1,
-        "children": [
+        id: 3,
+        name: '部门3',
+        pid: 1,
+        children: [
           {
-            "id": 4,
-            "name": "部门4",
-            "pid": 3,
-            "children": [
+            id: 4,
+            name: '部门4',
+            pid: 3,
+            children: [
               {
-                "id": 5,
-                "name": "部门5",
-                "pid": 4,
-                "children": []
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+                id: 5,
+                name: '部门5',
+                pid: 4,
+                children: [],
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ]
 
 console.log(tree2list(data2))
-

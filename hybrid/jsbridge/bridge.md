@@ -13,17 +13,17 @@
 // 所有调用方法最安全的做法是放到ready方法内调用
 // 目前因为Bridge文件由前端注入，不必等待，可以直接调用，但是wechat JSSDK 仍要ready后
 
-import Bridge from '@/utils/bridge';
-Bridge.ready(birdge => {
-  birdge.xxx();
+import Bridge from '@/utils/bridge'
+Bridge.ready((birdge) => {
+  birdge.xxx()
 })
 
 bridge.showToast({
   content: 'toast 信息, 必填字段，最长15字',
   success(res) {
-    console.log(res);
+    console.log(res)
   },
-});
+})
 
 // alert && confirm
 // id 为必选字段
@@ -44,30 +44,30 @@ bridge.showAlert({
     },
   ],
   success(res) {
-    console.log(res);
+    console.log(res)
   },
-});
+})
 
 bridge.navigateTo({
   url: location.href,
   success(res) {
-    console.log(res);
+    console.log(res)
   },
-});
+})
 
 bridge.redirectTo({
   url: location.href,
   success(res) {
-    console.log(res);
+    console.log(res)
   },
-});
+})
 
 bridge.navigateBack({
   deep: 1,
   success(res) {
-    console.log(res);
+    console.log(res)
   },
-});
+})
 
 bridge.getNativePath({
   success(res) {
@@ -76,15 +76,15 @@ bridge.getNativePath({
     //   tabList: [],
     //   pathList: [],
     // }
-    console.log(res);
+    console.log(res)
   },
-});
+})
 bridge.switchTab({
   url: location.href,
   success(res) {
-    console.log(res);
+    console.log(res)
   },
-});
+})
 
 // 如需要透明, 使用 hex8 传 alpha 通道
 // Android的使用 #AARRGGBB（见[文档](https://developer.android.com/guide/topics/resources/more-resources.html#Color)通过指出@gkaffka）。
@@ -98,9 +98,9 @@ bridge.setNavigationBar({
   color: '#ff0000',
   backgroundColor: '#1d33ee44',
   success(res) {
-    console.log(res);
+    console.log(res)
   },
-});
+})
 
 // 支持多个，自带监听效果，顺序从左到右，最多两个
 // id 为必选字段且唯一（大于0 整型）
@@ -145,23 +145,23 @@ bridge.addNavigationBarMenu({
         imgUrl:
           'http://img02.tooopen.com/images/20160509/tooopen_sy_161967094653.jpg',
         success(res2) {
-          console.log(res2);
+          console.log(res2)
         },
-      });
+      })
     }
-    console.log(res);
+    console.log(res)
   },
-});
+})
 
 // 同时也移除了监听事件
 bridge.removeNavigationBarMenu({
   ids: [1],
   success(res) {
-    console.log(res);
+    console.log(res)
   },
   fail() {},
   complete() {},
-});
+})
 
 // type 控制显示样式
 // 当存在 onlySelectChannel 时，只显示其设定的分享目标渠道
@@ -177,9 +177,7 @@ bridge.showShare({
     // 特定渠道定制数据，key 和分享渠道名一致
     title: '不一样的标题，覆盖通用分享数据',
   },
-  weixin_timeline: {
-
-  },
+  weixin_timeline: {},
   onlySelectChannel: [
     'weixin',
     'weixin_timeline',
@@ -189,7 +187,7 @@ bridge.showShare({
     'copy_link',
     'image',
   ],
-});
+})
 
 // bridge.setShareInfo({
 //   title: '',
@@ -203,81 +201,84 @@ bridge.showShare({
 // https://myjsapi.alipay.com/jsapi/native/start-share.html
 // 当用户选择该数组内指定的分享渠道时，仅返回渠道名，而不是真正开始自动分享
 // 通过 `onlySelectChannel` 屏蔽掉自动分享功能后，自行调用 `shareToChannel` 接口进行单独分享
-bridge.startShare({
-  onlySelectChannel: [
-    'Weibo',
-    'ALPContact',
-    'ALPTimeLine',
-    'SMS',
-    'Weixin',
-    'WeixinTimeLine',
-    'QQ',
-    'QQZone',
-    'DingDing',
-    // 'OpenInSafari',
-    'OpenInBrowser',
-    'Favorite',
-  ],
+bridge.startShare(
+  {
+    onlySelectChannel: [
+      'Weibo',
+      'ALPContact',
+      'ALPTimeLine',
+      'SMS',
+      'Weixin',
+      'WeixinTimeLine',
+      'QQ',
+      'QQZone',
+      'DingDing',
+      // 'OpenInSafari',
+      'OpenInBrowser',
+      'Favorite',
+    ],
 
-  channels: {
-    weibo: {},
-
+    channels: {
+      weibo: {},
+    },
+    // channels: [
+    //   {
+    //     name: 'Weibo',
+    //     param: shareData,
+    //   },
+    //   {
+    //     name: 'Weixin',
+    //     param: shareData,
+    //   },
+    //   {
+    //     name: 'CopyLink',
+    //     param: shareData,
+    //   },
+    //   {
+    //     name: 'ALPContact',
+    //     param: shareData,
+    //   },
+    // ],
   },
-  // channels: [
-  //   {
-  //     name: 'Weibo',
-  //     param: shareData,
-  //   },
-  //   {
-  //     name: 'Weixin',
-  //     param: shareData,
-  //   },
-  //   {
-  //     name: 'CopyLink',
-  //     param: shareData,
-  //   },
-  //   {
-  //     name: 'ALPContact',
-  //     param: shareData,
-  //   },
-  // ],
-}, data => {
-  console.log('当前用户点击的分享渠道名为：' + data.channelName);
+  (data) => {
+    console.log('当前用户点击的分享渠道名为：' + data.channelName)
 
-  bridge.shareToChannel({
-    name: data.channelName,
-    param: shareData,
-  })
-});
-
+    bridge.shareToChannel({
+      name: data.channelName,
+      param: shareData,
+    })
+  },
+)
 ```
 
 ```javascript
 // 用于创建桥接对象的函数
-function connectWebViewJavascriptBridge() {
+function connectWebViewJavascriptBridge() {
   // 如果桥接对象已存在，则直接调用callback函数
-  if (window.WebViewJavascriptBridge) {
+  if (window.WebViewJavascriptBridge) {
     // callback(window.WebViewJavascriptBridge);
-    onWebViewJavascriptBridgeReady();
+    onWebViewJavascriptBridgeReady()
   }
   // 否则添加一个监听器来执行callback函数
-  else {
-    document.addEventListener('WebViewJavascriptBridgeReady', function(event) {
-
-      // var bridge = event.bridge;  //这个其实就是 WebViewJavascriptBridge
-      // 这里的 bridge === window.WebViewJavascriptBridge
-      // Start using the bridge
-      // callback(window.WebViewJavascriptBridge);
-    }, false)
+  else {
+    document.addEventListener(
+      'WebViewJavascriptBridgeReady',
+      function (event) {
+        // var bridge = event.bridge;  //这个其实就是 WebViewJavascriptBridge
+        // 这里的 bridge === window.WebViewJavascriptBridge
+        // Start using the bridge
+        // callback(window.WebViewJavascriptBridge);
+      },
+      false,
+    )
   }
 }
 
-Bridge.ready(function(bridge) {
+Bridge.ready(function (bridge) {
   bridge.hideNavigationBar({
-    animation: true
-  });
-});
-
+    animation: true,
+  })
+})
 
 // window.webAttributes 这是什么鬼，有用么
 
@@ -291,17 +292,16 @@ Bridge.ready(function(bridge) {
 **/
 
 // 挂载后方法怎么调用，参数格式是什么样子的
-bridge.share = function(obj){
+bridge.share = function (obj) {
   // 参数obj是个对象，其属性值可以包含五种回调方法，这些方法不会传递到 Native 中，会做过滤
   // ['success', 'fail', 'cancel', 'complete', 'trigger']
   // 其他属性值，可作为 message 传递到 Native 中，
 }
 
 //如此来调用
-Bridge.ready(function(bridge){
+Bridge.ready(function (bridge) {
   bridge.method({
     //此中即上面的参数数据
   })
 })
-
 ```

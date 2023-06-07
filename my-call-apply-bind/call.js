@@ -34,4 +34,3 @@ Function.prototype.myCall = function (context) {
 
   return result
 }
-

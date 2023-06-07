@@ -2,7 +2,7 @@
 
 节流和防抖的区别
 
-都是N 秒内多次执行稀释成一次，节流 throttle 保留第一次，防抖 debounce 保留最后一次。
+都是 N 秒内多次执行稀释成一次，节流 throttle 保留第一次，防抖 debounce 保留最后一次。
 
 - 节流(throttle)：保留第一次。高频事件触发，但在 n 秒内只会执行一次，所以节流会稀释函数的执行频率
 - 防抖(debounce)：保留最后一次。触发高频事件后 n 秒内函数只会执行一次，如果 n 秒内高频事件再次被触发，则重新计算时间
@@ -35,13 +35,13 @@ const debounce = (fn, time = 1000) => {
 
 ```js
 const throttle = (fn, time = 1000) => {
-  let flag = true;
+  let flag = true
 
   return function (...args) {
     if (flag) {
-      flag = false;
+      flag = false
       setTimeout(() => {
-        flag = true;
+        flag = true
         fn(...args)
       }, time)
     }

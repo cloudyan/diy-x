@@ -1,7 +1,7 @@
 // 文档 https://prettier.io/docs/en/options.html
 module.exports = {
   printWidth: 80, // default 80
-  semi: true, // default true
+  semi: false, // default true
   singleQuote: true, // default false
   tabWidth: 2, // default 2
   trailingComma: 'all', // default es5
@@ -33,4 +33,4 @@ module.exports = {
       },
     },
   ],
-};
+}

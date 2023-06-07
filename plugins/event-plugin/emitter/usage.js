@@ -5,10 +5,9 @@ const emitter = new Emitter()
 // 按顺序
 emitter.on('some-event', function (arg1, arg2, arg3) {
   //
-});
+})
 
-emitter.emit('some-event', 'arg1 value', 'arg2 value', 'arg3 value');
-
+emitter.emit('some-event', 'arg1 value', 'arg2 value', 'arg3 value')
 
 // 例如小程序
 emitter.on('app.onError.before', (err) => {
@@ -19,14 +18,14 @@ emitter.on('app.onError.before', (err) => {
 // App(rewrite(options))
 
 function rewrite(options) {
-  Object.keys(options).forEach(key => {
-    const oldFn = options[key];
-    const t = 'app'; // app/page
-    const k = key;
-    emitter.emit(`${t}.${k}.before`, options, this);
-    const result = oldFn.call(this, options);
-    emitter.emit(`${t}.${k}.after`, options, this);
-    return result;
+  Object.keys(options).forEach((key) => {
+    const oldFn = options[key]
+    const t = 'app' // app/page
+    const k = key
+    emitter.emit(`${t}.${k}.before`, options, this)
+    const result = oldFn.call(this, options)
+    emitter.emit(`${t}.${k}.after`, options, this)
+    return result
   })
   return options
 }

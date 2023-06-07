@@ -1,6 +1,4 @@
-
 import { PluginVue } from './core'
-
 
 // 使用
 const tongji = new PluginVue({

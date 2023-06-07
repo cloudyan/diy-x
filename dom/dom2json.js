@@ -1,4 +1,3 @@
-
 // 实现 DOM2JSON 一个函数，可以把一个 DOM 节点输出 JSON 的格式
 
 const dom2json = (rootDom) => {
@@ -8,7 +7,7 @@ const dom2json = (rootDom) => {
 
   let rootObj = {
     tagName: rootDom.tagName,
-    children: []
+    children: [],
   }
 
   const children = rootDom.children
@@ -16,7 +15,7 @@ const dom2json = (rootDom) => {
   if (children && children.length) {
     Array.from(children).forEach((ele, i) => {
       // 递归处理
-      rootObj.children[ i ] = dom2json(ele)
+      rootObj.children[i] = dom2json(ele)
     })
   }
 

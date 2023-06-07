@@ -3,46 +3,43 @@ const betaCalc = {
   currentValue: 0,
 
   setValue(value) {
-    this.currentValue = value;
-    console.log(this.currentValue);
+    this.currentValue = value
+    console.log(this.currentValue)
   },
 
   core: {
-    'plus': (currentVal, addend) => currentVal + addend,
-    'minus': (currentVal, subtrahend) => currentVal - subtrahend
+    plus: (currentVal, addend) => currentVal + addend,
+    minus: (currentVal, subtrahend) => currentVal - subtrahend,
   },
 
   plugins: {},
 
   press(buttonName, newVal) {
-    const func = this.core[buttonName] || this.plugins[buttonName];
-    this.setValue(func(this.currentValue, newVal));
+    const func = this.core[buttonName] || this.plugins[buttonName]
+    this.setValue(func(this.currentValue, newVal))
   },
 
   register(plugin) {
-    const { name, exec } = plugin;
-    this.plugins[name] = exec;
-  }
-};
+    const { name, exec } = plugin
+    this.plugins[name] = exec
+  },
+}
 
 // 我们的插件
 const squaredPlugin = {
   name: 'squared',
-  exec: function(currentValue) {
-    return currentValue * currentValue;
-  }
-};
+  exec: function (currentValue) {
+    return currentValue * currentValue
+  },
+}
 
-
-betaCalc.register(squaredPlugin);
+betaCalc.register(squaredPlugin)
 
 // 使用计算器
-betaCalc.setValue(3);      // => 3
-betaCalc.press('plus', 2); // => 5
-betaCalc.press('squared'); // => 25
-betaCalc.press('squared'); // => 625
-
-
+betaCalc.setValue(3) // => 3
+betaCalc.press('plus', 2) // => 5
+betaCalc.press('squared') // => 25
+betaCalc.press('squared') // => 625
 
 // 优化点
 // 1. 把插件与计算器“核心”方法分开，做法是将其放入它自己的插件对象中。将我们的插件存储在一个 plugin 对象中可以使系统更加安全。现在此插件访问 this 时看不到 BetaCalc 的属性，只能得到 betaCalc.plugins 属性。

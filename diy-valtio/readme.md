@@ -3,7 +3,7 @@
 基本思路
 
 - 基于 Proxy
-- 通过 set 记录变更，比如 let version = 0; const foo = new Proxy({}, set() { version += 1; }) 然后 foo.bar = 1 就能记录了
+- 通过 set 记录变更，比如 `let version = 0; const foo = new Proxy({}, set() { version += 1; })` 然后 `foo.bar = 1` 就能记录了
 - 提供 snapshot 方法访问当前快照，version 有变时才生成新的
 - 提供 subscribe 方法，在 set 里执行注册的所有 listener
 - 通过 snapshot + subscribe 把 mutable state 连接到 react

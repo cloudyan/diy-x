@@ -25,4 +25,3 @@ Function.prototype.myApply = function (context) {
 
   return result
 }
-

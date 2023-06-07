@@ -1,4 +1,3 @@
-
 // 续 5.js, 到这里核心的 Promise 功能就完成了，但还缺少静态方法 resolve、reject
 // 这里添加静态方法 Promise.resolve, Promise.reject
 
@@ -10,7 +9,7 @@ class MyPromise {
   constructor(executor) {
     try {
       executor(this.resolve, this.reject)
-    } catch(err) {
+    } catch (err) {
       this.reject(err)
     }
   }
@@ -26,7 +25,7 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = FULFILLED
       this.value = value
-      while(this.onFulfilledCallback.length) {
+      while (this.onFulfilledCallback.length) {
         this.onFulfilledCallback.shift()(value)
       }
     }
@@ -35,7 +34,7 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = REJECTED
       this.reason = reason
-      while(this.onRejectedCallback.length) {
+      while (this.onRejectedCallback.length) {
         this.onRejectedCallback.shift()(reason)
       }
     }
@@ -43,9 +42,15 @@ class MyPromise {
 
   then(onFulfilled, onRejected) {
     // 解决 onFufilled，onRejected 没有传值的问题
-    const onFulfilled1 = typeof onFulfilled === 'function' ? onFulfilled : (value) => value
+    const onFulfilled1 =
+      typeof onFulfilled === 'function' ? onFulfilled : (value) => value
     // 因为错误的值要让后面访问到，所以这里也要抛出错误，不然会在之后 then 的 resolve 中捕获
-    const onRejected1 = typeof onRejected === 'function' ? onRejected : (reason) => {throw reason}
+    const onRejected1 =
+      typeof onRejected === 'function'
+        ? onRejected
+        : (reason) => {
+            throw reason
+          }
 
     const promise2 = new MyPromise((resolve, reject) => {
       const onResolve = () => {
@@ -53,7 +58,7 @@ class MyPromise {
           try {
             const x = onFulfilled1(this.value)
             resolvePromise(promise2, x, resolve, reject)
-          } catch(err) {
+          } catch (err) {
             reject(err)
           }
         })
@@ -63,7 +68,7 @@ class MyPromise {
           try {
             const x = onRejected1(this.reason)
             resolvePromise(promise2, x, resolve, reject)
-          } catch(err) {
+          } catch (err) {
             reject(err)
           }
         })
@@ -88,7 +93,7 @@ class MyPromise {
       return parameter
     }
     // 转为 promise
-    return new MyPromise(resolve => {
+    return new MyPromise((resolve) => {
       resolve(parameter)
     })
   }
@@ -102,7 +107,9 @@ class MyPromise {
 
 function resolvePromise(p, x, resolve, reject) {
   if (p === x) {
-    return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
+    return reject(
+      new TypeError('Chaining cycle detected for promise #<Promise>'),
+    )
   }
 
   // 此处不符合 2.3.3 规范
@@ -143,7 +150,6 @@ function resolvePromise(p, x, resolve, reject) {
 //   console.log(err);
 // })
 
-
 // 接下来我们就可以跑下 Promise A+ 单元测试了
 //   npm i promises-aplus-tests -D
 //   promises-aplus-tests MyPromise
@@ -152,16 +158,16 @@ function resolvePromise(p, x, resolve, reject) {
 
 // 单测需要附加以下代码
 MyPromise.deferred = function () {
-  var result = {};
+  var result = {}
   result.promise = new MyPromise(function (resolve, reject) {
-    result.resolve = resolve;
-    result.reject = reject;
-  });
+    result.resolve = resolve
+    result.reject = reject
+  })
 
-  return result;
+  return result
 }
 
-module.exports = MyPromise;
+module.exports = MyPromise
 
 /*
 

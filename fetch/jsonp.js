@@ -5,11 +5,13 @@ import axios from 'axios'
 
 axios.jsonp = jsonp
 const stringify = (params) => {
-  const res = [];
+  const res = []
   for (let key in params) {
     if (params.hasOwnProperty(key)) {
       if (typeof params[key] !== 'undefined') {
-        res.push(`${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
+        res.push(
+          `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`,
+        )
       }
     }
   }
@@ -17,7 +19,7 @@ const stringify = (params) => {
 }
 
 // simple
-function jsonp({url, params, callbackName}) {
+function jsonp({ url, params, callbackName }) {
   if (!url) {
     console.error('请输入 url')
     return
@@ -29,23 +31,26 @@ function jsonp({url, params, callbackName}) {
     jsNode.src = `${url}?${stringify(params)}&callback=${callbackName}`
 
     // 触发callback，触发后删除js标签和绑定在window上的callback
-    window[callbackName] = data => {
+    window[callbackName] = (data) => {
       delete window[callbackName]
       document.body.removeChild(jsNode)
       resolve(data)
     }
     // js 加载异常的情况
-    jsNode.addEventListener('error', () => {
-      delete window[callbackName]
-      document.body.removeChild(jsNode)
-      reject('JavaScript 资源加载失败')
-    }, false)
+    jsNode.addEventListener(
+      'error',
+      () => {
+        delete window[callbackName]
+        document.body.removeChild(jsNode)
+        reject('JavaScript 资源加载失败')
+      },
+      false,
+    )
 
     // 添加 js 节点，开始请求
     document.body.appendChild(jsNode)
   })
 }
-
 
 // example
 
@@ -76,7 +81,7 @@ function geoToCode(pos) {
     s: 1,
   }
   const url = 'https://api.map.baidu.com/geocoder/v2/'
-  return jsonp(url + '?' + stringify(params)).then(res => {
+  return jsonp(url + '?' + stringify(params)).then((res) => {
     console.log(JSON.stringify(res, null, 2))
     // const { result } = res
     // const {

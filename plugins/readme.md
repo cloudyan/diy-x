@@ -50,13 +50,13 @@
 - 稳定性：插件隔离
 - 性能：插件激活，插件都是懒加载的，实现上是插件注册特定激活事件
 
-看一下 chrome和vscode的插件机制，总结一下一个健壮的插件系统应该具备的几点核心特性：
+看一下 chrome 和 vscode 的插件机制，总结一下一个健壮的插件系统应该具备的几点核心特性：
 
 1. 控制插件的加载
 2. 对插件暴露合适范围的上下文，并对不同场景的上下文做隔离
 3. 有一套可插拔的消息通信机制，订阅&监听
 
-直接实现一个VS Code或者Chrome有点困难，所以本文以实现一个简单的CLI插件系统为例，讲解如何实现一个简单的插件系统。
+直接实现一个 VS Code 或者 Chrome 有点困难，所以本文以实现一个简单的 CLI 插件系统为例，讲解如何实现一个简单的插件系统。
 
 其他：
 
@@ -66,11 +66,11 @@
   - 译文[怎样设计一个 JavaScript 插件系统](https://segmentfault.com/a/1190000030697262)
 - [【第 1 期】插件系统的设计](https://zhuanlan.zhihu.com/p/106183037)
 - [插件化思维](https://github.com/ascoders/weekly/blob/master/%E5%89%8D%E6%B2%BF%E6%8A%80%E6%9C%AF/53.%E7%B2%BE%E8%AF%BB%E3%80%8A%E6%8F%92%E4%BB%B6%E5%8C%96%E6%80%9D%E7%BB%B4%E3%80%8B.md)
-- [从0到1编写插件系统](https://www.zhihu.com/column/c_1255589339138379776)
+- [从 0 到 1 编写插件系统](https://www.zhihu.com/column/c_1255589339138379776)
 - [大型 Web 应用插件化架构探索](https://zhuanlan.zhihu.com/p/357724347)
 - [插件式可扩展架构设计心得](https://zhuanlan.zhihu.com/p/372381276)
 - [库、插件、组件、控件、扩展](https://www.zhihu.com/question/49536781/answer/117606933)
-- [插件化js开发](https://blog.csdn.net/wocaonima123987/article/details/8501813)
+- [插件化 js 开发](https://blog.csdn.net/wocaonima123987/article/details/8501813)
 - [微内核架构模式](https://everfind.github.io/courses/software-architecture/microkernel-architecture.html#%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E)
 - [微内核架构模式在前端的实践与原则](https://zhuanlan.zhihu.com/p/443982576)
 
@@ -83,5 +83,4 @@
 
 - **主系统** 使用插件管理器加载插件、创建插件对象，之后的插件对象可以像常规对象一样创建了。
 - **插件管理器** 负责插件的加载、初始化、卸载并暴露到主系统中，也提供所有注册对象的获取、迭代以及获取对象的注册信息等。
-- **插件** 根据插件系统的规范实现各种接口类（这个规范包括类继承、类注册、DLL初始化等）
-
+- **插件** 根据插件系统的规范实现各种接口类（这个规范包括类继承、类注册、DLL 初始化等）

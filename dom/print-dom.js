@@ -32,20 +32,20 @@
  * @param root DOM 树的根节点
  */
 function printDomTreeByLevelOrder(root) {
-  let nodeArr = [root];
-  function fn(nodeArr){
-    while(nodeArr.length > 0){
-      const node = nodeArr.shift(nodeArr);
-      console.log(node.tagName + (node.id ? `#${node.id}`: ''));
+  let nodeArr = [root]
+  function fn(nodeArr) {
+    while (nodeArr.length > 0) {
+      const node = nodeArr.shift(nodeArr)
+      console.log(node.tagName + (node.id ? `#${node.id}` : ''))
       for (const child of node.children) {
-        nodeArr.push(child);
+        nodeArr.push(child)
       }
     }
   }
-  fn(nodeArr);
+  fn(nodeArr)
 }
 
-const node = document.createElement('div');
+const node = document.createElement('div')
 node.innerHTML = `
   <div id="d1">
     <div id="d4"></div>
@@ -61,7 +61,7 @@ node.innerHTML = `
   <div id="d3">
     <div id="d7"></div>
   </div>
-`;
+`
 
 printDomTreeByLevelOrder(node)
 

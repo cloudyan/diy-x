@@ -6,7 +6,8 @@ import PluginResError from './plugin-res-error'
 const core = new PluginCore({
   type: '',
 })
-core.use(PluginJsError, { js_err_report: true })
-    .use(PluginResError, { js_res_report: false })
+core
+  .use(PluginJsError, { js_err_report: true })
+  .use(PluginResError, { js_res_report: false })
 
 console.log(core)

@@ -1,4 +1,3 @@
-
 /*!
  * @Author: a791446794@163.com
  * @Created at: 2020-05-15 11:21:28
@@ -8,19 +7,19 @@
  */
 
 function num2letter(num) {
-  let slice = '';
+  let slice = ''
   do {
-    slice = String.fromCharCode(65 + (num % 26)) + slice;
-    num = Math.floor(num / 26);
-  } while (num > 0);
+    slice = String.fromCharCode(65 + (num % 26)) + slice
+    num = Math.floor(num / 26)
+  } while (num > 0)
 
-  return slice;
+  return slice
 }
 
 // test
-let i = 0;
+let i = 0
 while (i < 27) {
-  console.log(num2letter(i++));
+  console.log(num2letter(i++))
 }
 
 // getExt("1.mp4") //->mp4

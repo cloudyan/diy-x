@@ -1,4 +1,3 @@
-
 // 续 3.js，这里处理一下错误类型处理，以及异常捕获（执行器异常，then 执行异常）
 // 先手写 3.js 流程，后补充错误处理
 
@@ -11,23 +10,23 @@ class MyPromise {
     // 处理执行器异常捕获
     try {
       executor(this.resolve, this.reject)
-    } catch(err) {
+    } catch (err) {
       this.reject(err)
     }
   }
 
-  status = PENDING;
-  value = null;
-  reason = null;
+  status = PENDING
+  value = null
+  reason = null
 
-  onFulfilledCallback = [];
-  onRejectedCallback = [];
+  onFulfilledCallback = []
+  onRejectedCallback = []
 
   resolve = (value) => {
     if (this.status === PENDING) {
       this.status = FULFILLED
       this.value = value
-      while(this.onFulfilledCallback.length) {
+      while (this.onFulfilledCallback.length) {
         this.onFulfilledCallback.shift()(value)
       }
     }
@@ -36,7 +35,7 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = REJECTED
       this.reason = reason
-      while(this.onRejectedCallback.length) {
+      while (this.onRejectedCallback.length) {
         this.onRejectedCallback.shift()(reason)
       }
     }
@@ -50,7 +49,7 @@ class MyPromise {
           try {
             const x = onFulfilled(this.value)
             resolvePromise(promise, x, resolve, reject)
-          } catch(err) {
+          } catch (err) {
             reject(err)
           }
         })
@@ -67,7 +66,9 @@ class MyPromise {
 
 function resolvePromise(promise, x, resolve, reject) {
   if (promise === x) {
-    return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
+    return reject(
+      new TypeError('Chaining cycle detected for promise #<Promise>'),
+    )
   }
   if (x instanceof MyPromise) {
     x.then(resolve, reject)
@@ -100,7 +101,6 @@ function resolvePromise(promise, x, resolve, reject) {
 // }).then((res) => {
 //   console.log('then3', res)
 // })
-
 
 // 处理错误
 
@@ -136,7 +136,6 @@ function resolvePromise(promise, x, resolve, reject) {
 //   console.log('p2-2 err', err.message)
 // })
 
-
 // 3. then 链式调用自身，导致循环调用问题
 // 如果 then 方法返回的是自己的 Promise 对象，则会发生循环调用，这个时候程序会报错
 // 原生 Promise 会报类型错误
@@ -168,15 +167,17 @@ const promise = new MyPromise((resolve, reject) => {
 // ReferenceError: Cannot access 'p32' before initialization
 // 处理这个错误，需要创建一个异步函数去等待 其(p32) 完成初始化(可通过 queueMicrotask 实现)
 const p32 = promise.then((res) => {
-  console.log('2', res);
+  console.log('2', res)
   return p32
 })
-p32.then(res => {
-  console.log('res', res)
-}, err => {
-  console.log('err', err)
-})
-
+p32.then(
+  (res) => {
+    console.log('res', res)
+  },
+  (err) => {
+    console.log('err', err)
+  },
+)
 
 // 以上三个异常情况处理后，我们 fulfilled 分支下的流程算是处理，接下来还要把 rejected 和 pending 条件分支的逻辑都处理掉
 // 参见 5.js

@@ -4,12 +4,12 @@ TODO 柯里化的优缺点与使用场景
 
 ```js
 /*
-* 编写函数sum
-* sum(1)(2).count() // 3
-* sum(1)(2)(3).count() // 6
-*/
+ * 编写函数sum
+ * sum(1)(2).count() // 3
+ * sum(1)(2)(3).count() // 6
+ */
 
-function sum () {
+function sum() {
   let args = [...arguments]
   let add = function () {
     args.push(...arguments)
@@ -18,8 +18,8 @@ function sum () {
   add.count = function () {
     return args.reduce((acc, cur) => acc + cur)
   }
-    return add
+  return add
 }
-console.log(sum(1)(2).count()); // 3
-console.log(sum(1)(2)(3).count()); // 6
+console.log(sum(1)(2).count()) // 3
+console.log(sum(1)(2)(3).count()) // 6
 ```

@@ -10,15 +10,17 @@ function getRandom(min, max) {
 
 // testing
 const times = {}
-const result = Array(1000).fill(null).map(() => {
-  const num = getRandom(0, 9)
-  if (!times[num]) {
-    times[num] = 1
-  } else {
-    times[num]++
-  }
-  return getRandom(0, 9)
-})
+const result = Array(1000)
+  .fill(null)
+  .map(() => {
+    const num = getRandom(0, 9)
+    if (!times[num]) {
+      times[num] = 1
+    } else {
+      times[num]++
+    }
+    return getRandom(0, 9)
+  })
 // console.log(result)
 console.log(times)
 

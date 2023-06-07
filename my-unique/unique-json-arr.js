@@ -1,4 +1,3 @@
-
 // JSON 对象数组去重(只做第一层级)
 // 1. 遍历
 // 2. 转为 JSON 字符串(需要先按 key 排序)
@@ -19,7 +18,6 @@ function uniqueJsonArr(arr) {
   return result
 }
 
-
 // testing
 const jsonArr = [
   { name: 'red', age: 25 },
@@ -30,7 +28,6 @@ const jsonArr = [
   { name: 'blue', age: 28, phone: '123' },
 ]
 console.log(uniqueJsonArr(jsonArr))
-
 
 // 对象按 key 排序
 function sortObj(obj) {

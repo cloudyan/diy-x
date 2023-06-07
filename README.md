@@ -84,7 +84,7 @@ diy-x && toy-x 并无特别大的区别，不用在意
   - [x] 递归方式
   - [x] 尾递归优化方式
   - [ ] 缓存优化
-- [ ] 实现一个函数sum函数满足以下规律 `sum(2, 3)(2).valueOf() = 7`
+- [ ] 实现一个函数 sum 函数满足以下规律 `sum(2, 3)(2).valueOf() = 7`
 - [ ] 腾讯：实现一个大数加法的函数
 - [ ] 实现 `task.log(1).log(2).wait(1000)`
 
@@ -104,7 +104,6 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [ ] [手写 IOC](https://mp.weixin.qq.com/s/GXv7JwBbJ0b_AUMvZ8C1QQ)
 - [ ] [mini-vue3](https://juejin.cn/post/6911897255087702030)
 
-
 ## x-xxx
 
 一些问题的解决方案
@@ -121,7 +120,6 @@ diy-x && toy-x 并无特别大的区别，不用在意
 - [ ] 实现大文件的分包下载
 - @deepjs/uni-script
 - 逆向 sourceMap
-
 
 - HTTP2 头部压缩的原理是什么
 - 什么是 DSL

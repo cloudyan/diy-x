@@ -5,30 +5,32 @@
 // 目前小程序貌似没有并发限制，如果发现请求相关问题的话，使用此方案处理
 const checkConcurrency = (concurrency = 1) => {
   if (concurrency === null) {
-    concurrency = 1;
+    concurrency = 1
   } else if (concurrency === 0) {
-    throw new Error('Concurrency must not be zero');
+    throw new Error('Concurrency must not be zero')
   }
-  return concurrency;
-};
+  return concurrency
+}
 
-const onlyOnce = fn => (...args) => {
-  /* eslint eqeqeq: 0 */
-  if (fn == null) {
-    throw new Error('Callback was already called');
+const onlyOnce =
+  (fn) =>
+  (...args) => {
+    /* eslint eqeqeq: 0 */
+    if (fn == null) {
+      throw new Error('Callback was already called')
+    }
+    const callFn = fn
+    fn = null
+    return callFn(...args)
   }
-  const callFn = fn;
-  fn = null;
-  return callFn(...args);
-};
 
 function queue(callback, concurrency) {
-  checkConcurrency(concurrency);
+  checkConcurrency(concurrency)
 
   // 待处理的队列
-  const workers = [];
+  const workers = []
   // 正在处理的队列
-  const workerList = [];
+  const workerList = []
 
   return {
     concurrency,
@@ -36,54 +38,54 @@ function queue(callback, concurrency) {
       workers.push({
         task,
         cb,
-      });
+      })
       setTimeout(() => {
-        this.process();
-      }, 0);
+        this.process()
+      }, 0)
     },
     process() {
       while (this.concurrency > workerList.length && workers.length) {
-        const worker = workers.shift();
-        workerList.push(worker);
+        const worker = workers.shift()
+        workerList.push(worker)
         callback(
           worker.task,
           onlyOnce((...args) => {
-            this.pull(worker);
+            this.pull(worker)
             if (typeof worker.callback === 'function') {
-              worker.callback(...args);
+              worker.callback(...args)
             }
-            this.process();
+            this.process()
           }),
-        );
+        )
       }
     },
     pull(worker) {
-      const index = workerList.indexOf(worker);
+      const index = workerList.indexOf(worker)
       if (index !== -1) {
-        workerList.splice(index, 1);
+        workerList.splice(index, 1)
       }
     },
-  };
+  }
 }
 
 function queueWorker(fn, concurrency = 10) {
   if (typeof fn !== 'function') {
-    throw Error('fn must be function');
+    throw Error('fn must be function')
   }
-  const work = queue((task, callback) => task(callback), concurrency);
+  const work = queue((task, callback) => task(callback), concurrency)
 
-  return obj => {
-    work.push(callback => {
-      const originComplete = obj.complete;
+  return (obj) => {
+    work.push((callback) => {
+      const originComplete = obj.complete
       obj.complete = (...args) => {
-        callback();
+        callback()
         if (typeof originComplete === 'function') {
-          originComplete(...args);
+          originComplete(...args)
         }
-      };
-      fn(obj);
-    });
-  };
+      }
+      fn(obj)
+    })
+  }
 }
 
 // function queueRequest(concurrency) {
@@ -98,4 +100,4 @@ function queueWorker(fn, concurrency = 10) {
 
 // exports.queueWorker = queueWorker;
 // exports.queueRequest = queueRequest;
-export default queueWorker;
+export default queueWorker

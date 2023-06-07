@@ -12,7 +12,7 @@ console.log(arr.flat(Infinity))
 
 ```js
 // 没控制深度，相当于 Infinity
-const myFlat = function flat(arr){
+const myFlat = function flat(arr) {
   return arr.reduce((prev, cur) => {
     return prev.concat(Array.isArray(cur) ? flat(cur) : cur)
   }, [])
@@ -21,7 +21,7 @@ const myFlat = function flat(arr){
 let arr = [1, 2, [3, 4, [5, [6]]]]
 console.log(myFlat(arr, Infinity))
 
-console.log([1,2].concat(3, [4, 5]))
+console.log([1, 2].concat(3, [4, 5]))
 ```
 
 `concat(valueN)` 方法用于合并两个或多个数组。此方法不会更改现有数组，而是返回一个新数组。

@@ -5,14 +5,8 @@
   "description": "亲手实现 xxx",
   "main": "index.js",
   "scripts": {
-    "lint": "npm run lint:js",
-    "lint:js": "cross-env TIMING=1 eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./",
-    "lint:css": "stylelint '**/*.less' --syntax less",
-    "lint:prettier": "prettier --check '**/*'",
-    "lint:fix": "npm run lint:js:fix && npm run lint:css:fix && npm run lint:prettier:fix",
-    "lint:js:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./",
-    "lint:css:fix": "stylelint --fix '**/*.less' --syntax less",
-    "lint:prettier:fix": "prettier -c --write '**/*.{js,jsx,ts,tsx,less,md,json}' && git diff && prettier --version",
+    "prettier": "prettier --check '**/*'",
+    "prettier:fix": "prettier -c --write '**/*.{js,jsx,ts,tsx,less,md,json}' && git diff && prettier --version",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,6 +21,6 @@
   },
   "homepage": "https://github.com/cloudyan/diy-x#readme",
   "devDependencies": {
-    "@deepjs/lint": "0.0.16"
+    "prettier": "^2.8.8"
   }
 }

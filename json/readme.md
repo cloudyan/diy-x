@@ -1,10 +1,10 @@
 # JSON
 
-**JSON** 对象包含两个方法: 用于解析 JavaScript Object Notation  (JSON) 的 `parse()` 方法，以及将对象/值转换为 JSON字符串的 `stringify()` 方法。除了这两个方法, JSON这个对象本身并没有其他作用，也不能被调用或者作为构造函数调用。
+**JSON** 对象包含两个方法: 用于解析 JavaScript Object Notation (JSON) 的 `parse()` 方法，以及将对象/值转换为 JSON 字符串的 `stringify()` 方法。除了这两个方法, JSON 这个对象本身并没有其他作用，也不能被调用或者作为构造函数调用。
 
-**JSON** 是一种语法，用来序列化对象、数组、数值、字符串、布尔值和 `null` 。它基于 JavaScript 语法，但与之不同：**JavaScript不是JSON，JSON也不是JavaScript**。
+**JSON** 是一种语法，用来序列化对象、数组、数值、字符串、布尔值和 `null` 。它基于 JavaScript 语法，但与之不同：**JavaScript 不是 JSON，JSON 也不是 JavaScript**。
 
-JSON：并不是JavaScript 的子集。[JavaScript 与 JSON 的区别](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON#description)
+JSON：并不是 JavaScript 的子集。[JavaScript 与 JSON 的区别](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/JSON#description)
 
 详细参见
 
@@ -14,7 +14,7 @@ JSON：并不是JavaScript 的子集。[JavaScript 与 JSON 的区别](https://d
 
 ## `JSON.stringify(value[, replacer [, space]])`
 
-`JSON.stringify` 是浏览器高版本带的一个将 JS 的 Object 对象转换为**JSON字符串**的一个方法
+`JSON.stringify` 是浏览器高版本带的一个将 JS 的 Object 对象转换为**JSON 字符串**的一个方法
 
 该方法将一个 `JavaScript` 对象或值转换为 `JSON` 字符串，如果指定了一个 `replacer` 函数，则可以选择性地替换值，或者指定的 `replacer` 是数组，则可选择性地仅包含数组指定的属性。
 
@@ -42,26 +42,26 @@ const noop = () => {}
 const obj = {
   null: null,
   undefined: undefined, // 忽略, 在数组中会转为 null
-  symbol: Symbol(),     // 忽略, 在数组中会转为 null
-  fn_1: noop,           // 忽略, 在数组中会转为 null
-  nan: NaN,             // 转为 null
-  regexp: /abc/,        // 转为 '{}' 字符串
+  symbol: Symbol(), // 忽略, 在数组中会转为 null
+  fn_1: noop, // 忽略, 在数组中会转为 null
+  nan: NaN, // 转为 null
+  regexp: /abc/, // 转为 '{}' 字符串
   num_1: 0,
-  num_2: -0,            // 转为 0
-  num_3: Infinity,      // 转为 null
-  num_4: -Infinity,     // 转为 null
+  num_2: -0, // 转为 0
+  num_3: Infinity, // 转为 null
+  num_4: -Infinity, // 转为 null
   date: new Date('2022-02-17T08:53:59.659Z'), // 转为字符串 2022-02-17T08:53:59.659Z
   bool_1: true,
   bool_2: false,
   // 值在数组中
   arr_1: [NaN, 0, -0, Infinity, new Date('2022-02-17T08:53:59.659Z')],
-  arr_2: [undefined, Symbol(), noop],   // 作为属性会忽略，在数组中会转为 null
+  arr_2: [undefined, Symbol(), noop], // 作为属性会忽略，在数组中会转为 null
 }
 
 // key 为 Symbol 也会忽略
 
-console.log(JSON.stringify(noop))         // 函数       单独转换时，会返回 undefined
-console.log(JSON.stringify(undefined))    // undefined 单独转换时，会返回 undefined
+console.log(JSON.stringify(noop)) // 函数       单独转换时，会返回 undefined
+console.log(JSON.stringify(undefined)) // undefined 单独转换时，会返回 undefined
 console.log(JSON.stringify(obj, null, 2))
 ```
 
@@ -97,7 +97,7 @@ console.log(JSON.parse(jsonStr))
 
 参考
 
-- 深拷贝系列 ———— [自己实现一个JSON.stringify和JSON.parse](https://juejin.cn/post/6844904001801027592)
+- 深拷贝系列 ———— [自己实现一个 JSON.stringify 和 JSON.parse](https://juejin.cn/post/6844904001801027592)
 - [实现一个 JSON.stringify](https://github.com/YvetteLau/Step-By-Step/issues/39#issuecomment-508327280)
 - [JSON 之父 Douglas Crockford 写的 ployfill](https://github.com/douglascrockford/JSON-js)，里面提供了三种实现方式
   - 推荐：上文解析 [JSON.parse 三种实现方式](https://juejin.cn/post/6844903568919527432)

@@ -1,4 +1,3 @@
-
 // 现在 7.js 所有单测都通过了，但是还缺少一些方法
 // catch
 // finally ES2018
@@ -16,7 +15,7 @@ class MyPromise {
   constructor(executor) {
     try {
       executor(this.resolve, this.reject)
-    } catch(err) {
+    } catch (err) {
       this.reject(err)
     }
   }
@@ -32,7 +31,7 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = FULFILLED
       this.value = value
-      while(this.onFulfilledCallback.length) {
+      while (this.onFulfilledCallback.length) {
         this.onFulfilledCallback.shift()(value)
       }
     }
@@ -41,15 +40,21 @@ class MyPromise {
     if (this.status === PENDING) {
       this.status = REJECTED
       this.reason = reason
-      while(this.onRejectedCallback.length) {
+      while (this.onRejectedCallback.length) {
         this.onRejectedCallback.shift()(reason)
       }
     }
   }
 
   then(onFulfilled, onRejected) {
-    const onFulfilled1 = typeof onFulfilled === 'function' ? onFulfilled : (value) => value
-    const onRejected1 = typeof onRejected === 'function' ? onRejected : (reason) => {throw reason}
+    const onFulfilled1 =
+      typeof onFulfilled === 'function' ? onFulfilled : (value) => value
+    const onRejected1 =
+      typeof onRejected === 'function'
+        ? onRejected
+        : (reason) => {
+            throw reason
+          }
 
     const promise2 = new MyPromise((resolve, reject) => {
       const onResolve = () => {
@@ -57,7 +62,7 @@ class MyPromise {
           try {
             const x = onFulfilled1(this.value)
             resolvePromise(promise2, x, resolve, reject)
-          } catch(err) {
+          } catch (err) {
             reject(err)
           }
         })
@@ -67,7 +72,7 @@ class MyPromise {
           try {
             const x = onRejected1(this.reason)
             resolvePromise(promise2, x, resolve, reject)
-          } catch(err) {
+          } catch (err) {
             reject(err)
           }
         })
@@ -90,18 +95,23 @@ class MyPromise {
   }
   // ES2018
   finally(fn) {
-    return this.then(value => {
-      return MyPromise.resolve(fn()).then(() => value)
-    }, err => {
-      return MyPromise.resolve(fn()).then(() => { throw err })
-    })
+    return this.then(
+      (value) => {
+        return MyPromise.resolve(fn()).then(() => value)
+      },
+      (err) => {
+        return MyPromise.resolve(fn()).then(() => {
+          throw err
+        })
+      },
+    )
   }
 
   static resolve(parameter) {
     if (parameter instanceof MyPromise) {
       return parameter
     }
-    return new MyPromise(resolve => {
+    return new MyPromise((resolve) => {
       resolve(parameter)
     })
   }
@@ -118,22 +128,25 @@ class MyPromise {
     return new MyPromise((resolve, reject) => {
       const result = []
       const length = promiseList.length
-      let count = 0;
+      let count = 0
 
       if (length === 0) {
         return resolve(result)
       }
 
       promiseList.forEach((promise, index) => {
-        MyPromise.resolve(promise).then(value => {
-          count++
-          result[index] = value
-          if (count === length) {
-            resolve[result]
-          }
-        }, reason => {
-          reject(reason)
-        })
+        MyPromise.resolve(promise).then(
+          (value) => {
+            count++
+            result[index] = value
+            if (count === length) {
+              resolve[result]
+            }
+          },
+          (reason) => {
+            reject(reason)
+          },
+        )
       })
     })
   }
@@ -149,11 +162,14 @@ class MyPromise {
         // return resolve()
       }
       for (let i = 0; i < length; i++) {
-        MyPromise.resolve(promiseList[i]).then(value => {
-          return resolve(value)
-        }, reason => {
-          return reject(reason)
-        })
+        MyPromise.resolve(promiseList[i]).then(
+          (value) => {
+            return resolve(value)
+          },
+          (reason) => {
+            return reject(reason)
+          },
+        )
       }
     })
   }
@@ -162,7 +178,7 @@ class MyPromise {
     return new MyPromise((resolve, reject) => {
       const result = []
       const length = promiseList.length
-      let count = 0;
+      let count = 0
 
       if (length === 0) {
         return resolve(result)
@@ -170,21 +186,24 @@ class MyPromise {
 
       for (let i = 0; i < length; i++) {
         const currentPromise = MyPromise.resolve(promiseList[i])
-        currentPromise.then(value => {
-          count++
-          result[i] = {
-            status: FULFILLED,
-            value,
-          }
-          if (count === length) return resolve(result)
-        }, reason => {
-          count++
-          result[i] = {
-            status: REJECTED,
-            value,
-          }
-          if (count === length) return resolve(result)
-        })
+        currentPromise.then(
+          (value) => {
+            count++
+            result[i] = {
+              status: FULFILLED,
+              value,
+            }
+            if (count === length) return resolve(result)
+          },
+          (reason) => {
+            count++
+            result[i] = {
+              status: REJECTED,
+              value,
+            }
+            if (count === length) return resolve(result)
+          },
+        )
       }
     })
   }
@@ -221,10 +240,8 @@ class MyPromise {
 
       for (let promiseLike of promiseLikes) {
         if (promiseLike.then !== undefined || promiseLike.catch !== undefined) {
-          promiseLike
-            .then(result => resolveOnce(result))
-            .catch(err => {})
-          promiseLike.catch(reason => rejectionCheck(reason))
+          promiseLike.then((result) => resolveOnce(result)).catch((err) => {})
+          promiseLike.catch((reason) => rejectionCheck(reason))
         } else {
           resolveOnce(promiseLike)
         }
@@ -235,8 +252,8 @@ class MyPromise {
   // https://es6.ruanyifeng.com/#docs/promise#Promise-try
   // https://github.com/tc39/proposal-promise-try/blob/main/polyfill.js
   static try(func) {
-    return new MyPromise((resolve, reject) {
-      resolve(func());
+    return new MyPromise((resolve, reject) => {
+      resolve(func())
     })
   }
 
@@ -247,7 +264,9 @@ class MyPromise {
 
 function resolvePromise(p, x, resolve, reject) {
   if (p === x) {
-    return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
+    return reject(
+      new TypeError('Chaining cycle detected for promise #<Promise>'),
+    )
   }
 
   // 按规范 2.3.3 ~ 2.3.4 对以下逻辑进行处理
@@ -257,7 +276,7 @@ function resolvePromise(p, x, resolve, reject) {
     let then
     try {
       then = x.then
-    } catch(err) {
+    } catch (err) {
       return reject(err)
     }
 
@@ -266,18 +285,18 @@ function resolvePromise(p, x, resolve, reject) {
       try {
         then.call(
           x,
-          y => {
+          (y) => {
             if (called) return
             called = true
             resolvePromise(p, y, resolve, reject)
           },
-          r => {
+          (r) => {
             if (called) return
             called = true
             reject(r)
-          }
+          },
         )
-      } catch(err) {
+      } catch (err) {
         if (called) return
         reject(err)
       }
@@ -291,13 +310,13 @@ function resolvePromise(p, x, resolve, reject) {
 
 // 单测需要附加以下代码
 MyPromise.deferred = function () {
-  var result = {};
+  var result = {}
   result.promise = new MyPromise(function (resolve, reject) {
-    result.resolve = resolve;
-    result.reject = reject;
-  });
+    result.resolve = resolve
+    result.reject = reject
+  })
 
-  return result;
+  return result
 }
 
-module.exports = MyPromise;
+module.exports = MyPromise

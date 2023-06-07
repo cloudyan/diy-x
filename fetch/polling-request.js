@@ -1,11 +1,10 @@
-
 function pollingRequest(promiseAjax, interval) {
   const cacheQueue = []
   let polling = true
-  let timerId;
+  let timerId
   let times = 1
   function abortRequest() {
-    cacheQueue.forEach(item => {
+    cacheQueue.forEach((item) => {
       if (typeof item.abort === 'function') {
         item.abort()
       }
@@ -13,7 +12,7 @@ function pollingRequest(promiseAjax, interval) {
   }
   function creatRequest(resolve, reject) {
     const requestId = promiseAjax().then(
-      res => {
+      (res) => {
         if (polling) {
           polling = false
           resolve(res)
@@ -21,7 +20,7 @@ function pollingRequest(promiseAjax, interval) {
         clearInterval(timerId)
         abortRequest()
       },
-      err => {
+      (err) => {
         console.log(err)
       },
     )
@@ -38,29 +37,29 @@ function pollingRequest(promiseAjax, interval) {
 }
 
 function randomRange(under, over) {
-  switch(arguments.length) {
-    case 1: return parseInt(Math.random()*under+1, 10);
-    case 2: return parseInt(Math.random()*(over-under+1) + under, 10);
-    default: return 0;
+  switch (arguments.length) {
+    case 1:
+      return parseInt(Math.random() * under + 1, 10)
+    case 2:
+      return parseInt(Math.random() * (over - under + 1) + under, 10)
+    default:
+      return 0
   }
 }
 
 function mockFetch() {
-  const delay = randomRange(1, 9);
+  const delay = randomRange(1, 9)
   console.log('send request')
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({ data: 'success' })
-    }, delay*1000)
+    }, delay * 1000)
   })
 }
 
 pollingRequest(mockFetch, 1000).then(
-  res => {
+  (res) => {
     console.log(res)
   },
-  err => {
-
-  },
+  (err) => {},
 )
-

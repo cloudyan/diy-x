@@ -1,4 +1,3 @@
-
 // 复制内容到剪贴板
 export function copy2board(value) {
   const element = document.createElement('textarea')
@@ -16,7 +15,6 @@ export function copy2board(value) {
 
 // 如果复制成功返回true
 // copy2board('lalallala')
-
 
 // 原理：
 // - 创建一个textare元素并调用select()方法选中

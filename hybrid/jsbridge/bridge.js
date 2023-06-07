@@ -1,12 +1,12 @@
-import device from '@deepjs/device';
+import device from '@deepjs/device'
 
-const noop = () => {};
-const fnList = ['setShare', 'showShare', 'showOptionMenu', 'hideOptionMenu'];
-const bridge = {};
+const noop = () => {}
+const fnList = ['setShare', 'showShare', 'showOptionMenu', 'hideOptionMenu']
+const bridge = {}
 
-fnList.forEach(key => {
-  bridge[key] = noop;
-});
+fnList.forEach((key) => {
+  bridge[key] = noop
+})
 
 switch (device.host.name) {
   // case 'alipay':
@@ -26,14 +26,14 @@ switch (device.host.name) {
   case 'jsz':
   case 'iqgsh':
     // eslint-disable-next-line global-require
-    require('./WebViewJavascriptBridge');
+    require('./WebViewJavascriptBridge')
     // eslint-disable-next-line no-case-declarations,global-require
-    const Bridge = require('./index');
-    Object.assign(bridge, Bridge, window.WebViewJavascriptBridge);
+    const Bridge = require('./index')
+    Object.assign(bridge, Bridge, window.WebViewJavascriptBridge)
     // console.log('app bridge', bridge);
-    break;
+    break
   default:
   // do nothing...
 }
 
-export default bridge;
+export default bridge

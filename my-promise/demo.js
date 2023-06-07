@@ -1,7 +1,6 @@
+import axios from 'axios'
 
-import axios from 'axios';
-
-const GD_MAP_AK = '';
+const GD_MAP_AK = ''
 
 const a = (data = {}) => {
   return new Promise((resolve, reject) => {
@@ -31,16 +30,15 @@ const d = (data = {}) => {
   })
 }
 
-Promise.all([a(), b().then(c)]).then(d).then(res => {
-  console.log(res)
-})
+Promise.all([a(), b().then(c)])
+  .then(d)
+  .then((res) => {
+    console.log(res)
+  })
 
 // Promise.all([getCityList, browserGeo.then(geoToCode)]).then(getIqgCity)
 
-Promise.all([
-  getCityList(),
-  browserGeo().then(geoToCode),
-]).then(filterCity)
+Promise.all([getCityList(), browserGeo().then(geoToCode)]).then(filterCity)
 
 function getCityList() {
   return new Promise((resolve, reject) => {
@@ -53,10 +51,10 @@ function browserGeo() {
   return new Promise((resolve, reject) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        res => {
+        (res) => {
           resolve && resolve(res)
         },
-        err => {
+        (err) => {
           // err.code 1无权限使用定位 2无法确定设备位置 3超时
           reject && reject(err)
         },
@@ -64,13 +62,15 @@ function browserGeo() {
           enableHighAcuracy: true, // 是否要求高精度的地理位置信息
           timeout: 10000, // 对地理位置信息的获取操作做超时限制，如果再该事件内未获取到地理位置信息，将返回错误
           maximumAge: 60 * 15 * 1000, // 设置缓存有效时间，在该时间段内，获取的地理位置信息还是设置此时间段之前的那次获得的信息，超过这段时间缓存的位置信息会被废弃
-        })
+        },
+      )
     } else {
       // "对不起，您的浏览器不支持定位功能", //Sorry, browser does not support geolocation!
-      reject && reject({
-        code: -1,
-        message: '对不起，您的浏览器不支持定位功能',
-      })
+      reject &&
+        reject({
+          code: -1,
+          message: '对不起，您的浏览器不支持定位功能',
+        })
     }
   })
 }
@@ -89,7 +89,5 @@ function geoToCode(pos) {
 }
 
 function filterCity([cityList, geoInfo]) {
-  return new Promise((resolve, reject) => {
-
-  })
+  return new Promise((resolve, reject) => {})
 }

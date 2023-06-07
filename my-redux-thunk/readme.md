@@ -1,6 +1,5 @@
 # redux-thunk
 
-
 参考：
 
 - https://github.com/haixiangyan/my-redux-thunk

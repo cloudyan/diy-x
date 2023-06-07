@@ -1,4 +1,3 @@
-
 // 接 1.js 接下来处理 pending 状态
 // 先将 1.js 的实现手写迁移过来
 
@@ -10,13 +9,13 @@ class MyPromise {
   constructor(executor) {
     executor(this.resolve, this.reject)
   }
-  status = PENDING;
-  value = null;
-  reason = null;
+  status = PENDING
+  value = null
+  reason = null
 
   // 存储成功或失败的回调函数
-  onFulfilledCallback = [];
-  onRejectedCallback = [];
+  onFulfilledCallback = []
+  onRejectedCallback = []
 
   resolve = (value) => {
     if (this.status === PENDING) {
@@ -57,7 +56,6 @@ class MyPromise {
   }
 }
 
-
 // testing pending
 const p1 = new MyPromise((resolve, reject) => {
   // resolve('success')
@@ -65,29 +63,37 @@ const p1 = new MyPromise((resolve, reject) => {
   setTimeout(() => {
     resolve('success')
     reject('fail')
-  }, 2000);
+  }, 2000)
 })
 
-p1.then(value => {
-  console.log('0')
-  console.log('resolve', value)
-}, reason => {
-  console.log('reject', reason)
-})
-
+p1.then(
+  (value) => {
+    console.log('0')
+    console.log('resolve', value)
+  },
+  (reason) => {
+    console.log('reject', reason)
+  },
+)
 
 // 回调存储使用数组，支持 then 方法多次调用
-p1.then(value => {
-  console.log('1')
-  console.log('resolve1', value)
-}, reason => {
-  console.log('reject1', reason)
-})
-p1.then(value => {
-  console.log('2')
-  console.log('resolve2', value)
-}, reason => {
-  console.log('reject2', reason)
-})
+p1.then(
+  (value) => {
+    console.log('1')
+    console.log('resolve1', value)
+  },
+  (reason) => {
+    console.log('reject1', reason)
+  },
+)
+p1.then(
+  (value) => {
+    console.log('2')
+    console.log('resolve2', value)
+  },
+  (reason) => {
+    console.log('reject2', reason)
+  },
+)
 
 // 此时还不支持 then 的链式调用，参见 3.js

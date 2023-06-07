@@ -12,7 +12,7 @@ const { plugins } = kylinApp
 // console.log(plugins)
 
 function getResource(plugins) {
-  for(let i = 0; i < plugins.length; i++) {
+  for (let i = 0; i < plugins.length; i++) {
     const plugin = plugins[i]
     if (plugin && plugin[0]) {
       if (plugin[0] === 'resource') return plugin[1].map
@@ -29,18 +29,20 @@ function getSourceInfo(sources) {
   for (const key in sources) {
     res.push(sources[key].js)
   }
-  return res;
+  return res
 }
 
 const resArr = getSourceInfo(sources)
 
 console.log(resArr)
 
-Promise.all(resArr.map(url => {
-  const dir = url.replace(/^https?:\/\//, '').split('/')
-  dir.pop()
-  return download(url, `./dist/${dir.join('/')}`)
-}));
+Promise.all(
+  resArr.map((url) => {
+    const dir = url.replace(/^https?:\/\//, '').split('/')
+    dir.pop()
+    return download(url, `./dist/${dir.join('/')}`)
+  }),
+)
 
 // (async () => {
 //   // await download('http://unicorn.com/foo.jpg', 'dist');

@@ -7,15 +7,15 @@
 在 JavaScript 中，每当创建一个函数，闭包就会在函数创建的同时被创建出来。
 
 ```js
-for (var i=1; i<=5; i++) {
-  (function (i) {
-    setTimeout(() => console.log(i), 1000*i)
+for (var i = 1; i <= 5; i++) {
+  ;(function (i) {
+    setTimeout(() => console.log(i), 1000 * i)
   })(i)
 }
 ```
 
 ```js
-for (let i=1; i<=5; i++) {
-  setTimeout(() => console.log(i), 1000*i)
+for (let i = 1; i <= 5; i++) {
+  setTimeout(() => console.log(i), 1000 * i)
 }
 ```

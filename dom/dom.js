@@ -1,7 +1,7 @@
 document.addEventListener('click', function (clickEvent) {
-  const target = clickEvent.target;
-  readXPath(target);
-});
+  const target = clickEvent.target
+  readXPath(target)
+})
 function readXPath(el) {
   // jq路径
   // if (!el) {
@@ -41,60 +41,60 @@ function readXPath(el) {
   // return stack.join(' > ');
 
   // 标准CSS路径
-  if (!(el instanceof Element)) return;
-  const path = [];
+  if (!(el instanceof Element)) return
+  const path = []
   while (el.nodeType === Node.ELEMENT_NODE) {
-    let selector = el.nodeName.toLowerCase();
+    let selector = el.nodeName.toLowerCase()
     if (el.id) {
-      selector += '#' + el.id;
-      path.unshift(selector);
-      break;
+      selector += '#' + el.id
+      path.unshift(selector)
+      break
     } else {
-      let sib = el;
-      let nth = 1;
+      let sib = el
+      let nth = 1
 
       // eslint-disable-next-line no-cond-assign
       while ((sib = sib.previousElementSibling)) {
-        if (sib.nodeName.toLowerCase() === selector) nth++;
+        if (sib.nodeName.toLowerCase() === selector) nth++
       }
-      if (nth !== 1) selector += ':nth-of-type(' + nth + ')';
+      if (nth !== 1) selector += ':nth-of-type(' + nth + ')'
     }
-    path.unshift(selector);
-    el = el.parentNode;
+    path.unshift(selector)
+    el = el.parentNode
   }
-  return path.join(' > ');
+  return path.join(' > ')
 }
 
 // 相同路径获取 dom
 // 比如某元素第二个子元素下第一个子元素
 export function findDom(realWrapper, clonedWrapper, target) {
-  const xpath = getXPathByDom(target, clonedWrapper);
-  return getDomByXPath(realWrapper, xpath);
+  const xpath = getXPathByDom(target, clonedWrapper)
+  return getDomByXPath(realWrapper, xpath)
 }
 
 function getChildNum(child) {
-  let i = 0;
+  let i = 0
   // eslint-disable-next-line no-cond-assign
-  while ((child = child.previousSibling) != null) i++;
-  return i;
+  while ((child = child.previousSibling) != null) i++
+  return i
 }
 
 function getChildDom(parentNode, index) {
-  return parentNode.children[index];
+  return parentNode.children[index]
 }
 
 function getXPathByDom(el, root = null) {
-  const stack = [];
+  const stack = []
   while (el.parentNode != null) {
-    stack.push(getChildNum(el));
+    stack.push(getChildNum(el))
   }
-  return stack;
+  return stack
 }
 
 function getDomByXPath(el, xpath = []) {
-  let node = el;
+  let node = el
   for (let i = 0; i < xpath.length; i++) {
-    node = getChildDom(el, xpath[i]);
+    node = getChildDom(el, xpath[i])
   }
-  return node;
+  return node
 }

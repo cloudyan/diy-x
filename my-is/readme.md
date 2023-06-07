@@ -8,9 +8,9 @@ function typeOf(obj) {
   res = res.substring(0, res.length - 1).toLowerCase()
   return res
 }
-console.log(typeOf([]))        // 'array'
-console.log(typeOf({}))        // 'object'
-console.log(typeOf(new Date))  // 'date'
-console.log(typeOf(new RegExp))  // 'date'
-console.log(typeOf(new Error))  // 'date'
+console.log(typeOf([])) // 'array'
+console.log(typeOf({})) // 'object'
+console.log(typeOf(new Date())) // 'date'
+console.log(typeOf(new RegExp())) // 'regexp'
+console.log(typeOf(new Error())) // 'date'
 ```
