@@ -74,33 +74,18 @@ function unique7(arr) {
 // testing
 let name
 let symbol = Symbol(1)
+
+// prettier-ignore
 let arr = [
-  +0,
-  -0,
-  0,
-  NaN,
-  NaN,
-  1,
-  1,
-  false,
-  false,
-  '',
-  '0',
-  '0',
-  '1',
-  'NaN',
-  undefined,
-  name,
-  null,
-  null,
+  +0, -0, 0, NaN, NaN,
+  1, 1, false, false,
+  '', '0', '0', '1','NaN',
+  undefined, name, null, null,
   // symbol, symbol, Symbol(1), Symbol(2), Symbol(2),
   // 引用类型，不重复
-  {},
-  {},
-  Object.create(null),
-  Object.create(null),
-  { city: 'shanghai' },
-  { city: 'shanghai' },
+  {}, {},
+  Object.create(null), Object.create(null),
+  {city: 'shanghai'}, {city: 'shanghai'}
 ]
 console.log(unique1(arr))
 console.log(unique2(arr))

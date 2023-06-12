@@ -1,4 +1,4 @@
-# redux-thunk
+# 造一个 redux-thunk 轮子
 
 参考：
 
